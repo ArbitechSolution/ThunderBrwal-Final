@@ -1,0 +1,100 @@
+.pointinput {
+  border: none;
+  box-sizing: border-box;
+  border: 3px solid #454545;
+  background: #454545;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  color: white;
+  /* background-color: transparent; */
+}
+
+::placeholder {
+  color: white;
+  /* font-family: Gilroy-Medium; */
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.form-control:focus,
+.form-control:active {
+  background: #454545;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  color: white !important;
+  margin: 0;
+}
+
+input[placeholder],
+[placeholder],
+*[placeholder] {
+  color: white !important;
+}
+
+.form-select {
+  background: #454545;
+  color: white;
+  font-style: normal;
+  /* font-weight: bold; */
+  font-size: 18px;
+  line-height: 33px;
+  border-radius: 100px;
+  border: 3px solid #454545;
+  /* position:absolute; */
+}
+/* .boxpoint{
+  top: 192px;
+  right: 455px
+} */
+.PointImage{
+  position: relative;
+  width: 50px;
+}
+.PointImage1{
+  position: absolute;
+  width: 25px;
+}
+.buyPointText{
+  font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+color: #E98F1D;
+
+}
+.buyPointText1{
+  font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+color: white
+}
+.btnBuy{
+  background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
+border-radius: 100px;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 36px;
+color: #FFFFFF;
+}
+@media(max-width: 600px){
+  .buyPointText{
+    font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #E98F1D;
+  
+  }
+  .buyPointText1{
+    font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: white
+  }
+}

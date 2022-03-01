@@ -1,0 +1,82 @@
+.BreedBoxs {
+    background: linear-gradient(134.86deg, #4A1F19 0%, #442C0E 100%);
+    border: 5px solid rgba(255, 255, 255, 0.25);
+    box-sizing: border-box;
+    box-shadow: 0px 0px 20px #FB1601;
+    border-radius: 15px;
+}
+
+.BreedminiBox {
+    background: linear-gradient(90deg, #F3961E 0%, #F8B815 48.96%, #F3961E 100%);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 100%;
+    color: #000000;
+
+}
+
+.Breedtext {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    color: #F8B815;
+}
+
+.BreedminiBox2 {
+    background: linear-gradient(90deg, #FE5242 0%, #FF9288 48.96%, #FE5242 100%);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 100%;
+    color: #000000;
+}
+
+.Breedtext1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    color: #FE5242;
+}
+
+.breedboxes {
+    background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
+    border-radius: 100px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 33px;
+    color: #FFFFFF;
+
+}
+
+.breedtext1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    color: #A2A2A2;
+}
+
+.breedboxs12 {
+    background: #000000;
+    border: 1px solid #636363;
+    box-sizing: border-box;
+    height: 520px;
+    width: 82%;
+    overflow-y: scroll;
+    -webkit-appearance: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.breedImages{
+    width: 140px;
+}
+@media(max-width: 400px){
+    .breedImages{
+        width: 260px;
+    }
+}

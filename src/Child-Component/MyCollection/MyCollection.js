@@ -23,12 +23,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>
@@ -39,12 +36,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>
@@ -55,12 +49,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>
@@ -71,12 +62,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>
@@ -87,12 +75,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>
@@ -103,12 +88,9 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
 
-                                <div className='d-flex justify-content-between'>
-                                    <button className='btn btnCollection'>
-                                        Sell
-                                    </button>
-                                    <button className='btn btnCollectionOne'>
-                                        Transfer
+                                <div className="d-grid gap-2">
+                                    <button className='btn btnStakePage' size="lg">
+                                    Transfer
                                     </button>
                                 </div>
                             </div>

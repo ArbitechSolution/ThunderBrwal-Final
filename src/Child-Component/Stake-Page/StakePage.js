@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import "./StakePage.css"
-import { loadWeb3 } from '../../Component/Api/api'
+
+
 // import Vector10 from "../../Assets/Vector10.png"
 // import B from "../../Assets/--02 1.png"
 // import vector99 from "../../Assets/vector 99.png"
 // import vector100 from "../../Assets/100 2.png"
-import {getWallet} from '../../redux/redux/actions/actions';
+import {getWallet,getUserThbBalance} from '../../redux/redux/actions/actions';
 import {useSelector, useDispatch} from 'react-redux'
+
 function StakePage() {
 
-  let [btnTxt, setBtTxt] = useState("Connect")
+  let [btnTxt, setBtTxt] = useState("Connect Wallet")
   let dispatch = useDispatch();
   let {acc}= useSelector(state => state.connectWallet)
-  console.log("acc", acc);
-  const getAccount = async () => {
+  let {bal}=useSelector (state=> state.getThbbalance)
+  console.log("Acc",bal);
+  
+  
+  
+  const getAccount = () => {
+  dispatch(getUserThbBalance())
    dispatch(getWallet())
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
     }
@@ -27,11 +33,8 @@ function StakePage() {
 
     }
   }
-  useEffect(() => {
-    // setInterval(() => {
-    //   getAccount();
-    // }, 1000);
-  }, []);
+  // useEffect(() => {
+  // }, []);
 
 
 

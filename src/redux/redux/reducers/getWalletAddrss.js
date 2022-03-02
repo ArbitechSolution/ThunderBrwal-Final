@@ -4,6 +4,7 @@ import {GET_WALLET_ADDRESS} from '../types/types';
 let initialState = {acc:"Connect Wallet"};
 
 export const connectWallet = (state = initialState, action) => {
+    
 
     switch(action.type){
         case GET_WALLET_ADDRESS:

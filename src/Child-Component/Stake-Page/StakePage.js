@@ -5,12 +5,16 @@ import { loadWeb3 } from '../../Component/Api/api'
 // import B from "../../Assets/--02 1.png"
 // import vector99 from "../../Assets/vector 99.png"
 // import vector100 from "../../Assets/100 2.png"
+import {getWallet} from '../../redux/redux/actions/actions';
+import {useSelector, useDispatch} from 'react-redux'
 function StakePage() {
 
   let [btnTxt, setBtTxt] = useState("Connect")
-
+  let dispatch = useDispatch();
+  let {acc}= useSelector(state => state.connectWallet)
+  console.log("acc", acc);
   const getAccount = async () => {
-    let acc = await loadWeb3();
+   dispatch(getWallet())
     // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
@@ -24,9 +28,9 @@ function StakePage() {
     }
   }
   useEffect(() => {
-    setInterval(() => {
-      getAccount();
-    }, 1000);
+    // setInterval(() => {
+    //   getAccount();
+    // }, 1000);
   }, []);
 
 
@@ -41,7 +45,7 @@ function StakePage() {
                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
               </div>
               <div className='col-md-2 d-flex justify-content-end'>
-                <button className='btn btnstake'>{btnTxt}</button>
+                <button className='btn btnstake' onClick={getAccount}>{btnTxt}</button>
               </div>
             </div>
             <div className='row'>

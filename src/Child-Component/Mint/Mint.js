@@ -1,22 +1,88 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
 import "./Mint.css"
+import {getWallet,getUserBrawlMintPoint} from '../../redux/redux/actions/actions';
+import {useSelector, useDispatch} from 'react-redux';
+import { toast } from 'react-toastify';
+import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
+import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
 
-function Mint() {
-    const [value, setValue] = useState(1) 
+function Mint({ setShow, setNumber }) {   
+    let [value, setValue] = useState(1)
+    // let [point, setPoint] = useState(0);
+    let dispatch= useDispatch()
 
-    const IncreraseValue= ()=>{
-        setValue(++value)
-        console.log("setValue",value)
+    let {brawlMintPoints}=useSelector(state=>state.getBrawlPointMint);
+    let {acc} = useSelector(state =>state.connectWallet)
+    console.log("getBrawlPointMint",acc)
+
+
+    const increaseValue = () => {
+        if (value < 3) {
+            setValue(++value)
+            console.log("setValue", value)
+        }
+
     }
-    const DecreaseValue=()=>{
-        setValue(--value)
-        console.log("setValue",value)
+    const decreaseValue = () => {
+        if (value > 1) {
+            setValue(--value)
+            console.log("setValue", value)
+        }
+
     }
+
+// Minting Funtions 
+
+const myMint = async () => {
+    // console.log("ACC=",acc)
+    if (acc == "No Wallet") {
+        toast.error("No Wallet Connected")
+    }
+    else if (acc == "Wrong Network") {
+        toast.error("Wrong Newtwork please connect to test net")
+    }else if(acc =="Connect Wallet"){
+        toast.error("Not Connected")
+      } else {
+        console.log("mintFor");
+        const web3 = window.web3;
+        let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+        
+        let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
+        let supply = await nftContractOf.methods.totalSupply().call();
+        let maxSupply = await nftContractOf.methods.maxsupply().call();
+        if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
+            if (parseFloat(maxSupply) >= parseFloat(supply)) {
+               await nftContractOf.methods.mint(value).send({
+                    from: acc
+                }).on("receipt", (receipt) => {
+
+
+                    console.log("mintValue", receipt);
+                })
+                toast.success("Transaction Confirmed")
+                setShow(true)
+                setNumber(value)
+
+            } else {
+                toast.error("Maximum minting reached")
+            }
+
+        } else {
+            toast.error("You do not have enought Brawl points")
+        }
+
+    }
+}
+
+    useEffect(() => {
+
+        dispatch(getUserBrawlMintPoint())
+    })
     
     return (
         <div className='StakePageImage'>
@@ -42,19 +108,19 @@ function Mint() {
                         <div className='col-md-6 d-flex flex-column justify-content-center align-items-center'>
                             <div className='text-start'>
                             <span className='mintspane'>Your Brawl:</span>&nbsp; &nbsp;
-                            <span className='mintspane1'>1,000 Point</span>
+                            <span className='mintspane1'>{brawlMintPoints} Point</span>
                             </div>
-                            <div className='text-start pt-lg-3 pt-2'>
+                            {/* <div className='text-start pt-lg-3 pt-2'>
                             <span className='mintspane'>BRL Spend:</span>&nbsp; &nbsp;
                             <span className='mintspane1'>100 Point</span>
-                            </div>
+                            </div> */}
                             <div className='d-flex flex-row pt-lg-5 pt-3'>
-                                <a onClick={DecreaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px"/></a>
+                                <a onClick={decreaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px"/></a>
                                 <div className='mintboxsss mt-1 ms-4'>{value}</div>
-                                <a className='ms-4' onClick={IncreraseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px"/></a>
+                                <a className='ms-4' onClick={increaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px"/></a>
                             </div>
                             <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                <button className='btn mintbtn '>MINT</button>
+                                <button onClick={()=>myMint()} className='btn mintbtn '>MINT</button>
                             </div>
                             <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 10 tiger nfts CARD PER tx</span>
                         </div>

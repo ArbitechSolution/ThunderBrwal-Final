@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import "./StakePage.css"
 
 
@@ -6,38 +6,335 @@ import "./StakePage.css"
 // import B from "../../Assets/--02 1.png"
 // import vector99 from "../../Assets/vector 99.png"
 // import vector100 from "../../Assets/100 2.png"
-import {getWallet,getUserThbBalance} from '../../redux/redux/actions/actions';
-import {useSelector, useDispatch} from 'react-redux'
+import {getWallet,getUserThbBalance,
+  getUserThbLpBalance,getUserTHbTamount,getUserTHbLPTamount,getUserBrLp,getUserBrl} from '../../redux/redux/actions/actions';
+import {useSelector, useDispatch} from 'react-redux';
+import { toast } from 'react-toastify';
+
+import { thbTokenAddress, thbTokenAbi } from "../../Component/Utils/ThbToken"
+import { thbLpTokenAddress, thbLpTokenAbi } from '../../Component/Utils/ThbLpToken'
+import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
+
 
 function StakePage() {
-
+  let stakeAmount = useRef(0);
+  let stakeAmountLp = useRef(0);
   let [btnTxt, setBtTxt] = useState("Connect Wallet")
   let dispatch = useDispatch();
   let {acc}= useSelector(state => state.connectWallet)
-  let {bal}=useSelector (state=> state.getThbbalance)
-  console.log("Acc",bal);
-  
-  
+  let {thbBal}=useSelector (state=> state.getThbbalance)
+  let {thbLpBal}= useSelector(state=> state.getThbLpbalance)
+  let {tamount}= useSelector(state=> state.tAmount);
+  let {tamountlp}= useSelector(state=>state.tAmountLp)
+  let {brlPoint}= useSelector(state=> state.getUserBrlpoint)
+  let {brlLPPoint} = useSelector(state => state.getUserBrLplpoint)
+  console.log("Acc",brlLPPoint);
   
   const getAccount = () => {
   dispatch(getUserThbBalance())
    dispatch(getWallet())
+   dispatch(getUserThbLpBalance())
+   dispatch(getUserTHbTamount())
+   dispatch(getUserTHbLPTamount())
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
     }
     else if (acc == "Wrong Network") {
       setBtTxt("Wrong Network")
-    } else {
+    }
+    else if(acc =="Connect Wallet"){
+      setBtTxt("Connect Wallet")
+    }
+    else {
       let myAcc = acc?.substring(0, 4) + "..." + acc?.substring(acc?.length - 4);
       setBtTxt(myAcc);
 
     }
   }
-  // useEffect(() => {
-  // }, []);
+
+/// here goes the staking Functions for THB
+
+const stakeVal = async () => {
+  if (acc == "No Wallet") {
+    toast.error("Connect Wallet")
+  }
+  else if (acc == "Wrong Network") {
+    toast.error("Wrong Newtwork please connect to test net")
+
+  }else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  } else {
+    try {
+      let enteredVal = stakeAmount.current.value;
+      console.log("U NEterd", enteredVal);
+      const web3 = window.web3;
+      let thbTokenContractOf = new web3.eth.Contract(thbTokenAbi, thbTokenAddress);
+      let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      if (enteredVal > 0) {
+        if (parseFloat(thbBal) >= parseFloat(enteredVal)) {
+          if (tamount <= 0) {
+            enteredVal = web3.utils.toWei(enteredVal.toString());
+            await thbTokenContractOf.methods.approve(stakingContractAddress, enteredVal.toString()).send({
+              from: acc
+            })
+            toast.success("Transaction Confirmed")
+            await stakingCOntractOf.methods.Stake(enteredVal.toString()).send({
+              from: acc
+            })
+            stakeAmount.current.value = ""
+            toast.success("Transaction Confirmed")
+
+          } else {
+            toast.error("You Have Already Staked. Please Unstake and try again")
+          }
 
 
 
+        } else {
+          toast.error("Insufficient balance")
+          console.log("Insufficient Balance");
+        }
+
+      } else {
+        console.log("Staking Amount must be greater than 0");
+        toast.error("Staking Amount must be greater than 0")
+      }
+    } catch (e) {
+      console.log("Error while staking amount", e);
+      toast.error("Transaction Failed")
+    }
+  }
+}
+
+
+// Unstake Function for Thb
+const unstake = async () => {
+  console.log("ACC=",acc)
+  if (acc == "No Wallet") {
+    toast.error("Not Connected to Wallet")
+
+  }
+  else if (acc == "Wrong Network") {
+    toast.error("Wrong Newtwork please connect to test net")
+  } else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  }
+  
+  else {
+    try {
+
+      const web3 = window.web3
+      let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      if (tamount > 0) {
+        await stakingCOntractOf.methods.withdrawtoken().send({
+          from: acc
+        })
+        toast.success("Transaction Confirmed")
+      } else {
+        toast.error("You have not staked yet")
+        console.log("You have not staked yet");
+      }
+
+
+    } catch (e) {
+      console.log("Error while staking amount", e);
+      toast.error("Transaction Failed")
+
+    }
+  }
+
+}
+
+// stake functions for Lp THB
+
+const stakeLpVal = async () => {
+  // console.log("ACC=",acc)
+  if (acc == "No Wallet") {
+    setBtTxt("Connect Wallet")
+  }
+  else if (acc == "Wrong Network") {
+    setBtTxt("Wrong Network")
+  }else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  } else {
+    try {
+
+
+      let enteredVal = stakeAmountLp.current.value;
+
+      console.log("U NEterd", enteredVal);
+      const web3 = window.web3;
+
+      let thbLpTokenContractOf = new web3.eth.Contract(thbLpTokenAbi, thbLpTokenAddress);
+      let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      if (enteredVal > 0) {
+        if (parseFloat(thbLpBal) >= parseFloat(enteredVal)) {
+          if (tamountlp <= 0) {
+            enteredVal = web3.utils.toWei(enteredVal.toString());
+            
+            await thbLpTokenContractOf.methods.approve(stakingContractAddress, enteredVal.toString()).send({
+              from: acc
+            })
+            toast.success("Transaction Confirmed")
+            await stakingCOntractOf.methods.StakeforLP(enteredVal.toString()).send({
+              from: acc
+            })
+            stakeAmountLp.current.value = ""
+            toast.success("Transaction Confirmed")
+          } else {
+            toast.error("You have staked already. Unstake and try again.")
+          }
+
+
+        } else {
+          toast.error("Insufficient Balance")
+          console.log("Insufficient Balance");
+        }
+
+      } else {
+        console.log("Staking Amount must be greater than 0");
+        toast.error("Staking Amount must be greater than 0")
+      }
+    } catch (e) {
+      console.log("Error while staking amount", e);
+      toast.error("Transaction Failed")
+
+    }
+  }
+}
+
+// // function for Unstaking LPThb
+
+const unstakeLp = async () => {
+  // console.log("ACC=",acc)
+  if (acc == "No Wallet") {
+    setBtTxt("Connect Wallet")
+  }
+  else if (acc == "Wrong Network") {
+    setBtTxt("Wrong Network")
+  }else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  } else {
+    try {
+
+      let timestamp = Math.floor(new Date().getTime() / 1000)
+      console.log("timestamp", timestamp);
+
+      const web3 = window.web3;
+      let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call()
+      let userLP = await stakingCOntractOf.methods.UserLP(acc).call()
+      let depositTimes = userLP.Deposit_time
+      let AddTime = +lpLockTime + +depositTimes;
+      console.log("AddTime", AddTime);
+      if (tamountlp > 0) {
+        if(timestamp >= AddTime){
+          await stakingCOntractOf.methods.withdrawLPtoken().send({
+            from: acc
+          })
+          toast.success("Transaction Confirmed")
+        }else{
+          toast.error("Unlocked Time Not Reached !")
+        }
+        
+
+      } else {
+        toast.error("You have not staked any Lp Tokens yet")
+        console.log("You have not staked any Lp Tokens yet");
+      }
+
+    } catch (e) {
+      console.log("Error while staking amount", e);
+      toast.error("Transaction Failed")
+    }
+  }
+}
+
+// // function For redeeming THB
+const redeemTHB=async()=>{
+  console.log("ACC=",acc)
+  if (acc == "No Wallet") {
+    setBtTxt("Connect Wallet")
+  }
+  else if (acc == "Wrong Network") {
+    setBtTxt("Wrong Network")
+  } else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  } else {
+    try {
+      const web3 = window.web3
+      let redeemContract = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      const bPBlance = await redeemContract.methods.BPcalculator(acc).call();
+      console.log("BPBlance",bPBlance);
+      if (bPBlance > 0) {
+
+        await redeemContract.methods.redeem().send({
+          from: acc
+        })
+        toast.success("Transaction Confirmed")
+      } else {
+        toast.error("You have no Brawl Point yet")
+        console.log("You have not staked yet");
+      }
+
+    }catch(e){
+      console.log("Error While Redeeming THB", e);
+      toast.error("Transaction Failed")
+    }
+  }
+
+}
+
+// // function for redeeming LPThb
+const RedeemLPTHP = async () => {
+  console.log("ACC=",acc)
+  if (acc == "No Wallet") {
+    setBtTxt("Connect Wallet")
+  }
+  else if (acc == "Wrong Network") {
+    setBtTxt("Wrong Network")
+  } else if (acc=="Connect Wallet")
+  {
+    toast.error("Not Connected")
+  } else {
+    try {
+      const web3 = window.web3
+      let redeemLPContract = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      let blanceLP = await redeemLPContract.methods.BPcalculatorforLP(acc).call();
+      if (blanceLP > 0) {
+        await redeemLPContract.methods.redeemforLp().send({
+          from: acc
+        })
+        toast.success("Transaction Confirmed")
+      } else {
+        toast.error("You have no LP Brawl Point yet")
+        console.log("You have not staked yet");
+      }
+
+    } catch (e) {
+      console.log("Error while RedeemLP", e);
+      toast.error("Transaction Failed")
+    }
+  }
+}
+useEffect(()=>{
+  setInterval(()=>{
+    dispatch(getUserThbBalance())
+    dispatch(getUserThbLpBalance())
+    dispatch(getUserTHbTamount())
+    dispatch(getUserTHbLPTamount())
+    dispatch(getWallet())
+    dispatch(getUserBrLp())
+    dispatch(getUserBrl())
+  },1000)
+
+
+},[])
   return (
     <div className='StakePageImage'>
       <div className='container pt-3'>
@@ -48,7 +345,7 @@ function StakePage() {
                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
               </div>
               <div className='col-md-2 d-flex justify-content-end'>
-                <button className='btn btnstake' onClick={getAccount}>{btnTxt}</button>
+                <button className='btn btnstake' onClick={getAccount}>{acc ==="No Wallet" ? "Insatll metamask" :acc ==="Connect Wallet" ? acc  : acc ==="Connect to Rinkebey"? acc :acc.substring(0,5) + "..." + acc.substring(acc.length - 5)  }</button>
               </div>
             </div>
             <div className='row'>
@@ -69,19 +366,19 @@ function StakePage() {
                   <div className='row d-flex justify-content-center mt-4 '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Wallet</p>
-                      <p className='text-end'>0 THB</p>
+                      <p className='text-end'>{thbBal} THB</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>BRL Point: </p>
-                      <p className='text-end'>0</p>
+                      <p className='text-end'>{brlPoint}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Staked:</p>
-                      <p className='text-end'>0</p>
+                      <p className='text-end'>{tamount}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
@@ -91,34 +388,34 @@ function StakePage() {
                     <div className="col-6">
                       <input
                         // name="first_input"
+                        ref={stakeAmount}
                         className="stakeinput form-control mx-3"
                         placeholder="0"
                         type="Number"
-
                         name="second_input"
-
                       />
                     </div>
                   </div>
-
                   <div className='row d-flex justify-content-center second-box '>
                     <div className='col-md-12 col-11  pt-3 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button onClick={()=>stakeVal()} className='btn btnStakePage' size="lg">
                           Approve & Stake
                         </button>
                       </div>
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button onClick={()=>unstake()} className='btn btnStakePage' size="lg">
                           Unstake
                         </button>
                       </div>
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button
+                         onClick={()=>redeemTHB()}
+                          className='btn btnStakePage' size="lg">
                           Redeem
                         </button>
                       </div>
@@ -136,7 +433,6 @@ function StakePage() {
                   <li className='Stakelist'>*Max staking 30,000 THB</li>
                 </ul>
               </div>
-
               <div className='col-lg-4 col-11 '>
                 <div className='row Stakeboxs1'>
                   <div className='col-12 pt-3'>
@@ -145,23 +441,22 @@ function StakePage() {
                   <div className='col-md-12'>
                     <img src="https://i.ibb.co/X32t6X6/100-2.png" className="StakeImagessss" />
                   </div>
-
                   <div className='row d-flex justify-content-center mt-4 '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Wallet</p>
-                      <p className='text-end'>0 THB</p>
+                      <p className='text-end'>{thbLpBal} THB-LP</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>BRL Point: </p>
-                      <p className='text-end'>0</p>
+                      <p className='text-end'>{brlLPPoint}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Staked:</p>
-                      <p className='text-end'>0</p>
+                      <p className='text-end'>{tamountlp}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
@@ -170,35 +465,33 @@ function StakePage() {
                     </div>
                     <div className="col-6">
                       <input
+                      ref={stakeAmountLp}
                         // name="first_input"
                         className="stakeinput form-control mx-3"
                         placeholder="0"
                         type="Number"
-
                         name="second_input"
-
                       />
                     </div>
                   </div>
-
                   <div className='row d-flex justify-content-center second-box '>
                     <div className='col-md-12 col-11  pt-3 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button onClick={()=>stakeLpVal()} className='btn btnStakePage' size="lg">
                           Approve & Stake
                         </button>
                       </div>
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button onClick={()=>unstakeLp()} className='btn btnStakePage' size="lg">
                           Unstake
                         </button>
                       </div>
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button className='btn btnStakePage' size="lg">
+                        <button onClick={()=>RedeemLPTHP()} className='btn btnStakePage' size="lg">
                           Redeem
                         </button>
                       </div>

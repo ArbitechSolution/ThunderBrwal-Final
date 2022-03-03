@@ -17,9 +17,12 @@ import StakePages from './StakePages';
 import Mintpage from './Mintpage';
 import Traitspage from './Traitspage';
 import BreedPage from './BreedPage';
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
+      <ToastContainer/>
       {/* <Router> */}
       <Router>
         {/* <Navbar /> */}

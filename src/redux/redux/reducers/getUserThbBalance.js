@@ -1,5 +1,5 @@
 import {GET_USER_THB_BALANCE} from '../types/types';
-let initialState = {bal:"0"};
+let initialState = {thbBal:"0"};
 
 
 
@@ -9,7 +9,7 @@ export const getThbbalance =(state= initialState,action)=>{
         case GET_USER_THB_BALANCE:
         return {
             ...state,
-            bal:action.payload
+            thbBal:action.payload
 
         }
         default:return {...state}

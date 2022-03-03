@@ -54,13 +54,13 @@ function MyCollection() {
     }
 
     const ClickNext = () => {
-        if(limit < max && limit >= 0){
+        if (limit < max && limit >= 0) {
             setlimit(limit + 6);
             setnum(num + 6);
         }
     }
-    const ClickPrevious =()=>{
-        if(limit <= max && limit > 6){
+    const ClickPrevious = () => {
+        if (limit <= max && limit > 6) {
             setlimit(limit - 6);
             setnum(num - 6);
         }
@@ -110,7 +110,7 @@ function MyCollection() {
                     </div>
                     <div className='row d-flex flex-row justify-content-center justify-content-evenly' >
 
-                        <div className='col-1 d-flex align-items-center justify-content-center' onClick={ClickPrevious} style={{cursor:"pointer"}}>
+                        <div className='col-1 d-flex align-items-center justify-content-center' onClick={ClickPrevious} style={{ cursor: "pointer" }}>
                             <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                             <img src="https://i.ibb.co/NjDtXXY/Vector12.png" style={{ position: " relative" }} />
                         </div>
@@ -122,12 +122,12 @@ function MyCollection() {
                             <span className='MyCollectionspan'>/3</span>
                         </div>
 
-                            {/* <button className='btn '> */}
-                        <div className='col-1 d-flex align-items-center justify-content-center ms-4' onClick={ClickNext} style={{cursor:"pointer"}}>
+                        {/* <button className='btn '> */}
+                        <div className='col-1 d-flex align-items-center justify-content-center ms-4' onClick={ClickNext} style={{ cursor: "pointer" }}>
                             <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                             <img src="https://i.ibb.co/n1ZWTmj/Vector13.png" style={{ position: " relative" }} />
                         </div>
-                            {/* </button> */}
+                        {/* </button> */}
 
                     </div>
                 </div>

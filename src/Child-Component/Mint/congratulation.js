@@ -5,21 +5,27 @@ import "./congratulation.css"
 import axios from 'axios';
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 function MyVerticallyCenteredModal(props) {
-   
+
     let [image, setImage] = useState([])
-   
+
     const get = async () => {
         console.log("Bilal")
         // let newarr = [11,23,32,12,22,1,2];
         let simplearray = []
         for (let i = 0; i <= 12; i++) {
-            console.log("Enterimg Loop",i)
+            console.log("Enterimg Loop", i)
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
             let inputId = await nftContractOf.methods.mintids(i).call();
-            console.log("Input ",inputId)
             // // newarr.push(Inputid)
-            // let finalapiData = await axios.get(`https://gateway.pinata.cloud/ipfs/QmP3CU9tcQGYbBYzzhWk8tc4fcQePHXKwJqYBMY3LZNBw7/${Inputid}.json`)
+            try {
+                let finalapiData = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${inputId}.json`)
+                console.log("finalapiData ", finalapiData)
+            } catch (e) {
+                console.log("Error while Fetching api", e)
+            }
+
+
             // finalapiData = finalapiData.data;
             // let imageUrl = finalapiData.image;
             // console.log("api data,", finalapiData);
@@ -32,7 +38,7 @@ function MyVerticallyCenteredModal(props) {
 
     }
     // useEffect(() => {
-        // get()
+    get()
     // })
     return (
 
@@ -78,13 +84,13 @@ function MyVerticallyCenteredModal(props) {
 
                                         return (
                                             <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                        <img src={image[index]} className="mintImage45" />
+                                                <img src={image[index]} className="mintImage45" />
 
-                                    </div>
+                                            </div>
                                         )
                                     })
                                 }
-                                
+
                                 {/* <img src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage45" /> */}
                             </div>
                         </div>

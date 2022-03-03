@@ -57,13 +57,13 @@ const myMint = async () => {
         let maxSupply = await nftContractOf.methods.maxsupply().call();
         if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
             if (parseFloat(maxSupply) >= parseFloat(supply)) {
-               await nftContractOf.methods.mint(value).send({
-                    from: acc
-                }).on("receipt", (receipt) => {
+            //    await nftContractOf.methods.mint(value).send({
+            //         from: acc
+            //     }).on("receipt", (receipt) => {
 
 
-                    console.log("mintValue", receipt);
-                })
+            //         console.log("mintValue", receipt);
+            //     })
                 toast.success("Transaction Confirmed")
                 setShow(true)
                 setNumber(value)

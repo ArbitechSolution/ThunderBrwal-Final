@@ -5,31 +5,35 @@ import "./congratulation.css"
 import axios from 'axios';
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 function MyVerticallyCenteredModal(props) {
+   
     let [image, setImage] = useState([])
+   
     const get = async () => {
         console.log("Bilal")
         // let newarr = [11,23,32,12,22,1,2];
         let simplearray = []
-        for (let i = 0; i < props.number; i++) {
+        for (let i = 0; i <= 12; i++) {
+            console.log("Enterimg Loop",i)
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
-            let Inputid = await nftContractOf.methods.mintids(i).call();
-            // newarr.push(Inputid)
-            let finalapiData = await axios.get(`https://gateway.pinata.cloud/ipfs/QmP3CU9tcQGYbBYzzhWk8tc4fcQePHXKwJqYBMY3LZNBw7/${Inputid}.json`)
-            finalapiData = finalapiData.data;
-            let imageUrl = finalapiData.image;
-            console.log("api data,", finalapiData);
-            console.log("imageUrl", imageUrl);
-            console.log("newarr", Inputid);
-            simplearray.push(imageUrl);
-            setImage(simplearray);
+            let inputId = await nftContractOf.methods.mintids(i).call();
+            console.log("Input ",inputId)
+            // // newarr.push(Inputid)
+            // let finalapiData = await axios.get(`https://gateway.pinata.cloud/ipfs/QmP3CU9tcQGYbBYzzhWk8tc4fcQePHXKwJqYBMY3LZNBw7/${Inputid}.json`)
+            // finalapiData = finalapiData.data;
+            // let imageUrl = finalapiData.image;
+            // console.log("api data,", finalapiData);
+            // console.log("imageUrl", imageUrl);
+            // console.log("newarr", Inputid);
+            // simplearray.push(imageUrl);
+            // setImage(simplearray);
             // newarr.push(Inputid)
         }
 
     }
-    useEffect(() => {
-        get()
-    })
+    // useEffect(() => {
+        // get()
+    // })
     return (
 
 
@@ -74,7 +78,7 @@ function MyVerticallyCenteredModal(props) {
 
                                         return (
                                             <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                        <img src={items} className="mintImage45" />
+                                        <img src={image[index]} className="mintImage45" />
 
                                     </div>
                                         )

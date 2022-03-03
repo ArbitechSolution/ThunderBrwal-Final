@@ -14,18 +14,18 @@
     justify-content: center;
 
 }
-.uperimg{
+/* .uperimg{
     display: flex;
     justify-content:start;
 align-items: center;
 
-}
+} */
 
 .mintImage45{
-    position: absolute;
-    width: 20%;
-    left:   40%;
-    top: 50%;
+    /* position: relative; */
+    width: 70%;
+    /* left:   40%;
+    top: 50%; */
 
 }
 .simpleText{

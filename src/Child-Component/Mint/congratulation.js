@@ -7,6 +7,7 @@ import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 function MyVerticallyCenteredModal(props) {
     let [image, setImage] = useState([])
     const get = async () => {
+        console.log("Bilal")
         // let newarr = [11,23,32,12,22,1,2];
         let simplearray = []
         for (let i = 0; i < props.number; i++) {
@@ -65,21 +66,21 @@ function MyVerticallyCenteredModal(props) {
                             </p>
                         </div>
                         <div className='cardImg'  >
-                            <img alt='NftImage' src='https://i.ibb.co/Sdz30VC/Group-505.png' className='underimg' width="50%" />
+                            {/* <img alt='NftImage' src='https://i.ibb.co/Sdz30VC/Group-505.png' className='underimg' width="50%" /> */}
 
                             <div className="uperimg row d-flex justify-content-center">
                                 {
                                     image.map((items, index) => {
 
                                         return (
-                                            <div className='col-lg-3 col-md-5'>
+                                            <div className='col-lg-3 col-md-5 p-2 m-2'>
+                                        <img src={items} className="mintImage45" />
 
-                                                <img src={items} className="mintImage45" />
-
-                                            </div>
+                                    </div>
                                         )
                                     })
                                 }
+                                
                                 {/* <img src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage45" /> */}
                             </div>
                         </div>

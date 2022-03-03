@@ -58,9 +58,10 @@ export const getUserThbLpBalance =()=> async(dispatch)=>{
     console.log("get getUserThbBalance 1212");
     let address = await loadWeb3();
     if (address=="No Wallet"){
-        toast.error("Not Connected")
+        // toast.error("Not Connected")
+        console.log("Not Connected")
     }else if(address=="Wrong Network"){
-        toast.error("Wrong Network")
+        console.log("Wrong Network")
     }else{
         const web3 = window.web3
         let userThbLpBalance = await thbLpTokenContractOf.methods.balanceOf(address).call();
@@ -166,9 +167,9 @@ export const  getUserBrawlMintPoint =()=> async(dispatch)=>{
     
     let address = await loadWeb3();
     if (address=="No Wallet"){
-        toast.error("Not Connected")
+        console.log("Not Connected")
     }else if(address=="Wrong Network"){
-        toast.error("Wrong Network")
+        console.log("Wrong Network")
     }else{
         const web3 = window.web3
         let bpCalculator = await stakingCOntractOf.methods.balances(address).call();

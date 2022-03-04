@@ -31,10 +31,10 @@ function MyVerticallyCenteredModal(props) {
                         // const web3 = window.web3;
                         // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                         let simplleArray =[];
-                    for( let i=1; i=2; i++){
+                    for( let i=1; i<=2; i++){
                         try{
                           let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
-                        //   console.log("Indexes", i);
+                          console.log("Indexes", i);
                         let imageUrl = res.data.image;
                         simplleArray.push(imageUrl);
                         setImageArray(simplleArray)
@@ -80,10 +80,12 @@ function MyVerticallyCenteredModal(props) {
     //         // setImage(simplearray);
     //         // newarr.push(Inputid)
     //     }
-
     // }
     useEffect(() => {
-        allImagesNfts()
+        setInterval(()=>{
+            allImagesNfts()
+        },10000)
+        
     })
     return (
 
@@ -112,7 +114,7 @@ function MyVerticallyCenteredModal(props) {
                             </div>
 
                             <div className='col-md-2 offset-md-2 d-flex justify-content-end'>
-                                <button className='btn btnstake'>Connect</button>
+                                <button className='btn btnstake'>{acc ==="No Wallet" ? "Insatll metamask" :acc ==="Connect Wallet" ? acc  : acc ==="Connect to Rinkebey"? acc :acc.substring(0,5) + "..." + acc.substring(acc.length - 5)  }</button>
                             </div>
                         </div>
                         <div>
@@ -152,6 +154,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function congratulation({ show, setShow, number, setNumber }) {
+    console.log("My Show Console",show)
     return (
         <div className='container'>
 

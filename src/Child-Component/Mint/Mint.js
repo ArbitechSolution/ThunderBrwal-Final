@@ -39,7 +39,7 @@ function Mint({ setShow, setNumber }) {
 // Minting Funtions 
 
 const myMint = async () => {
-    // console.log("ACC=",acc)
+    console.log("my ACC=",acc)
     if (acc == "No Wallet") {
         toast.error("No Wallet Connected")
     }
@@ -49,14 +49,14 @@ const myMint = async () => {
         toast.error("Not Connected")
       } else {
         console.log("mintFor");
-        const web3 = window.web3;
-        let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+        // const web3 = window.web3;
+        // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
         
-        let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
-        let supply = await nftContractOf.methods.totalSupply().call();
-        let maxSupply = await nftContractOf.methods.maxsupply().call();
+        // let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
+        // let supply = await nftContractOf.methods.totalSupply().call();
+        // let maxSupply = await nftContractOf.methods.maxsupply().call();
         // if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
-            if (parseFloat(maxSupply) >= parseFloat(supply)) {
+            // if (parseFloat(maxSupply) >= parseFloat(supply)) {
             //    await nftContractOf.methods.mint(value).send({
             //         from: acc
             //     }).on("receipt", (receipt) => {
@@ -68,9 +68,9 @@ const myMint = async () => {
                 setShow(true)
                 setNumber(value)
 
-            } else {
-                toast.error("Maximum minting reached")
-            }
+            // } else {
+            //     toast.error("Maximum minting reached")
+            // }
 
         // } 
         // else {

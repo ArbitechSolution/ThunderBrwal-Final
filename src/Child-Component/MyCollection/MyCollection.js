@@ -109,12 +109,11 @@ function MyCollection() {
             setInitiaLimit(initialLimit-6)
             setFinalLimit(finalLimit-6)
 
-            // setnum(num - 6);
         }
     }
     useEffect(() => {
-        // mycollection();
-        allImagesNfts()
+            allImagesNfts()
+       
     }, [])
     return (
         <div className='StakePageImagess pb-5'>
@@ -126,7 +125,7 @@ function MyCollection() {
                                 <p className='stakepageP'>My NFT Collection</p>
                             </div>
                             <div className='col-md-3 d-flex justify-content-end'>
-                                <button className='btn btnstake'>{btnTxt}</button>
+                                <button className='btn btnstake'>{acc ==="No Wallet" ? "Insatll metamask" :acc ==="Connect Wallet" ? acc  : acc ==="Connect to Rinkebey"? acc :acc.substring(0,5) + "..." + acc.substring(acc.length - 5)  }</button>
                             </div>
                         </div>
 

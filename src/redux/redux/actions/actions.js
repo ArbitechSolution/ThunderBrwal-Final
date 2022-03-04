@@ -1,6 +1,7 @@
 
 import {GET_USER_THB_BALANCE, GET_WALLET_ADDRESS,GET_USER_THB_LP_BALANCE,
-    GET_USER_BRL,GET_USER_TAMOUNT,GET_USER_TAMOUNT_LP,GET_USER_BRL_LP,GET_USER_MINT_BRAWL_POINTS} from '../types/types'
+        GET_USER_BRL,GET_USER_TAMOUNT,GET_USER_TAMOUNT_LP,GET_USER_BRL_LP,
+        GET_USER_MINT_BRAWL_POINTS} from '../types/types'
 import {loadWeb3} from '../../../Component/Api/api'
 import Web3 from "web3";
 import { thbTokenAddress, thbTokenAbi } from "../../../Component/Utils/ThbToken"
@@ -11,12 +12,9 @@ import { nftContratAddress, nftContractAbi } from '../../../Component/Utils/Nft'
 
 const webSupply = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
-
 let thbTokenContractOf = new webSupply.eth.Contract(thbTokenAbi, thbTokenAddress);
 let thbLpTokenContractOf = new webSupply.eth.Contract(thbLpTokenAbi, thbLpTokenAddress);
 let stakingCOntractOf = new webSupply.eth.Contract(stakingContractAbi, stakingContractAddress);
-
-
 
 export const getWallet = () => async (dispatch) => {
     console.log("get wallet 121212");

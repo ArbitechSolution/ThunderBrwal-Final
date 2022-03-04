@@ -25,7 +25,7 @@ function Menu() {
               <div className='col-md-6 box1'>
                 <img src="https://i.ibb.co/HK031mK/vectorone.png" className="imagemenu" />
                 <iframe height="400" width="500"
-                  src="https://www.youtube.com/embed/rlLZVe97Qus" className='mt-4 videos' controls="controls" autoplay="true">
+                  src="https://www.youtube.com/embed/rlLZVe97Qus" className='mt-4 videos' controls="controls" autoPlay="false">
                 </iframe>
                 {/* <video src="https://www.youtube.com/watch?v=rlLZVe97Qus" className='mt-4 videos' controls="controls" autoplay="true" /> */}
 

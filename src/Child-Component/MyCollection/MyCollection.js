@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./MyCollection.css"
-import { loadWeb3 } from '../../Component/Api/api';
 import Web3 from 'web3';
-import {getWallet} from '../../redux/redux/actions/actions';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 import axios from 'axios';
@@ -112,8 +110,7 @@ function MyCollection() {
         }
     }
     useEffect(() => {
-            allImagesNfts()
-       
+            allImagesNfts() 
     }, [])
     return (
         <div className='StakePageImagess pb-5'>

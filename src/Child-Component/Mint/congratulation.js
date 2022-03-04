@@ -33,11 +33,11 @@ function MyVerticallyCenteredModal(props) {
                         let simplleArray =[];
                     for( let i=1; i<=2; i++){
                         try{
-                          let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
+                        //   let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
                           console.log("Indexes", i);
-                        let imageUrl = res.data.image;
-                        simplleArray.push(imageUrl);
-                        setImageArray(simplleArray)
+                        // let imageUrl = res.data.image;
+                        // simplleArray.push(imageUrl);
+                        // setImageArray(simplleArray)
 
                           console.log("Getting Response", res.data.image);
                         }catch(e){

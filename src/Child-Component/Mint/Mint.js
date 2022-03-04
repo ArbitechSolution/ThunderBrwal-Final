@@ -10,9 +10,14 @@ import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
-
-function Mint({ setShow, setNumber }) {   
+// import congratulation from "./"
+import Congratulation from "./congratulation"
+function Mint(
+    // { setShow, setNumber }
+    ) {   
     let [value, setValue] = useState(1)
+    let [show,setShow] = useState(false)
+  let[number,setNumber]= useState();
     // let [point, setPoint] = useState(0);
     let dispatch= useDispatch()
 
@@ -49,28 +54,27 @@ const myMint = async () => {
         toast.error("Not Connected")
       } else {
         console.log("mintFor");
-        // const web3 = window.web3;
-        // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+        const web3 = window.web3;
+        let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
         
-        // let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
-        // let supply = await nftContractOf.methods.totalSupply().call();
-        // let maxSupply = await nftContractOf.methods.maxsupply().call();
+        let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
+        let supply = await nftContractOf.methods.totalSupply().call();
+        let maxSupply = await nftContractOf.methods.maxsupply().call();
         // if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
-            // if (parseFloat(maxSupply) >= parseFloat(supply)) {
-            //    await nftContractOf.methods.mint(value).send({
-            //         from: acc
-            //     }).on("receipt", (receipt) => {
+        //     if (parseFloat(maxSupply) >= parseFloat(supply)) {
+        //        await nftContractOf.methods.mint(value).send({
+        //             from: acc
+        //         }).on("receipt", (receipt) => {
 
-
-            //         console.log("mintValue", receipt);
-            //     })
+        //             console.log("mintValue", receipt);
+        //         })
                 toast.success("Transaction Confirmed")
                 setShow(true)
                 setNumber(value)
 
-            // } else {
-            //     toast.error("Maximum minting reached")
-            // }
+        //     } else {
+        //         toast.error("Maximum minting reached")
+        //     }
 
         // } 
         // else {
@@ -150,6 +154,7 @@ const myMint = async () => {
                     </div>
                 </div>
             </div>
+            <Congratulation  show={show} setShow={setShow} number={number} setNumber={setNumber} />
         </div>
     )
 }

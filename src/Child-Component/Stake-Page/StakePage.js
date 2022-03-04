@@ -79,11 +79,18 @@ const stakeVal = async () => {
               from: acc
             })
             toast.success("Transaction Confirmed")
+          
             await stakingCOntractOf.methods.Stake(enteredVal.toString()).send({
               from: acc
             })
             stakeAmount.current.value = ""
             toast.success("Transaction Confirmed")
+            dispatch(getUserTHbTamount())
+            dispatch(getUserTHbLPTamount())
+            dispatch(getUserThbBalance())
+    dispatch(getUserThbLpBalance())
+    dispatch(getUserBrLp())
+    dispatch(getUserBrl())
 
           } else {
             toast.error("You Have Already Staked. Please Unstake and try again")
@@ -132,6 +139,12 @@ const unstake = async () => {
           from: acc
         })
         toast.success("Transaction Confirmed")
+        dispatch(getUserTHbTamount())
+        dispatch(getUserTHbLPTamount())
+        dispatch(getUserThbBalance())
+         dispatch(getUserThbLpBalance())
+         dispatch(getUserBrLp())
+    dispatch(getUserBrl())
       } else {
         toast.error("You have not staked yet")
         console.log("You have not staked yet");
@@ -184,6 +197,12 @@ const stakeLpVal = async () => {
             })
             stakeAmountLp.current.value = ""
             toast.success("Transaction Confirmed")
+            dispatch(getUserTHbTamount())
+            dispatch(getUserTHbLPTamount())
+            dispatch(getUserThbBalance())
+            dispatch(getUserThbLpBalance())
+            dispatch(getUserBrLp())
+    dispatch(getUserBrl())
           } else {
             toast.error("You have staked already. Unstake and try again.")
           }
@@ -237,6 +256,12 @@ const unstakeLp = async () => {
             from: acc
           })
           toast.success("Transaction Confirmed")
+          dispatch(getUserTHbTamount())
+          dispatch(getUserTHbLPTamount())
+          dispatch(getUserThbBalance())
+         dispatch(getUserThbLpBalance())
+         dispatch(getUserBrLp())
+    dispatch(getUserBrl())
         }else{
           toast.error("Unlocked Time Not Reached !")
         }
@@ -277,6 +302,12 @@ const redeemTHB=async()=>{
           from: acc
         })
         toast.success("Transaction Confirmed")
+        dispatch(getUserTHbTamount())
+        dispatch(getUserTHbLPTamount())
+        dispatch(getUserThbBalance())
+        dispatch(getUserThbLpBalance())
+        dispatch(getUserBrLp())
+    dispatch(getUserBrl())
       } else {
         toast.error("You have no Brawl Point yet")
         console.log("You have not staked yet");
@@ -311,6 +342,12 @@ const RedeemLPTHP = async () => {
           from: acc
         })
         toast.success("Transaction Confirmed")
+        dispatch(getUserTHbTamount())
+        dispatch(getUserTHbLPTamount())
+        dispatch(getUserThbBalance())
+        dispatch(getUserBrLp())
+        dispatch(getUserBrl())
+        dispatch(getUserThbLpBalance())
       } else {
         toast.error("You have no LP Brawl Point yet")
         console.log("You have not staked yet");
@@ -324,16 +361,18 @@ const RedeemLPTHP = async () => {
 }
 useEffect(()=>{
   setInterval(()=>{
-    dispatch(getUserThbBalance())
-    dispatch(getUserThbLpBalance())
-    dispatch(getUserTHbTamount())
-    dispatch(getUserTHbLPTamount())
-    dispatch(getWallet())
     dispatch(getUserBrLp())
     dispatch(getUserBrl())
-  },1000)
-
-
+  },60000)
+ 
+    dispatch(getWallet())
+    dispatch(getUserTHbTamount())
+        dispatch(getUserTHbLPTamount())
+        dispatch(getUserThbBalance())
+        dispatch(getUserThbLpBalance())
+        dispatch(getUserBrLp())
+    dispatch(getUserBrl())
+    
 },[])
   return (
     <div className='StakePageImage'>

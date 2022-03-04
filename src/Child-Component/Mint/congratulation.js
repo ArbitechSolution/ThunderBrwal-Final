@@ -28,16 +28,26 @@ function MyVerticallyCenteredModal(props) {
         
         else {
             console.log("Inside")
-                        // const web3 = window.web3;
-                        // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                        const web3 = window.web3;
+                        let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                            let num = props.value
+                            console.log(" my Number",num)
+                            console.log(" my Number",typeof(num))
+
+
                         let simplleArray =[];
-                    for( let i=1; i<=2; i++){
+                    for( let i=0; i<=num; i++){
                         try{
-                        //   let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
+                            
+                        let inputId = await nftContractOf.methods.mintids(i).call();
+                        
+                        console.log("walletOfOwner", inputId);
+                            // let walletLength = inputId.length
+                          let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${inputId[i]}.json`)
                           console.log("Indexes", i);
-                        // let imageUrl = res.data.image;
-                        // simplleArray.push(imageUrl);
-                        // setImageArray(simplleArray)
+                        let imageUrl = res.data.image;
+                        simplleArray.push(imageUrl);
+                        setImageArray(simplleArray)
 
                           console.log("Getting Response", res.data.image);
                         }catch(e){
@@ -45,9 +55,7 @@ function MyVerticallyCenteredModal(props) {
                         }
                           
                     }
-                    // let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
-                    // let walletLength = walletOfOwner.length
-                    // console.log("walletOfOwner", walletLength);
+                    
 
         }
 
@@ -82,11 +90,11 @@ function MyVerticallyCenteredModal(props) {
     //     }
     // }
     useEffect(() => {
-        setInterval(()=>{
-            allImagesNfts()
-        },10000)
-        
-    })
+        // setInterval(()=>{
+        //     allImagesNfts()
+        // },10000)
+        allImagesNfts()    
+    },[])
     return (
 
 
@@ -153,13 +161,13 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-function congratulation({ show, setShow, number, setNumber }) {
+function congratulation({ show, setShow, value, setNumber }) {
     console.log("My Show Console",show)
     return (
         <div className='container'>
 
             <MyVerticallyCenteredModal
-                number={number}
+                value={value}
                 setNumber={setNumber}
                 show={show}
                 onHide={() => setShow(false)}

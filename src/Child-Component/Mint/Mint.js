@@ -60,34 +60,33 @@ const myMint = async () => {
         let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
         let supply = await nftContractOf.methods.totalSupply().call();
         let maxSupply = await nftContractOf.methods.maxsupply().call();
-        // if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
-        //     if (parseFloat(maxSupply) >= parseFloat(supply)) {
-        //        await nftContractOf.methods.mint(value).send({
-        //             from: acc
-        //         }).on("receipt", (receipt) => {
+        if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
+            if (parseFloat(maxSupply) >= parseFloat(supply)) {
+               await nftContractOf.methods.mint(value).send({
+                    from: acc
+                }).on("receipt", (receipt) => {
 
-        //             console.log("mintValue", receipt);
-        //         })
+                    console.log("mintValue", receipt);
+                })
                 toast.success("Transaction Confirmed")
+                dispatch(getUserBrawlMintPoint())
                 setShow(true)
                 setNumber(value)
 
-        //     } else {
-        //         toast.error("Maximum minting reached")
-        //     }
+            } else {
+                toast.error("Maximum minting reached")
+            }
 
-        // } 
-        // else {
-        //     toast.error("You do not have enought Brawl points")
-        // }
+        } 
+        else {
+            toast.error("You do not have enought Brawl points")
+        }
 
     }
 }
-
-    useEffect(() => {
-
-        dispatch(getUserBrawlMintPoint())
-    })
+useEffect(()=>{
+dispatch(getUserBrawlMintPoint())
+},[])
     
     return (
         <div className='StakePageImage'>
@@ -154,7 +153,7 @@ const myMint = async () => {
                     </div>
                 </div>
             </div>
-            <Congratulation  show={show} setShow={setShow} number={number} setNumber={setNumber} />
+            <Congratulation  show={show} setShow={setShow} value={value} setNumber={setNumber} />
         </div>
     )
 }

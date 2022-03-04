@@ -30,26 +30,30 @@ function MyCollection() {
             
             else {
                 console.log("Inside")
-                            // const web3 = window.web3;
-                            // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                            const web3 = window.web3;
+                            let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                             let simplleArray =[];
-                        for( let i=0; i<=10; i++){
-                            try{
-                              let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
-                            //   console.log("Indexes", i);
-                            let imageUrl = res.data.image;
-                            simplleArray.push(imageUrl);
-                            setImageArray(simplleArray)
-
-                              console.log("Getting Response", res.data.image);
-                            }catch(e){
-                                console.log("Error while Fetching Api",e)
+                            let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
+                            let walletLength = walletOfOwner.length
+                            console.log("walletOfOwner", walletLength);
+                            if(parseInt(walletLength)>0){
+                                for( let i=0; i<=parseInt(walletLength); i++){
+                                    try{
+                                      let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${walletOfOwner[i]}.json`)
+                                    //   console.log("Indexes", i);
+                                    let imageUrl = res.data.image;
+                                    simplleArray.push(imageUrl);
+                                    setImageArray(simplleArray)
+        
+                                      console.log("Getting Response", res.data.image);
+                                    }catch(e){
+                                        console.log("Error while Fetching Api",e)
+                                    }
+                                      
+                                }
                             }
-                              
-                        }
-                        // let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
-                        // let walletLength = walletOfOwner.length
-                        // console.log("walletOfOwner", walletLength);
+                       
+                       
 
             }
 

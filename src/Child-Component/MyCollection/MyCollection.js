@@ -35,7 +35,7 @@ function MyCollection() {
                             // const web3 = window.web3;
                             // let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                             let simplleArray =[];
-                        for( let i=1; i<=10; i++){
+                        for( let i=0; i<=10; i++){
                             try{
                               let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${i}.json`)
                             //   console.log("Indexes", i);

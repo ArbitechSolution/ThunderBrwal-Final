@@ -55,7 +55,7 @@ const myMint = async () => {
         let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
         let supply = await nftContractOf.methods.totalSupply().call();
         let maxSupply = await nftContractOf.methods.maxsupply().call();
-        if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
+        // if (parseFloat(brawlMintPoints) >= parseFloat(mintingPrice)) {
             if (parseFloat(maxSupply) >= parseFloat(supply)) {
             //    await nftContractOf.methods.mint(value).send({
             //         from: acc
@@ -72,9 +72,10 @@ const myMint = async () => {
                 toast.error("Maximum minting reached")
             }
 
-        } else {
-            toast.error("You do not have enought Brawl points")
-        }
+        // } 
+        // else {
+        //     toast.error("You do not have enought Brawl points")
+        // }
 
     }
 }

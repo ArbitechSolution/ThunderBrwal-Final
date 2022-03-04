@@ -82,9 +82,9 @@ function MyVerticallyCenteredModal(props) {
     //     }
 
     // }
-    // useEffect(() => {
-    // get()
-    // })
+    useEffect(() => {
+        allImagesNfts()
+    })
     return (
 
 
@@ -129,7 +129,7 @@ function MyVerticallyCenteredModal(props) {
 
                                         return (
                                             <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                                <img src={image[index]} className="mintImage45" />
+                                                <img src={imageArray[index]} className="mintImage45" />
 
                                             </div>
                                         )

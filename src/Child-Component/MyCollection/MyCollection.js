@@ -121,7 +121,7 @@ function MyCollection() {
         <div className='StakePageImagess pb-5'>
             {
                 modalShow?
-                <Modal
+                <Modal 
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 // {...props}
@@ -129,13 +129,13 @@ function MyCollection() {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               >
-                <Modal.Header closeButton>
+                <Modal.Header className='modalBackground' closeButton>
                   <Modal.Title id="contained-modal-title-vcenter">
-                   Confirm
+                   <h2 className='collectionsTextLarge m-2'> Confirm</h2>
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className='d-flex justify-content-center align-items-center flex-column'>
-                  <h4>Selected Image</h4>
+                <Modal.Body className='modalBackground d-flex justify-content-center align-items-center flex-column'>
+                  <h4 className='collectionsTextLarge m-2  '>Selected Image</h4>
                   {/* {imageArray.map((items, index) => { */}
                                 {/* return ( */}
                                     <div className='col-lg-3 col-md-5 mycollectionsModal p-2 m-2'>
@@ -157,9 +157,6 @@ function MyCollection() {
                                 {/* ) */}
                             {/* })} */}
                 </Modal.Body>
-                <Modal.Footer>
-                  {/* <Button onClick={props.onHide}>Close</Button> */}
-                </Modal.Footer>
               </Modal>:<></>
             }
 

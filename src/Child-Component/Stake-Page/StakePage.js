@@ -461,12 +461,12 @@ useEffect(()=>{
                 <ul className='game-order-list text-start' >
                   <li className='gamelist' style={{ fontSize: "18px" }}>Stake THB token to earn Energy point.</li>
                   <li className='gamelist' style={{ fontSize: "18px" }}>You can Unstake anytime.</li>
-                  <li className='gamelist' style={{ fontSize: "18px" }}>THB rewards are calculated per block</li>
+                  {/* <li className='gamelist' style={{ fontSize: "18px" }}>THB rewards are calculated per block</li> */}
                 </ul>
                 <ul className='StakeOrder'>
-                  <li className='Stakelist'>20,000 Point = 1 random card</li>
-                  <li className='Stakelist'>*Min staking 500 THB</li>
-                  <li className='Stakelist'>*Max staking 30,000 THB</li>
+                  <li className='Stakelist'>4,000 Point = 1 random card</li>
+                  {/* <li className='Stakelist'>*Min staking 500 THB</li>
+                  <li className='Stakelist'>*Max staking 30,000 THB</li> */}
                 </ul>
               </div>
               <div className='col-lg-4 col-11 '>
@@ -541,9 +541,9 @@ useEffect(()=>{
                 </ul>
                 <ul className='StakeOrder'>
                   <li className='Stakelist'>THB/BNP staking = 10,000 point a day * 1BNB value base</li>
-                  <li className='Stakelist'>20,000 Point = 1 random card</li>
-                  <li className='Stakelist'>* Min staking 0.1 BNB</li>
-                  <li className='Stakelist'>* Max staking 6 BNB</li>
+                  <li className='Stakelist'>4,000 Point = 1 random card</li>
+                  {/* <li className='Stakelist'>* Min staking 0.1 BNB</li>
+                  <li className='Stakelist'>* Max staking 6 BNB</li> */}
                 </ul>
               </div>
 

@@ -5,14 +5,12 @@ import "./congratulation.css"
 import axios from 'axios';
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 import {useSelector, useDispatch} from 'react-redux';
+
 function MyVerticallyCenteredModal(props) {
     console.log("Prpos",props);
 
-    let [imageArray,setImageArray] = useState([]);
-    
+    let [imageArray,setImageArray] = useState([]);  
     let {acc} = useSelector(state =>state.connectWallet)
-
-
     
     const allImagesNfts=async()=>{
         // console.log("ACC=",acc)
@@ -46,7 +44,7 @@ function MyVerticallyCenteredModal(props) {
                           let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${inputId[i]}.json`)
                           console.log("Indexes", i);
                         let imageUrl = res.data.image;
-                        simplleArray.push(imageUrl);
+                        simplleArray =[...simplleArray,imageUrl]
                         setImageArray(simplleArray)
 
                           console.log("Getting Response", res.data.image);
@@ -55,8 +53,6 @@ function MyVerticallyCenteredModal(props) {
                         }
                           
                     }
-                    
-
         }
 
 }
@@ -91,7 +87,7 @@ function MyVerticallyCenteredModal(props) {
     // }
     useEffect(() => {
         // setInterval(()=>{
-        //     allImagesNfts()
+            allImagesNfts()
         // },10000)
         allImagesNfts()    
     },[])

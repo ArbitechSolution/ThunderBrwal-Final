@@ -1,14 +1,14 @@
 import React, { useEffect, useState,useRef } from 'react'
 import "./MyCollection.css"
-import Web3 from 'web3';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Modal from 'react-bootstrap/Modal'
-
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {getWallet} from '../../redux/redux/actions/actions';
 function MyCollection() {
     let max = 200;
+    let dispatch =useDispatch();
     let [btnTxt, setBtTxt] = useState("Connect");
     let [modalShow, setModalShow] = useState(false)
     let [clickedIndexes, setClickedIndexes] = useState()
@@ -19,6 +19,7 @@ function MyCollection() {
     let [num, setnum] = useState(0);
     let { acc } = useSelector(state => state.connectWallet)
     let toAddress =useRef("")
+    
     const allImagesNfts = async () => {
         if (acc == "No Wallet") {
             console.log("wallet");
@@ -42,9 +43,9 @@ function MyCollection() {
                 for (let i = 0; i < parseInt(walletLength); i++) {
                     try {
                         let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${walletOfOwner[i]}.json`)
-                        //   console.log("Indexes", i);
+                     
                         let imageUrl = res.data.image;
-                        simplleArray.push(imageUrl);
+                        simplleArray =[...simplleArray,imageUrl]
                         setImageArray(simplleArray)
 
                         console.log("Getting Response", res.data.image);
@@ -72,8 +73,9 @@ function MyCollection() {
     const clickedImage = (index) => {
         setClickedIndexes(index)
         setModalShow(true)
-        console.log("Clicked Image", index);
     }
+
+
     const transferNft =async()=>{
         if (acc == "No Wallet") {
             console.log("wallet");
@@ -110,14 +112,23 @@ function MyCollection() {
         }
     }
 
+const getWalletAddress =()=>{
+dispatch(getWallet());
+// allImagesNfts()
+
+}
     useEffect(() => {
-        allImagesNfts()
+        allImagesNfts();
+    }, [acc])
+    useEffect(() => {
+      
+        setInterval(()=>{
+            allImagesNfts()
+        },1500)
+
     }, [])
+  
     return (
-
-
-
-
         <div className='StakePageImagess pb-5'>
             {
                 modalShow?
@@ -168,12 +179,13 @@ function MyCollection() {
                                 <p className='stakepageP'>My NFT Collection</p>
                             </div>
                             <div className='col-md-3 d-flex justify-content-end'>
-                                <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                <button onClick={()=>getWalletAddress()} className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                             </div>
                         </div>
 
                         <div className='row d-flex justify-content-center mt-3'>
                             {imageArray.slice(initialLimit, finalLimit).map((items, index) => {
+                               
                                 return (
                                     <div className='col-lg-3 col-md-5 mycollections p-2 m-2'>
                                         <img src={imageArray[index]} className='myCollectionsImage ' />

@@ -7,7 +7,6 @@ import {getWallet,getUserBrawlMintPoint} from '../../redux/redux/actions/actions
 import {useSelector, useDispatch} from 'react-redux';
 import { toast } from 'react-toastify';
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
-import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
 // import congratulation from "./"
@@ -20,18 +19,14 @@ function Mint(
   let[number,setNumber]= useState();
     // let [point, setPoint] = useState(0);
     let dispatch= useDispatch()
-
     let {brawlMintPoints}=useSelector(state=>state.getBrawlPointMint);
     let {acc} = useSelector(state =>state.connectWallet)
     console.log("getBrawlPointMint",acc)
-
-
     const increaseValue = () => {
         if (value < 3) {
             setValue(++value)
             console.log("setValue", value)
         }
-
     }
     const decreaseValue = () => {
         if (value > 1) {

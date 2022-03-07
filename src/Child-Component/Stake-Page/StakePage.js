@@ -1,7 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react'
 import "./StakePage.css"
-
-
 // import Vector10 from "../../Assets/Vector10.png"
 // import B from "../../Assets/--02 1.png"
 // import vector99 from "../../Assets/vector 99.png"
@@ -28,7 +26,6 @@ function StakePage() {
   let {tamountlp}= useSelector(state=>state.tAmountLp)
   let {brlPoint}= useSelector(state=> state.getUserBrlpoint)
   let {brlLPPoint} = useSelector(state => state.getUserBrLplpoint)
-  console.log("Acc",brlLPPoint);
   
   const getAccount = () => {
   dispatch(getUserThbBalance())

@@ -43,11 +43,9 @@ function MyCollection() {
                 for (let i = 0; i < parseInt(walletLength); i++) {
                     try {
                         let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${walletOfOwner[i]}.json`)
-                     
                         let imageUrl = res.data.image;
                         simplleArray =[...simplleArray,imageUrl]
                         setImageArray(simplleArray)
-
                         console.log("Getting Response", res.data.image);
                     } catch (e) {
                         console.log("Error while Fetching Api", e)
@@ -120,13 +118,7 @@ dispatch(getWallet());
     useEffect(() => {
         allImagesNfts();
     }, [acc])
-    useEffect(() => {
-      
-        setInterval(()=>{
-            allImagesNfts()
-        },1500)
 
-    }, [])
   
     return (
         <div className='StakePageImagess pb-5'>

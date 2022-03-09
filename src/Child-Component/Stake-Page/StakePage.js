@@ -68,8 +68,9 @@ const stakeVal = async () => {
       const web3 = window.web3;
       let thbTokenContractOf = new web3.eth.Contract(thbTokenAbi, thbTokenAddress);
       let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      let userThbBal =web3.utils.toWei(thbBal.toString())
       if (enteredVal > 0) {
-        if (parseFloat(thbBal) >= parseFloat(enteredVal)) {
+        if (parseFloat(userThbBal) >= parseFloat(enteredVal)) {
           if (tamount <= 0) {
             enteredVal = web3.utils.toWei(enteredVal.toString());
             await thbTokenContractOf.methods.approve(stakingContractAddress, enteredVal.toString()).send({
@@ -172,19 +173,16 @@ const stakeLpVal = async () => {
   } else {
     try {
 
-
       let enteredVal = stakeAmountLp.current.value;
-
       console.log("U NEterd", enteredVal);
       const web3 = window.web3;
-
       let thbLpTokenContractOf = new web3.eth.Contract(thbLpTokenAbi, thbLpTokenAddress);
       let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+      let userThbLpBal= web3.utils.toWei(thbLpBal.toString())
       if (enteredVal > 0) {
-        if (parseFloat(thbLpBal) >= parseFloat(enteredVal)) {
+        if (parseFloat(userThbLpBal) >= parseFloat(enteredVal)) {
           if (tamountlp <= 0) {
-            enteredVal = web3.utils.toWei(enteredVal.toString());
-            
+            enteredVal = web3.utils.toWei(enteredVal.toString());  
             await thbLpTokenContractOf.methods.approve(stakingContractAddress, enteredVal.toString()).send({
               from: acc
             })

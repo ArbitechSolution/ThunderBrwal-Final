@@ -1,7 +1,7 @@
 
 import {GET_USER_THB_BALANCE, GET_WALLET_ADDRESS,GET_USER_THB_LP_BALANCE,
         GET_USER_BRL,GET_USER_TAMOUNT,GET_USER_TAMOUNT_LP,GET_USER_BRL_LP,
-        GET_USER_MINT_BRAWL_POINTS} from '../types/types'
+        GET_USER_MINT_BRAWL_POINTS,GET_CURRENT_BP_TOKENS,GET_MAX_BP_TOKENS} from '../types/types'
 import {loadWeb3} from '../../../Component/Api/api'
 import Web3 from "web3";
 import { thbTokenAddress, thbTokenAbi } from "../../../Component/Utils/ThbToken"
@@ -38,7 +38,7 @@ export const getUserThbBalance =()=> async(dispatch)=>{
     }else{
         const web3 = window.web3
         let userthbBalance = await thbTokenContractOf.methods.balanceOf(address).call();
-        userthbBalance =parseInt(userthbBalance)/1000000000000000000;
+        userthbBalance = web3.utils.fromWei(userthbBalance)
         userthbBalance =parseInt(userthbBalance)
         console.log("userthbBalance ",userthbBalance);
         dispatch({
@@ -63,7 +63,7 @@ export const getUserThbLpBalance =()=> async(dispatch)=>{
     }else{
         const web3 = window.web3
         let userThbLpBalance = await thbLpTokenContractOf.methods.balanceOf(address).call();
-        userThbLpBalance =parseInt(userThbLpBalance)/1000000000000000000;
+        userThbLpBalance =web3.utils.fromWei(userThbLpBalance)
         userThbLpBalance =parseInt(userThbLpBalance)
         console.log("userThbLpBalance",userThbLpBalance);
     
@@ -89,7 +89,7 @@ export const getUserTHbTamount =()=> async(dispatch)=>{
         const web3 = window.web3
         let userThbData = await stakingCOntractOf.methods.User(address).call();
         let tAmount = userThbData.Tamount;
-        tAmount =parseInt(tAmount)/1000000000000000000;
+        tAmount = web3.utils.fromWei(tAmount)
         tAmount =parseInt(tAmount)
         dispatch({
             type:GET_USER_TAMOUNT,
@@ -111,7 +111,7 @@ export const getUserTHbLPTamount =()=> async(dispatch)=>{
         const web3 = window.web3
         let userThbLpData = await stakingCOntractOf.methods.UserLP(address).call()
         let tAmountlp = userThbLpData.Tamount;
-        tAmountlp = parseInt(tAmountlp)/1000000000000000000;
+        tAmountlp =web3.utils.fromWei(tAmountlp)
         tAmountlp =parseInt(tAmountlp);
         dispatch({
             type:GET_USER_TAMOUNT_LP,
@@ -130,8 +130,8 @@ export const getUserBrl =()=> async(dispatch)=>{
     }else{
         const web3 = window.web3
         let userBrawlPoint = await stakingCOntractOf.methods.BPcalculator(address).call()
-        // userBrawlPoint =parseInt(userBrawlPoint)/1000000000000000000;
-        // userBrawlPoint =parseInt(userBrawlPoint)
+        userBrawlPoint =web3.utils.fromWei(userBrawlPoint)
+        userBrawlPoint =parseInt(userBrawlPoint)
        
         dispatch({
             type:GET_USER_BRL,
@@ -151,8 +151,8 @@ export const getUserBrLp =()=> async(dispatch)=>{
     }else{
         const web3 = window.web3
         let userBrawlLpPoint = await stakingCOntractOf.methods.BPcalculatorforLP(address).call()
-        // userBrawlLpPoint = parseInt(userBrawlLpPoint)/1000000000000000000;
-        // userBrawlLpPoint=parseInt(userBrawlLpPoint)
+        userBrawlLpPoint = web3.utils.fromWei(userBrawlLpPoint)
+        userBrawlLpPoint=parseInt(userBrawlLpPoint)
        
         dispatch({
             type:GET_USER_BRL_LP,
@@ -171,8 +171,8 @@ export const  getUserBrawlMintPoint =()=> async(dispatch)=>{
     }else{
         const web3 = window.web3
         let bpCalculator = await stakingCOntractOf.methods.balances(address).call();
-        // bpCalculator= parseInt(bpCalculator)/1000000000000000000
-        // bpCalculator = parseInt(bpCalculator)
+        bpCalculator =web3.utils.fromWei(bpCalculator)
+        bpCalculator = parseInt(bpCalculator)
        
         dispatch({
             type:GET_USER_MINT_BRAWL_POINTS,
@@ -181,3 +181,27 @@ export const  getUserBrawlMintPoint =()=> async(dispatch)=>{
     }
   
 }
+
+export const  getCurrentBpTokens =()=> async(dispatch)=>{
+  
+        const web3 = window.web3
+        let currentbp = await stakingCOntractOf.methods.currentBP().call();
+        // currentbp =web3.utils.fromWei(currentbp);
+        // currentbp =parseInt(currentbp);
+        console.log("Current bp in action",currentbp);
+        dispatch({
+            type:GET_CURRENT_BP_TOKENS,
+            payload:currentbp
+        })
+}
+export const  getMaxBpTokens =()=> async(dispatch)=>{
+        const web3 = window.web3
+        let maxbp = await stakingCOntractOf.methods.maxBPToken().call();
+        console.log("maxbp bp in action",maxbp);
+        dispatch({
+            type:GET_MAX_BP_TOKENS,
+            payload:maxbp
+        })
+}
+
+

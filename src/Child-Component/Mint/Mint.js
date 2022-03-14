@@ -4,7 +4,7 @@ import React, { useState ,useEffect} from 'react'
 // import tiger1 from "../../Assets/tiger 1.jpg"
 import "./Mint.css"
 import axios from 'axios';
-import {getWallet,getUserBrawlMintPoint} from '../../redux/redux/actions/actions';
+import {getUserBrawlMintPoint} from '../../redux/redux/actions/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import CloseButton from 'react-bootstrap/CloseButton'
 import { toast } from 'react-toastify';
@@ -156,10 +156,10 @@ className='d-flex StakePageImage'>
         </div>
         <div className='row' >
             <div className='col-md-8'>
-                <img src='https://i.ibb.co/SJLFXL2/Vector10.png' className='Congratimage' />
+                <img alt='greetings' src='https://i.ibb.co/SJLFXL2/Vector10.png' className='Congratimage' />
             </div>
             <div className='col-md-8'>
-                <img src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
+                <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
             </div>
 
             <div className='col-md-2 offset-md-2 d-flex justify-content-end'>
@@ -180,7 +180,7 @@ className='d-flex StakePageImage'>
 
                         return (
                             <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                <img src={imageArray[index]} className="mintImage45" />
+                                <img  alt='greetings' src={imageArray[index]} className="mintImage45" />
 
                             </div>
                         )
@@ -204,7 +204,7 @@ className='d-flex StakePageImage'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>
                         <div className='row'>
                             <div className='col-md-12'>
-                                <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
+                                <img alt='greetings' src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
                         </div>
                         <div className='row'>
@@ -215,8 +215,8 @@ className='d-flex StakePageImage'>
 
                         <div className='row pt-4 pb-4 d-flex justify-content-center '> 
                         <div className='col-md-6 d-flex justify-content-center align-items-center'>
-                            <img src="https://i.ibb.co/yyNVLVb/Rectangle-554.png" className="mintImage1"/>
-                            <img src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage2"/>
+                            <img alt='greetings' src="https://i.ibb.co/yyNVLVb/Rectangle-554.png" className="mintImage1"/>
+                            <img alt='greetings' src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage2"/>
                         </div>
                         <div className='col-md-6 d-flex flex-column justify-content-center align-items-center'>
                             <div className='text-start'>
@@ -228,7 +228,7 @@ className='d-flex StakePageImage'>
                             <span className='mintspane1'>100 Point</span>
                             </div> */}
                             <div className='d-flex flex-row pt-lg-5 pt-3'>
-                                <a onClick={decreaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px"/></a>
+                                <a  onClick={decreaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px"/></a>
                                 <div className='mintboxsss mt-1 ms-4'>{value}</div>
                                 <a className='ms-4' onClick={increaseValue} style={{cursor: "pointer"}}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px"/></a>
                             </div>

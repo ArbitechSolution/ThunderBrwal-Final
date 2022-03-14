@@ -90,7 +90,7 @@ export const getUserTHbTamount =()=> async(dispatch)=>{
         let userThbData = await stakingCOntractOf.methods.User(address).call();
         let tAmount = userThbData.Tamount;
         tAmount = web3.utils.fromWei(tAmount)
-        tAmount =parseInt(tAmount)
+        tAmount =parseFloat(tAmount)
         dispatch({
             type:GET_USER_TAMOUNT,
             payload:tAmount
@@ -112,7 +112,8 @@ export const getUserTHbLPTamount =()=> async(dispatch)=>{
         let userThbLpData = await stakingCOntractOf.methods.UserLP(address).call()
         let tAmountlp = userThbLpData.Tamount;
         tAmountlp =web3.utils.fromWei(tAmountlp)
-        tAmountlp =parseInt(tAmountlp);
+        tAmountlp =parseFloat(tAmountlp);
+        console.log("tAmountlp",tAmountlp)
         dispatch({
             type:GET_USER_TAMOUNT_LP,
             payload:tAmountlp

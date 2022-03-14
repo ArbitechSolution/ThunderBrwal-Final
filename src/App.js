@@ -18,25 +18,25 @@ import Mintpage from './Mintpage';
 import Traitspage from './Traitspage';
 import BreedPage from './BreedPage';
 import { ToastContainer } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
-      <ToastContainer/>
+      <ToastContainer />
       {/* <Router> */}
       <Router>
         {/* <Navbar /> */}
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/StakePages" component={StakePages}/>
-        <Route exact path="/mint" component={Mintpage} />
-        <Route exact path="/traits" component={Traitspage} />
-        <Route exact path="/Breed" component={BreedPage} />
-      </Switch>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/StakePages" component={StakePages} />
+          <Route exact path="/mint" component={Mintpage} />
+          <Route exact path="/traits" component={Traitspage} />
+          <Route exact path="/Breed" component={BreedPage} />
+        </Switch>
         <FooterDown />
         <Footer />
       </Router>
-        
+
     </div>
   );
 }

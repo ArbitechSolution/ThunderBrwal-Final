@@ -126,7 +126,32 @@
     width: 70px;
     height: 30px;
 }
+@media(min-width: 2000px) and (max-width: 6000px) {
+    .StakePageImagess {
+        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+        /* background: rgba(0, 0, 0, 0.2); */
+        background-repeat: no-repeat;
+        background-color: black;
+        /* background-attachment: fixed; */
+        background-size: cover, contain;
+        /* height: 500px; */
+        height: 100vh ;
 
+    }
+}
+@media(max-width: 1290px){
+    .StakePageImagess {
+        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+        /* background: rgba(0, 0, 0, 0.2); */
+        background-repeat: no-repeat;
+        background-color: black;
+        /* background-attachment: fixed; */
+        background-size: cover, contain;
+        /* height: 500px; */
+        /* height: 100%; */
+
+    }
+}
 @media(max-width: 600px) {
     .collections {
         display: flex;

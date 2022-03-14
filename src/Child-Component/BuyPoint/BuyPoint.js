@@ -42,7 +42,7 @@ const buyWithBnb =async()=>{
                         await stakingCOntractOf.methods.BuywithBNb().send({
                             from:acc,
                             value :userEnterdValue
-      
+
                         })
                         toast.success("Transaction confirmed")
                       }else{
@@ -51,14 +51,14 @@ const buyWithBnb =async()=>{
                 }else{
                     toast.error("The entered amount is Greater than your balance ")
                 }
-              
+
             }else{
                 toast.error("Entered value must be greater than 0")
             }
         }catch(e){
             toast.error("Transaction Failed")
             console.log("Error While buying with bnb",e);
-        } 
+        }
     }
 }
 
@@ -67,7 +67,7 @@ dispatch(getMaxBpTokens());
 dispatch(getCurrentBpTokens());
 },[])
     return (
-        <div className='StakePageImage'>
+        <div className='StakePageImage-Mint'>
             <div className='container pt-3'>
                 <div className='row d-flex justify-content-center align-items-center pb-3'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>

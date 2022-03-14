@@ -30,7 +30,7 @@ function NavbarId({ ChnageMain, ChangeStake, ChangeMint, ChangeTraits, ChangeBre
                                             STAKING & NFT
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a className="dropdown-item text-white" href="#StakePages" onClick={() => {ChangeStake();window.scrollTo(0, 0);}}>STAKE & POINT </a></li>
+                                            <li className="navbar-li"><a className="dropdown-item text-white" href="#StakePages" onClick={() => {ChangeStake();window.scrollTo(0, 0);}}>STAKE & POINT </a></li>
                                             <li><a className="dropdown-item text-white" href="#Mint" onClick={() => { ChangeMint(); window.scrollTo(0, 0); }}>MINT</a></li>
                                             <li><a className="dropdown-item text-white" href="#breed" onClick={() => { ChangeBreed(); window.scrollTo(0, 0); }}>BREED</a></li>
                                             <li><a className="dropdown-item text-white" href="#"onClick={() => { ChangeBuyPoint(); window.scrollTo(0, 0); }}>BUY POINT</a></li>

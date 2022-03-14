@@ -19,7 +19,7 @@ function MyCollection() {
     let [num, setnum] = useState(0);
     let { acc } = useSelector(state => state.connectWallet)
     let toAddress =useRef("")
-    
+
     const allImagesNfts = async () => {
         if (acc == "No Wallet") {
             console.log("wallet");
@@ -94,7 +94,7 @@ function MyCollection() {
                     let tokenId =walletOfOwner[clickedIndexes];
                     await nftContractOf.methods.safeTransferFrom(acc,userEnteredAddress,tokenId).send({
                         from:acc
-                    })    
+                    })
                     toast.success("Transaction confirmed")
                     setModalShow(false)
                 }catch(e){
@@ -119,12 +119,12 @@ dispatch(getWallet());
         allImagesNfts();
     }, [acc])
 
-  
+
     return (
         <div className='StakePageImagess pb-5'>
             {
                 modalShow?
-                <Modal 
+                <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 // {...props}
@@ -162,7 +162,7 @@ dispatch(getWallet());
                 </Modal.Body>
               </Modal>:<></>
             }
-
+<div className="StakePageImagess">
             <div className='container pt-3'>
                 <div className='row d-flex justify-content-center align-items-center pb-3'>
                     <div className='col-md-12 col-11 pt-4 pb-4'>
@@ -177,7 +177,7 @@ dispatch(getWallet());
 
                         <div className='row d-flex justify-content-center mt-3'>
                             {imageArray.slice(initialLimit, finalLimit).map((items, index) => {
-                               
+
                                 return (
                                     <div className='col-lg-3 col-md-5 mycollections p-2 m-2'>
                                         <img src={imageArray[index]} className='myCollectionsImage ' />
@@ -221,6 +221,7 @@ dispatch(getWallet());
 
                     </div>
                 </div>
+            </div>
             </div>
 
         </div>

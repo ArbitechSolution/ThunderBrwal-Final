@@ -34,3 +34,18 @@
     color: white;
 }
 .dropdown:hover .dropdown-menu {display: block;}
+
+.navbar-li:hover{
+background-color: transparent;
+    color: white;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: transparent;
+    color: white;
+
+}
+.navbar .navbar-nav > li.open > a:hover,
+.navbar .navbar-nav > li.open > a:focus {
+  /* background-color: teal; */
+  color: #fff;
+}

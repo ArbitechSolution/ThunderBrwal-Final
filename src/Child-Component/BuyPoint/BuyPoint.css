@@ -8,6 +8,19 @@
   color: white;
   /* background-color: transparent; */
 }
+.buypount{
+  background-color: #454545;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  /* border: 2px solid red; */
+  padding: 15px 15px;
+  /* line-height: 100%; */
+  color: #FFFFFF;
+  /* text-align: start; */
+  display: flex;
+  align-items: center;
+}
 
 ::placeholder {
   color: white;
@@ -34,21 +47,11 @@ input[placeholder],
   color: white !important;
 }
 
-.form-select {
-  background: #454545;
-  color: white;
-  font-style: normal;
-  /* font-weight: bold; */
-  font-size: 18px;
-  line-height: 33px;
-  border-radius: 100px;
-  border: 3px solid #454545;
-  /* position:absolute; */
-}
-/* .boxpoint{
+
+.boxpoint{
   top: 192px;
   right: 455px
-} */
+}
 .PointImage{
   position: relative;
   width: 50px;
@@ -88,7 +91,7 @@ color: #FFFFFF;
   font-size: 18px;
   line-height: 100%;
   color: #E98F1D;
-  
+
   }
   .buyPointText1{
     font-style: normal;

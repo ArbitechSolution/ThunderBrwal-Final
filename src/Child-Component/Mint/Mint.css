@@ -76,7 +76,7 @@
     color: #FFFFFF;
 }
 
-@media(min-width: 2000px) and (max-width: 6000px) {
+@media(min-width: 1400px) and (max-width: 6000px) {
     .StakePageImage-Mint {
         background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
         background-repeat: no-repeat;
@@ -172,16 +172,16 @@
 
 }
 
-/* .uperimg{
-    display: flex;
-    justify-content:start;
-align-items: center;
+.uperimg{
+    background-image: url("https://i.ibb.co/Sdz30VC/Group-505.png");
+    background-repeat: no-repeat;
+    background-position: center;
 
-} */
+}
 
 .mintImage45 {
     /* position: relative; */
-    width: 70%;
+    width: 300px;
     /* left:   40%;
     top: 50%; */
 

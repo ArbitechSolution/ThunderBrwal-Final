@@ -141,7 +141,7 @@ input[placeholder],
     color: white !important;
 }
 
-@media(min-width: 2000px) and (max-width: 6000px) {
+@media(min-width: 1400px) and (max-width: 6000px) {
     .StakePageImage {
         background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
         background-repeat: no-repeat;

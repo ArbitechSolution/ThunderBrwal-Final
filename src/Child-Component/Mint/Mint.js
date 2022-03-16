@@ -160,43 +160,46 @@ function Mint() {
                                 </div>
                             </div>
                             <div className='row d-flex justify-content-center mt-3' >
-                                <div className='col-md-7'>
+                                <div className='col-md-12'>
                                     <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
                                 </div>
-                                {/* <div className='col-md-8'>
-                <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
-            </div> */}
+
 
 
                             </div>
                             <div>
                                 <p className='simpleText'>
-                                    {value}
+                                    You got a Tiger mask card now!
                                 </p>
                             </div>
-                            {/* <div className='cardImg'  > */}
-                                {/* <img alt='NftImage' src='https://i.ibb.co/Sdz30VC/Group-505.png' className='underimg' width="50%" /> */}
 
-                                <div className="uperimg row d-flex justify-content-center">
-                                    {
-                                        imageArray.map((items, index) => {
 
-                                            return (
-                                                <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                                    <img alt='greetings' src={imageArray[index]} className="mintImage45" />
+                            <div className="uperimg row d-flex justify-content-center">
+                                {
+                                    imageArray.map((items, index) => {
 
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                        return (
+                                            <div className='col-lg-3 col-md-5 p-2 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="mintImage45" />
 
-                                    {/* <img src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage45" /> */}
-                                </div>
-                            {/* </div> */}
+                                            </div>
+                                        )
+                                    })
+                                }
+
+
+                            </div>
+
 
                             <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
                                 <div className="col-md-4 col-10">
-                                    <button className='undermodelbtn me-2'>BREED</button>
+                                    <div className="d-grid gap-2">
+                                        <button className='undermodelbtn ' size="lg">
+                                        BREED
+                                        </button>
+
+                                    </div>
+
                                 </div>
                                 <div className="col-md-4 col-10">
                                     <button className='undermodelbtn2'>ACCEPT</button>

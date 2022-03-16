@@ -17,6 +17,8 @@ import Traitspage from './Traitspage'
 import BreedPage from './BreedPage'
 import MyCollectionPage from './MyCollectionPage'
 import BuyPointPage from "./BuyPointPage"
+import FooterDown from './Component/FooterDown/FooterDown';
+import Footer from './Component/Footer/Footer';
 function Home() {
   const [isChangeRoute, setIsChangeRoute] = useState("main")
   const ChnageMain = () => {
@@ -34,10 +36,10 @@ function Home() {
   const ChangeBreed = () => {
     setIsChangeRoute("breed")
   }
-  const ChangeMyCollection = ()=>{
+  const ChangeMyCollection = () => {
     setIsChangeRoute("MyCollection")
   }
-  const ChangeBuyPoint = ()=>{
+  const ChangeBuyPoint = () => {
     setIsChangeRoute("BuyPoint")
   }
   const Main = () => {
@@ -62,6 +64,8 @@ function Home() {
         <GameNFT />
         <NFTImage />
         <Roadmap />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
@@ -78,6 +82,8 @@ function Home() {
           ChangeBuyPoint={ChangeBuyPoint}
         />
         <StakePages />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
@@ -94,6 +100,8 @@ function Home() {
           ChangeBuyPoint={ChangeBuyPoint}
         />
         <Mintpage />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
@@ -110,6 +118,8 @@ function Home() {
           ChangeBuyPoint={ChangeBuyPoint}
         />
         <Traitspage />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
@@ -126,13 +136,15 @@ function Home() {
           ChangeBuyPoint={ChangeBuyPoint}
         />
         <BreedPage />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
-  const MyCollection = ()=>{
-    return(
+  const MyCollection = () => {
+    return (
       <>
-       <Navbar
+        <Navbar
           ChnageMain={ChnageMain}
           ChangeStake={ChangeStake}
           ChangeMint={ChangeMint}
@@ -141,14 +153,16 @@ function Home() {
           ChangeMyCollection={ChangeMyCollection}
           ChangeBuyPoint={ChangeBuyPoint}
         />
-        <MyCollectionPage/>
+        <MyCollectionPage />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }
-  const BuyPoint =()=>{
-    return(
+  const BuyPoint = () => {
+    return (
       <>
-      <Navbar
+        <Navbar
           ChnageMain={ChnageMain}
           ChangeStake={ChangeStake}
           ChangeMint={ChangeMint}
@@ -157,7 +171,9 @@ function Home() {
           ChangeMyCollection={ChangeMyCollection}
           ChangeBuyPoint={ChangeBuyPoint}
         />
-        <BuyPointPage/>
+        <BuyPointPage />
+        {/* <FooterDown />
+        <Footer /> */}
       </>
     )
   }

@@ -1,3 +1,11 @@
+.StakePageImage-Mint {
+    background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+    /* background: rgba(0, 0, 0, 0.2); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .mintImage1 {
     position: relative;
     width: 400px;
@@ -47,33 +55,49 @@
     color: #FFFFFF;
     /* margin-left: 80px; */
 }
-.mintspan23{
+
+.mintspan23 {
     font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 100%;
-color: #FFFFFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #FFFFFF;
 }
-.mint-Page-border{
+
+.mint-Page-border {
     border-top: 3px solid rgba(255, 255, 255, 0.25);
 }
-.Mint-Time{
+
+.Mint-Time {
     font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 132%;
-color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 132%;
+    color: #FFFFFF;
 }
-@media(max-width: 1050px){
+
+@media(min-width: 2000px) and (max-width: 6000px) {
+    .StakePageImage-Mint {
+        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+        height: 100vh;
+    }
+}
+
+@media(max-width: 1050px) {
     .mintImage1 {
         position: relative;
         width: 320px;
     }
-    
+
     .mintImage2 {
         position: absolute;
         width: 282px;
     }
+
     .mintspane {
         font-style: normal;
         font-weight: 700;
@@ -81,7 +105,7 @@ color: #FFFFFF;
         line-height: 100%;
         color: #F8B815;
     }
-    
+
     .mintspane1 {
         font-style: normal;
         font-weight: 400;
@@ -89,17 +113,37 @@ color: #FFFFFF;
         line-height: 100%;
         color: #FFFFFF;
     }
+    .StakePageImage-Mint {
+        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+        height: 100vh;
+    }
 }
-@media(max-width: 400px){
+
+@media(max-width: 600px) {
+    .StakePageImage-Mint {
+        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+        height: 100%;
+    }
+}
+@media(max-width: 400px) {
     .mintImage1 {
         position: relative;
         width: 280px;
     }
-    
+
     .mintImage2 {
         position: absolute;
         width: 252px;
     }
+
     /* .Mint-Time{
         font-style: normal;
     font-weight: 500;
@@ -109,10 +153,12 @@ color: #FFFFFF;
     text-align: left;
     } */
 }
-.Congratimage{
+
+.Congratimage {
     width: 400px;
 }
-.cardImg{
+
+.cardImg {
     /* background-image: url("https://i.ibb.co/Sdz30VC/Group-505.png");
     padding-top: 20px;
 
@@ -125,6 +171,7 @@ color: #FFFFFF;
     justify-content: center;
 
 }
+
 /* .uperimg{
     display: flex;
     justify-content:start;
@@ -132,15 +179,16 @@ align-items: center;
 
 } */
 
-.mintImage45{
+.mintImage45 {
     /* position: relative; */
     width: 70%;
     /* left:   40%;
     top: 50%; */
 
 }
-.simpleText{
-   font-family: Poppins;
+
+.simpleText {
+    font-family: Poppins;
     font-size: 26px;
     font-style: normal;
     font-weight: 500;
@@ -152,49 +200,55 @@ align-items: center;
 
 }
 
-.underimg{
+.underimg {
     background-repeat: no-repeat;
 }
 
-.undermodelbtn{
+.undermodelbtn {
 
-width: 160px;
-height: 50px;
-
-
-background: rgba(0, 0, 0, 0.5);
-border-radius: 100px;
+    width: 160px;
+    height: 50px;
 
 
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100px;
 
 
-font-family: Poppins;
-font-style: normal;
-font-weight: bold;
-font-size: 22px;
-line-height: 33px;
 
 
-color: #F3961E;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 33px;
+
+
+    color: #F3961E;
 }
 
-.undermodelbtn2{
+.undermodelbtn2 {
 
-background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
-border-radius: 100px;
-width: 160px;
-height: 50px;
+    background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
+    border-radius: 100px;
+    width: 160px;
+    height: 50px;
 
-font-family: Poppins;
-font-style: normal;
-font-weight: bold;
-font-size: 22px;
-line-height: 33px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 33px;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
-.btnmodelhere{
+.btnmodelhere {
     display: flex;
     justify-content: center;
+}
+
+@media(max-width: 600px) {
+    .Congratimage {
+        width: 270px;
+    }
 }

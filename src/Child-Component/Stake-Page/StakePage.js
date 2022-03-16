@@ -421,6 +421,7 @@ useEffect(()=>{
                     </div>
                     <div className="col-6">
                       <input
+                      // style={{float:'right'}}
                         // name="first_input"
                         ref={stakeAmount}
                         className="stakeinput form-control mx-3"

@@ -8,7 +8,8 @@
   color: white;
   /* background-color: transparent; */
 }
-.buypount{
+
+.buypount {
   background-color: #454545;
   border-radius: 50px;
   font-weight: 600;
@@ -48,56 +49,133 @@ input[placeholder],
 }
 
 
-.boxpoint{
+.boxpoint {
   top: 192px;
   right: 455px
 }
-.PointImage{
+
+.PointImage {
   position: relative;
   width: 50px;
 }
-.PointImage1{
+
+.PointImage1 {
   position: absolute;
   width: 25px;
 }
-.buyPointText{
-  font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 100%;
-color: #E98F1D;
 
-}
-.buyPointText1{
+.buyPointText {
   font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 100%;
-color: white
-}
-.btnBuy{
-  background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
-border-radius: 100px;
-font-style: normal;
-font-weight: bold;
-font-size: 24px;
-line-height: 36px;
-color: #FFFFFF;
-}
-@media(max-width: 600px){
-  .buyPointText{
-    font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 24px;
   line-height: 100%;
   color: #E98F1D;
 
-  }
-  .buyPointText1{
-    font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+}
+
+.buyPointText1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
   line-height: 100%;
   color: white
+}
+
+.btnBuy {
+  background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
+  border-radius: 100px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 36px;
+  color: #FFFFFF;
+}
+
+.buypoint-span {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 144%;
+  color: #E98F1D;
+  text-align: left;
+}
+
+.buypintox {
+  background: linear-gradient(134.86deg, rgba(255, 82, 66, 0.25) 0%, rgba(243, 150, 30, 0.25) 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.btnBuy18 {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  border: 1px solid #FF5043;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 36px;
+  color: #FFFFFF;
+}
+
+.btnBuy18:hover {
+  color: #FFFFFF;
+}
+
+.btn-text {
+  font-weight: 500;
+  font-size: 20px;
+  color: #E98F1D;
+}
+
+.point-buy-txt {
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-align: end;
+}
+
+.model-but-box {
+  background: #000000;
+  border: 3px solid #000000;
+  box-shadow: 0px 0px 10px #F8B815;
+}
+
+.model-but-p {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  color: #FFFFFF;
+}
+
+.modelbuy-pp2 {
+  font-weight: 500;
+  font-size: 22px;
+  color: #E98F1D;
+}
+.model-p99{
+  font-weight: 400;
+font-size: 20px;
+color: #E98F1D;
+}
+.model-p98{
+  font-weight: 400;
+font-size: 20px;
+color: #FFFFFF;
+}
+@media(max-width: 600px) {
+  .buyPointText {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #E98F1D;
+
+  }
+
+  .buyPointText1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: white
   }
 }

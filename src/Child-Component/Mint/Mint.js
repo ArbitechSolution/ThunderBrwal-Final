@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
-import zero from "../../Assets/0.png"
-import one from "../../Assets/1.png"
-import two from "../../Assets/2.png"
 import "./Mint.css"
 import axios from 'axios';
 import { getUserBrawlMintPoint } from '../../redux/redux/actions/actions';
@@ -72,13 +69,8 @@ function Mint() {
                     console.log("Indexes2", inputId);
 
 
-<<<<<<< HEAD
                     let res = await axios.get(`https://gateway.pinata.cloud/ipfs/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${apiParameter}.json`)
-=======
-                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmcS5nyFLCyoTD5JnuQubWbVpx9WvKpCVUuUs9ZsXN4kFJ/${apiParameter}.png`)
->>>>>>> 5f89b4244360a878d9246a0b838c125993b1ad68
                     let imageUrl = res.data.image;
-                    console.log("imageUrl", imageUrl);
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
 
@@ -182,29 +174,28 @@ function Mint() {
                             </div>
 
 
-                            <div className=" row d-flex justify-content-center">
-                                {/* <div className='col-lg-3 uperimg p-3'> */}
+                            <div className="uperimg row d-flex justify-content-center">
                                 {
                                     imageArray.map((items, index) => {
 
                                         return (
-                                            <div className='col-lg-3 uperimg p-3 p-2 m-2'>
-                                                <img alt='greetings' src={items} className="model-i" />
+                                            <div className='col-lg-3 col-md-5 p-2 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="mintImage45" />
 
                                             </div>
                                         )
                                     })
                                 }
-                                {/* <img src={zero} className="model-i" />
-                                </div> */}
+
+
                             </div>
 
 
-                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere mt-3">
+                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
                                 <div className="col-md-4 col-10">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
-                                            BREED
+                                        BREED
                                         </button>
 
                                     </div>
@@ -252,10 +243,7 @@ function Mint() {
                                     <a className='ms-4' onClick={increaseValue} style={{ cursor: "pointer" }}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px" /></a>
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                    <button onClick={() => {
-                                        myMint()
-                                        // setModalShow(true);
-                                    }} className='btn mintbtn '>MINT</button>
+                                    <button onClick={() => myMint()} className='btn mintbtn '>MINT</button>
                                 </div>
                                 <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 3 tiger nfts CARD PER tx</span>
                             </div>

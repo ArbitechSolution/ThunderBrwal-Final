@@ -117,7 +117,7 @@ function Mint() {
                     })
                     toast.success("Transaction Confirmed")
                     dispatch(getUserBrawlMintPoint())
-                    allImagesNfts();
+                   await allImagesNfts();
                     setModalShow(true);
                     setIsLoading(false)
 

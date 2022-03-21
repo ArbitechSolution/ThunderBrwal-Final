@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
 import "./Mint.css"
+import { IoMdClose } from "react-icons/io";
+
 import axios from 'axios';
 import { getUserBrawlMintPoint } from '../../redux/redux/actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +23,7 @@ function Mint() {
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
     // console.log("getBrawlPointMint",acc)
+
     const increaseValue = () => {
         if (value < 3) {
             setValue(++value)
@@ -52,29 +55,29 @@ function Mint() {
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
 
-            console.log(" my Number", value)
-            console.log(" my Number", typeof (value))
+            // console.log(" my Number", await nftContractOf.methods)
+            //             let inputId = await nftContractOf.methods.mintids(0).call();
+            //         let apiParameter = parseInt(inputId)
+            // console.log(" my Number", apiParameter)
 
 
             let simplleArray = [];
-            for (let i = 0; i < value; i++) {
+            for (let i = 0; i <2; i++) {
                 try {
 
-                    let inputId = await nftContractOf.methods.mintids(i).call();
-                    let apiParameter = parseInt(inputId)
+                    let inputId = await nftContractOf.methods.mintids(i).call(); 
 
-                    console.log("walletOfOwner", inputId);
+                    // console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
                     console.log("Indexes", i);
                     console.log("Indexes2", inputId);
 
-
-                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${apiParameter}.json`)
+                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${inputId}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
 
-                    console.log("Getting Response", res.data.image);
+                    console.log("Getting Response", res);
                 } catch (e) {
                     console.log("Error while Fetching Api", e)
                 }
@@ -83,14 +86,6 @@ function Mint() {
         }
 
     }
-
-
-
-
-
-
-
-
 
     // Minting Funtions
     const myMint = async () => {
@@ -104,6 +99,8 @@ function Mint() {
             toast.error("Not Connected")
         } else {
             console.log("mintFor");
+            allImagesNfts();
+            setModalShow(true);
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
             let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
@@ -112,15 +109,14 @@ function Mint() {
             let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
             if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
                 if (parseFloat(maxSupply) >= parseFloat(supply)) {
-                    await nftContractOf.methods.mint(value).send({
-                        from: acc
-                    }).on("receipt", (receipt) => {
-                        console.log("mintValue", receipt);
-                    })
+                    // await nftContractOf.methods.mint(value).send({
+                    //     from: acc
+                    // }).on("receipt", (receipt) => {
+                    //     console.log("mintValue", receipt);
+                    // })
                     toast.success("Transaction Confirmed")
                     dispatch(getUserBrawlMintPoint())
-                    setModalShow(true);
-                    allImagesNfts();
+                    // allImagesNfts();
 
                 } else {
                     toast.error("Maximum minting reached")
@@ -139,18 +135,83 @@ function Mint() {
 
     return (
         <div className='StakePageImage-Mint'>
+ {
+                modalShow ?
+                    <Modal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        // {...props}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
 
-            {
+                    >
+                        <Modal.Header className=' StakePageImage' >
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                <IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} />
+                                {/* <h2 className='collectionsTextLarge m-2'> Confirm</h2> */}
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
+                        <div className="row d-flex justify-content-end mt-3">
+                                <div className='col-md-12 d-flex justify-end-lg-end'>
+                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                </div>
+                            </div>
+                            <div className='row d-flex justify-content-center mt-3' >
+                                <div className='col-md-12'>
+                                    <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
+                                </div>
+                            </div>
+                            <div>
+                                <p className='simpleText'>
+                                    You got a Tiger mask card now!
+                                </p>
+                            </div>
+                            <div className="row d-flex flex-row justify-content-center">
+                               
+                                {
+                                    imageArray.map((items, index) => {
+
+                                        return (
+                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="model-i" />
+
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
+                                <div className="col-md-4 col-10">
+                                    <div className="d-grid gap-2">
+                                        <button className='undermodelbtn ' size="lg">
+                                        BREED
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                                <div className="col-md-4 col-10">
+                                    <button className='undermodelbtn2'>ACCEPT</button>
+                                </div>
+                            </div>
+                        </Modal.Body>
+                    </Modal> : <></>
+            }
+            {/* {
                 modalShow ? <Modal
-                    show={modalShow} onHide={() => setModalShow(false)}
+                    show={modalShow} 
+                    onHide={() => setModalShow(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
-                    className='d-flex StakePageImage'>
+                    className='d-flex StakePageImage'
+                    >
                     <Modal.Header className='StakePageImage'>
-                        <div className='container Stakeboxs pb-4 '>
-                            <div className='row d-flex justify-content-center'>
-                                <div className='col-md-12 d-flex justify-content-md-end mt-2'>
+                        <div className='pb-4 '>
+                            <div className=' d-flex justify-content-center'>
+                                <div className=' d-flex mt-2'>
                                     <CloseButton onClick={() => setModalShow(false)} variant="white" />
                                 </div>
                             </div>
@@ -174,13 +235,13 @@ function Mint() {
                             </div>
 
 
-                            <div className="uperimg row d-flex justify-content-center">
+                            <div className="uperimg row d-flex flex-row justify-content-center">
                                 {
                                     imageArray.map((items, index) => {
 
                                         return (
-                                            <div className='col-lg-3 col-md-5 p-2 m-2'>
-                                                <img alt='greetings' src={imageArray[index]} className="mintImage45" />
+                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="model-i" />
 
                                             </div>
                                         )
@@ -208,7 +269,7 @@ function Mint() {
                         </div>
                     </Modal.Header>
                 </Modal > : <></>
-            }
+            } */}
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>

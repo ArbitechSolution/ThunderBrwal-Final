@@ -69,7 +69,7 @@ function Mint() {
                     console.log("Indexes2", inputId);
 
 
-                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmNwQ2LLf1nt4T94xYHDA7YFQjmPRyTBBgYfVizLpJG5SB/${apiParameter}.json`)
+                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${apiParameter}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)

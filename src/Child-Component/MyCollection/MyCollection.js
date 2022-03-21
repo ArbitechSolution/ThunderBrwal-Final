@@ -42,7 +42,7 @@ function MyCollection() {
             if (parseInt(walletLength) > 0) {
                 for (let i = 0; i < parseInt(walletLength); i++) {
                     try {
-                        let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPQxoBcxfkDc28mDSxXABkC74HTimND6ESNhubqrNnuGz/${walletOfOwner[i]}.json`)
+                        let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${walletOfOwner[i]}.json`)
                         let imageUrl = res.data.image;
                         simplleArray =[...simplleArray,imageUrl]
                         setImageArray(simplleArray)
@@ -55,7 +55,7 @@ function MyCollection() {
         }
     }
     const ClickNext = () => {
-        if (finalLimit < 12 && initialLimit >= 0) {
+        if (finalLimit <14 && initialLimit >= 0) {
             setInitiaLimit(initialLimit + 6)
             setFinalLimit(finalLimit + 6)
         }

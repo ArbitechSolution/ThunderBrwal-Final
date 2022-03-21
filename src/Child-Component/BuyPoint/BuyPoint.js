@@ -13,12 +13,51 @@ import { IoMdClose } from "react-icons/io";
 function BuyPoint() {
     let dispatch = useDispatch();
     const [modalShow, setModalShow] = useState(false);
+    let [userBnbBalance, setUserBnbBalance]=useState();
+    let [userSpent, setBnbSpent]=useState(0)
+    let [usersConvertedpoints, setUsersConvertedPoints]=useState(0);
+
+
+    const getUserBalance =async()=>{
+
+        if (acc == "No Wallet") {
+            console.error("No allet");
+        }
+        else if (acc == "Wrong Network") {
+            console.error(" Wrong wallet");
+
+        } else if (acc == "Connect Wallet") {
+            console.error("Connect Wallet");
+        } else {
+
+
+        try{
+            const web3 = window.web3;
+            let userBNBBalance = await web3.eth.getBalance(acc);
+            userBNBBalance= web3.utils.fromWei(userBNBBalance);
+            userBNBBalance=parseFloat(userBNBBalance).toFixed(4)
+            setUserBnbBalance(userBNBBalance)
+            console.log("UserBnb balance",userBNBBalance);
+
+        }catch(e){
+            console.error("Error whgile getting users Bnb Balance");
+        }
+    }
+    }
+
+
+
     let { currentBp } = useSelector(state => state.setCurrentBpTokens)
     let { maxBpTokens } = useSelector(state => state.setMaxBpTokens)
     let { acc } = useSelector(state => state.connectWallet)
     console.log("Current Bp = ", currentBp)
     console.log("maxBpTokens Bp = ", maxBpTokens)
     let userEnterd = useRef()
+
+
+const closeModal=()=>{
+    setModalShow(false)
+}
 
     const buyWithBnb = async () => {
         console.log("Inside");
@@ -36,10 +75,16 @@ function BuyPoint() {
             try {
                 const web3 = window.web3;
                 let userEnterdValue = userEnterd.current.value;
+                setBnbSpent(userEnterdValue);
                 let userBNBBalance = await web3.eth.getBalance(acc);
+                
                 userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
+                
+
                 console.log("userEnterdValue", userBNBBalance);
                 let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+                let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
+                setUsersConvertedPoints(converted)
                 if (parseFloat(userEnterdValue) > 0) {
                     if (parseFloat(userBNBBalance) >= parseFloat(userEnterdValue)) {
                         if (parseFloat(currentBp) <= parseFloat(maxBpTokens)) {
@@ -71,6 +116,7 @@ function BuyPoint() {
     useEffect(() => {
         dispatch(getMaxBpTokens());
         dispatch(getCurrentBpTokens());
+        getUserBalance();
     }, [])
     return (
         <div className='StakePageImage-Mint'>
@@ -112,12 +158,12 @@ function BuyPoint() {
                                                     <img src={User} />
                                                     <p className='model-but-p mt-3'>Successful</p>
                                                     <div className='mt-4' >
-                                                        <p className='modelbuy-pp2'>You will spend</p>
-                                                        <p className='model-but-p'>1 BNB</p>
+                                                        <p className='modelbuy-pp2'>You Have spent</p>
+                                                        <p className='model-but-p'>{userSpent} BNB</p>
                                                     </div>
                                                     <div className='d-flex justify-content-between mt-5'>
                                                         <span className='model-p99'>Converted:</span>
-                                                        <span className='model-p98'>3,636.36 POINT</span>
+                                                        <span className='model-p98'>{usersConvertedpoints} POINT</span>
                                                     </div>
                                                     <div className='d-flex justify-content-between mt-3'>
                                                         <span className='model-p99'>Price:</span>
@@ -126,7 +172,7 @@ function BuyPoint() {
                                                     <div className='row d-flex justify-content-center mt-5 mb-4'>
                                                         <div className='col-md-5 mt-2'>
                                                             <div className="d-grid gap-2">
-                                                                <button className="btn btnBuy18" size="lg">
+                                                                <button onClick={()=>closeModal()} className="btn btnBuy18" size="lg">
                                                                     Back
                                                                 </button>
                                                             </div>
@@ -150,7 +196,7 @@ function BuyPoint() {
 
                             }
                             <div className='col-md-7 text-end'>
-                                <span className='point-buy-txt'>Available: 10 BNB</span>
+                                <span className='point-buy-txt'>Available:{userBnbBalance} BNB</span>
                                 <InputGroup >
                                     <FormControl
                                         ref={userEnterd}

@@ -11,18 +11,20 @@ import { InputGroup, FormControl } from 'react-bootstrap'
 import tick2 from "../../Assets/tick (2) 2.png"
 
 function MyCollection() {
-    let max = 200;
+    
     let dispatch = useDispatch();
     let [btnTxt, setBtTxt] = useState("Connect");
     let [modalShow, setModalShow] = useState(false)
     let [modalShowone, setModalShowone] = useState(false);
     let [clickedIndexes, setClickedIndexes] = useState()
     let [imageArray, setImageArray] = useState([]);
-    let [test, setTest] = useState([])
+    let [test, setTest] = useState([]);
+    let [mywalletLength, setMyWalletLength]=useState();
     let [initialLimit, setInitiaLimit] = useState(0);
     let [finalLimit, setFinalLimit] = useState(6)
     let [num, setnum] = useState(0);
-    let { acc } = useSelector(state => state.connectWallet)
+    let { acc } = useSelector(state => state.connectWallet);
+    console.log("acc", acc);
     let toAddress = useRef("")
 
     const allImagesNfts = async () => {
@@ -43,32 +45,43 @@ function MyCollection() {
             let simplleArray = [];
             let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
             let walletLength = walletOfOwner.length
+            setMyWalletLength(walletLength)
             console.log("walletOfOwner", walletLength);
+            
             if (parseInt(walletLength) > 0) {
-                for (let i = 0; i < parseInt(walletLength); i++) {
-                    try {
-                        let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${walletOfOwner[i]}.json`)
-                        let imageUrl = res.data.image;
-                        simplleArray = [...simplleArray, imageUrl]
-                        setImageArray(simplleArray)
-                        console.log("Getting Response", res.data.image);
-                    } catch (e) {
-                        console.log("Error while Fetching Api", e)
+                if(finalLimit<parseInt(walletLength))
+                {
+                    for (let i = initialLimit; i < finalLimit; i++) {
+                        try {
+                            let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
+                            let imageUrl = res.data.image;
+                            let dna = res.data.dna
+                            simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna}]
+                            console.log("simplleArray", simplleArray);
+                            setImageArray(simplleArray)
+                            console.log("Getting Response", res.data.image);
+                        } catch (e) {
+                            console.log("Error while Fetching Api", e)
+                        }
                     }
-                }
+                }    
             }
         }
     }
     const ClickNext = () => {
-        if (finalLimit <14 && initialLimit >= 0) {
+        if (finalLimit <mywalletLength && initialLimit >= 0) {
+            console.log("More");
             setInitiaLimit(initialLimit + 6)
             setFinalLimit(finalLimit + 6)
+
         }
     }
     const ClickPrevious = () => {
-        if (initialLimit <= max && finalLimit > 6) {
+        if (initialLimit <= mywalletLength && finalLimit > 6) {
             setInitiaLimit(initialLimit - 6)
             setFinalLimit(finalLimit - 6)
+            console.log("Less");
+
 
         }
     }
@@ -124,6 +137,10 @@ function MyCollection() {
     useEffect(() => {
         allImagesNfts();
     }, [acc])
+    useEffect(() => {
+        allImagesNfts();
+    }, [finalLimit])
+
 
 
     return (
@@ -245,7 +262,7 @@ function MyCollection() {
                                 </div>
                             </div>
                         </Modal.Body>
-                    </Modal> : <></>
+                    </Modal>:<></>
             }
             <div className="StakePageImagess">
                 <div className='container pt-3'>
@@ -261,14 +278,14 @@ function MyCollection() {
                             </div>
 
                             <div className='row d-flex justify-content-center mt-3'>
-                                {imageArray.slice(initialLimit, finalLimit).map((items, index) => {
+                                {imageArray.map((items, index) => {
 
                                     return (
                                         <div className='col-lg-3 col-md-5 mycollections p-2 m-2'>
-                                            <img src={imageArray[index]} className='myCollectionsImage ' />
-                                            {/* <span className='imageText text-white'  >&nbsp;&nbsp;{items.data.dna}</span> */}
+                                            <img src={items.imageUrl} className='myCollectionsImage ' />
+                                            {/* <span className='imageText text-white'  >&nbsp;&nbsp;{items.d}</span> */}
                                             <div>
-                                                <span className='imageText text-white'  >&nbsp;&nbsp;{index}</span>
+                                                <span className='imageText text-white'  >&nbsp;&nbsp;{items.num}</span>
                                                 <p className='collectionsText mt-3'>#20211 Tiger Master</p>
                                                 <p className='collectionsTextSmall'>Common</p>
                                             </div>
@@ -290,11 +307,11 @@ function MyCollection() {
                                 <img src="https://i.ibb.co/NjDtXXY/Vector12.png" style={{ position: " relative" }} />
                             </div>
                             <div className='col-lg-3 col-md-5 col d-flex flex-row align-items-center justify-content-evenly'>
-                                <span className='MyCollectionspan'>Current</span>
+                                {/* <span className='MyCollectionspan'>{mywalletLength}</span> */}
                                 <div className='bosCollection'>
-                                    <span className='mycollectionsP '>1</span>
+                                    <span className='mycollectionsP '>{acc=="No Wallet" || acc == "Wrong Network" || acc == "Connect Wallet" ? "" : finalLimit }/{mywalletLength}</span>
                                 </div>
-                                <span className='MyCollectionspan'>/3</span>
+                                {/* <span className='MyCollectionspan'>/{mywalletLength}</span> */}
                             </div>
 
                             {/* <button className='btn '> */}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 // import tiger1 from "../../Assets/tiger 1.jpg"
 import "./Mint.css"
 import { IoMdClose } from "react-icons/io";
-
+import Spinner from './Spinner';
 import axios from 'axios';
 import { getUserBrawlMintPoint } from '../../redux/redux/actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,9 +16,11 @@ import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group188 from "../../Assets/Group 188.png"
 
 function Mint() {
+    
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
+    let [isLoading, setIsLoading] = useState(false)
     let dispatch = useDispatch()
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
@@ -62,17 +64,17 @@ function Mint() {
 
 
             let simplleArray = [];
-            for (let i = 0; i <2; i++) {
+            for (let i = 0; i <value; i++) {
                 try {
 
                     let inputId = await nftContractOf.methods.mintids(i).call(); 
 
-                    // console.log("walletOfOwner", inputId);
+                    console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
                     console.log("Indexes", i);
                     console.log("Indexes2", inputId);
 
-                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmPqcs4xnYWdEhG6wZL69TcdtZ9L7Xq5VJTz8Hp9YfJBGc/${inputId}.json`)
+                    let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${inputId}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
@@ -99,8 +101,6 @@ function Mint() {
             toast.error("Not Connected")
         } else {
             console.log("mintFor");
-            allImagesNfts();
-            setModalShow(true);
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
             let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
@@ -109,14 +109,17 @@ function Mint() {
             let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
             if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
                 if (parseFloat(maxSupply) >= parseFloat(supply)) {
-                    // await nftContractOf.methods.mint(value).send({
-                    //     from: acc
-                    // }).on("receipt", (receipt) => {
-                    //     console.log("mintValue", receipt);
-                    // })
+                    setIsLoading(true)
+                    await nftContractOf.methods.mint(value).send({
+                        from: acc
+                    }).on("receipt", (receipt) => {
+                        console.log("mintValue", receipt);
+                    })
                     toast.success("Transaction Confirmed")
                     dispatch(getUserBrawlMintPoint())
-                    // allImagesNfts();
+                    allImagesNfts();
+                    setModalShow(true);
+                    setIsLoading(false)
 
                 } else {
                     toast.error("Maximum minting reached")
@@ -129,12 +132,45 @@ function Mint() {
 
         }
     }
+
+const getEventsForMinting=async()=>{
+    try{
+        if (acc == "No Wallet") {
+            console.error("No Wallet Connected")
+        }
+        else if (acc == "Wrong Network") {
+            console.error("Wrong Newtwork please connect to test net")
+        } else if (acc == "Connect Wallet") {
+            console.error("Not Connected")
+        } else {
+            const web3 = window.web3;
+            let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+          let ahan =  await nftContractOf.events.allEvents({ fromBlock: 'latest' })
+          let event = nftContractOf.events.Transfer();
+            console.log("My Events", ahan);
+            console.log("Specific Events=",event);
+        }
+
+
+    }catch(e){
+        console.log("Error While getting",e);
+    }
+}
+
+
+
+
+
     useEffect(() => {
         dispatch(getUserBrawlMintPoint())
+        getEventsForMinting();
     }, [])
 
     return (
         <div className='StakePageImage-Mint'>
+            {
+                isLoading && <Spinner/>
+            }
  {
                 modalShow ?
                     <Modal
@@ -182,7 +218,7 @@ function Mint() {
                                     })
                                 }
                             </div>
-                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
+                            <div className=" row d-flex justify-content-center justify-content-md-around btnmodelhere">
                                 <div className="col-md-4 col-10">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
@@ -193,7 +229,12 @@ function Mint() {
 
                                 </div>
                                 <div className="col-md-4 col-10">
-                                    <button className='undermodelbtn2'>ACCEPT</button>
+                                <div className="d-grid gap-2">
+                                        <button className='undermodelbtn2 ' size="lg">
+                                        BREED
+                                        </button>
+
+                                    </div>
                                 </div>
                             </div>
                         </Modal.Body>

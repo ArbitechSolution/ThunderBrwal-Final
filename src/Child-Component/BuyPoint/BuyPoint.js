@@ -8,6 +8,8 @@ import Vector33 from "../../Child-Component/Breed/Vector33.png"
 import { InputGroup, FormControl } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 import User from "../../Assets/User.png"
+import { IoMdClose } from "react-icons/io";
+
 function BuyPoint() {
     let dispatch = useDispatch();
     const [modalShow, setModalShow] = useState(false);
@@ -94,9 +96,9 @@ function BuyPoint() {
                                 aria-labelledby="contained-modal-title-vcenter"
                                 centered
                             >
-                                <Modal.Header className='StakePageImage' style={{ color: "white" }} closeButton>
+                                <Modal.Header className='StakePageImage' style={{ color: "white" }} >
                                     <Modal.Title id="contained-modal-title-vcenter">
-                                        Buy Point Success
+                                    <IoMdClose onClick={() => setModalShow(false)} size={28} style={{color: "white",cursor: "pointer"}} />
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body className='StakePageImage'>

@@ -197,8 +197,6 @@ function Mint() {
                                 }
                                 {/* <img src={zero} className="model-i" />
                                 </div> */}
-
-
                             </div>
 
 

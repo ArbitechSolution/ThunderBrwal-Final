@@ -17,7 +17,7 @@ import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group188 from "../../Assets/Group 188.png"
 
 function Mint() {
-    
+
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
@@ -68,7 +68,7 @@ function Mint() {
             for (let i = 0; i <value; i++) {
                 try {
 
-                    let inputId = await nftContractOf.methods.mintids(i).call(); 
+                    let inputId = await nftContractOf.methods.mintids(i).call();
 
                     // console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
@@ -102,7 +102,7 @@ function Mint() {
             } else if (acc == "Connect Wallet") {
                 toast.error("Not Connected")
             } else {
-                
+
                 // console.log("mintFor");
                 const web3 = window.web3;
                 let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
@@ -123,13 +123,13 @@ function Mint() {
                        await allImagesNfts();
                         setModalShow(true);
                         setIsLoading(false)
-    
+
                     } else {
                         setIsLoading(false)
-    
+
                         toast.error("Maximum minting reached")
                     }
-    
+
                 }
                 else {
                     setIsLoading(false)
@@ -141,7 +141,7 @@ function Mint() {
             console.log("Error While Mintinng",e);
         }
 
-       
+
     }
 
 const getEventsForMinting=async()=>{
@@ -216,7 +216,7 @@ const getEventsForMinting=async()=>{
                                 </p>
                             </div>
                             <div className="row d-flex flex-row justify-content-center">
-                               
+
                                 {
                                     imageArray.map((items, index) => {
 
@@ -242,9 +242,16 @@ const getEventsForMinting=async()=>{
                                 <div className="col-md-4 col-10">
                                 <div className="d-grid gap-2">
                                         <button className='undermodelbtn2 ' size="lg">
-                                        BREED
+                                        ACCEPT
                                         </button>
 
+                                    </div>
+                                </div>
+                                <div className="col-md-4 col-10">
+                                    <div className="d-grid gap-2">
+                                        <button className='undermodelbtn ' size="lg">
+                                        DO IT LATER
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +260,7 @@ const getEventsForMinting=async()=>{
             }
             {/* {
                 modalShow ? <Modal
-                    show={modalShow} 
+                    show={modalShow}
                     onHide={() => setModalShow(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"

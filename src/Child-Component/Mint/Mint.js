@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
-import zero from "../../Assets/0.png"
-import one from "../../Assets/1.png"
-import two from "../../Assets/2.png"
 import "./Mint.css"
+import { IoMdClose } from "react-icons/io";
+import Spinner from './Spinner';
 import axios from 'axios';
 import mints from "../../Assets/mint.png"
 import { getUserBrawlMintPoint } from '../../redux/redux/actions/actions';
@@ -18,13 +17,16 @@ import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group188 from "../../Assets/Group 188.png"
 
 function Mint() {
+    
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
+    let [isLoading, setIsLoading] = useState(false)
     let dispatch = useDispatch()
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
     // console.log("getBrawlPointMint",acc)
+
     const increaseValue = () => {
         if (value < 3) {
             setValue(++value)
@@ -56,30 +58,29 @@ function Mint() {
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
 
-            console.log(" my Number", value)
-            console.log(" my Number", typeof (value))
+            // console.log(" my Number", await nftContractOf.methods)
+            //             let inputId = await nftContractOf.methods.mintids(0).call();
+            //         let apiParameter = parseInt(inputId)
+            // console.log(" my Number", apiParameter)
 
 
             let simplleArray = [];
-            for (let i = 0; i < value; i++) {
+            for (let i = 0; i <value; i++) {
                 try {
 
-                    let inputId = await nftContractOf.methods.mintids(i).call();
-                    let apiParameter = parseInt(inputId)
+                    let inputId = await nftContractOf.methods.mintids(i).call(); 
 
-                    console.log("walletOfOwner", inputId);
+                    // console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
-                    console.log("Indexes", i);
-                    console.log("Indexes2", inputId);
+                    // console.log("Indexes", i);
+                    // console.log("Indexes2", inputId);
 
-
-                    let res = await axios.get(`https://gateway.pinata.cloud/ipfs/QmcS5nyFLCyoTD5JnuQubWbVpx9WvKpCVUuUs9ZsXN4kFJ/${apiParameter}.png`)
+                    let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${inputId}.json`)
                     let imageUrl = res.data.image;
-                    console.log("imageUrl", imageUrl);
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
 
-                    console.log("Getting Response", res.data.image);
+                    // console.log("Getting Response", res);
                 } catch (e) {
                     console.log("Error while Fetching Api", e)
                 }
@@ -89,73 +90,180 @@ function Mint() {
 
     }
 
-
-
-
-
-
-
-
-
     // Minting Funtions
     const myMint = async () => {
-        console.log("my ACC=", acc)
+        try{
+            console.log("my ACC=", acc)
+            if (acc == "No Wallet") {
+                toast.error("No Wallet Connected")
+            }
+            else if (acc == "Wrong Network") {
+                toast.error("Wrong Newtwork please connect to test net")
+            } else if (acc == "Connect Wallet") {
+                toast.error("Not Connected")
+            } else {
+                
+                // console.log("mintFor");
+                const web3 = window.web3;
+                let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
+                let supply = await nftContractOf.methods.totalSupply().call();
+                let maxSupply = await nftContractOf.methods.maxsupply().call();
+                let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
+                if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
+                    if (parseFloat(maxSupply) >= parseFloat(supply)) {
+                        setIsLoading(true)
+                        await nftContractOf.methods.mint(value).send({
+                            from: acc
+                        }).on("receipt", (receipt) => {
+                            console.log("mintValue", receipt);
+                        })
+                        toast.success("Transaction Confirmed")
+                        dispatch(getUserBrawlMintPoint())
+                       await allImagesNfts();
+                        setModalShow(true);
+                        setIsLoading(false)
+    
+                    } else {
+                        setIsLoading(false)
+    
+                        toast.error("Maximum minting reached")
+                    }
+    
+                }
+                else {
+                    setIsLoading(false)
+                    toast.error("You do not have enought Brawl points")
+                }
+            }
+        }catch(e){
+            setIsLoading(false)
+            console.log("Error While Mintinng",e);
+        }
+
+       
+    }
+
+const getEventsForMinting=async()=>{
+    try{
         if (acc == "No Wallet") {
-            toast.error("No Wallet Connected")
+            console.error("No Wallet Connected")
         }
         else if (acc == "Wrong Network") {
-            toast.error("Wrong Newtwork please connect to test net")
+            console.error("Wrong Newtwork please connect to test net")
         } else if (acc == "Connect Wallet") {
-            toast.error("Not Connected")
+            console.error("Not Connected")
         } else {
-            console.log("mintFor");
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
-            let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
-            let supply = await nftContractOf.methods.totalSupply().call();
-            let maxSupply = await nftContractOf.methods.maxsupply().call();
-            let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
-            if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
-                if (parseFloat(maxSupply) >= parseFloat(supply)) {
-                    await nftContractOf.methods.mint(value).send({
-                        from: acc
-                    }).on("receipt", (receipt) => {
-                        console.log("mintValue", receipt);
-                    })
-                    toast.success("Transaction Confirmed")
-                    dispatch(getUserBrawlMintPoint())
-                    setModalShow(true);
-                    allImagesNfts();
-
-                } else {
-                    toast.error("Maximum minting reached")
-                }
-
-            }
-            else {
-                toast.error("You do not have enought Brawl points")
-            }
-
+          let ahan =  await nftContractOf.events.allEvents({ fromBlock: 'latest' })
+          let event = nftContractOf.events.Transfer();
+            // console.log("My Events", ahan);
+            // console.log("Specific Events=",event);
         }
+
+
+    }catch(e){
+        console.log("Error While getting",e);
     }
+}
+
+
+
+
+
     useEffect(() => {
         dispatch(getUserBrawlMintPoint())
+        getEventsForMinting();
     }, [])
 
     return (
         <div className='StakePageImage-Mint'>
-
             {
+                isLoading && <Spinner/>
+            }
+ {
+                modalShow ?
+                    <Modal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        // {...props}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+
+                    >
+                        <Modal.Header className=' StakePageImage' >
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                <IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} />
+                                {/* <h2 className='collectionsTextLarge m-2'> Confirm</h2> */}
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
+                        <div className="row d-flex justify-content-end mt-3">
+                                <div className='col-md-12 d-flex justify-end-lg-end'>
+                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                </div>
+                            </div>
+                            <div className='row d-flex justify-content-center mt-3' >
+                                <div className='col-md-12'>
+                                    <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
+                                </div>
+                            </div>
+                            <div>
+                                <p className='simpleText'>
+                                    You got a Tiger mask card now!
+                                </p>
+                            </div>
+                            <div className="row d-flex flex-row justify-content-center">
+                               
+                                {
+                                    imageArray.map((items, index) => {
+
+                                        return (
+                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="model-i" />
+
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className=" row d-flex justify-content-center justify-content-md-around btnmodelhere">
+                                <div className="col-md-4 col-10">
+                                    <div className="d-grid gap-2">
+                                        <button className='undermodelbtn ' size="lg">
+                                        BREED
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                                <div className="col-md-4 col-10">
+                                <div className="d-grid gap-2">
+                                        <button className='undermodelbtn2 ' size="lg">
+                                        BREED
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </Modal.Body>
+                    </Modal> : <></>
+            }
+            {/* {
                 modalShow ? <Modal
-                    show={modalShow} onHide={() => setModalShow(false)}
+                    show={modalShow} 
+                    onHide={() => setModalShow(false)}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
-                    className='d-flex StakePageImage'>
+                    className='d-flex StakePageImage'
+                    >
                     <Modal.Header className='StakePageImage'>
-                        <div className='container Stakeboxs pb-4 '>
-                            <div className='row d-flex justify-content-center'>
-                                <div className='col-md-12 d-flex justify-content-md-end mt-2'>
+                        <div className='pb-4 '>
+                            <div className=' d-flex justify-content-center'>
+                                <div className=' d-flex mt-2'>
                                     <CloseButton onClick={() => setModalShow(false)} variant="white" />
                                 </div>
                             </div>
@@ -179,29 +287,28 @@ function Mint() {
                             </div>
 
 
-                            <div className=" row d-flex justify-content-center">
-                                {/* <div className='col-lg-3 uperimg p-3'> */}
+                            <div className="uperimg row d-flex flex-row justify-content-center">
                                 {
                                     imageArray.map((items, index) => {
 
                                         return (
-                                            <div className='col-lg-3 uperimg p-3 p-2 m-2'>
-                                                <img alt='greetings' src={items} className="model-i" />
+                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
+                                                <img alt='greetings' src={imageArray[index]} className="model-i" />
 
                                             </div>
                                         )
                                     })
                                 }
-                                {/* <img src={zero} className="model-i" />
-                                </div> */}
+
+
                             </div>
 
 
-                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere mt-3">
+                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
                                 <div className="col-md-4 col-10">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
-                                            BREED
+                                        BREED
                                         </button>
 
                                     </div>
@@ -214,7 +321,7 @@ function Mint() {
                         </div>
                     </Modal.Header>
                 </Modal > : <></>
-            }
+            } */}
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>
@@ -249,10 +356,7 @@ function Mint() {
                                     <a className='ms-4' onClick={increaseValue} style={{ cursor: "pointer" }}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px" /></a>
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                    <button onClick={() => {
-                                        myMint()
-                                        // setModalShow(true);
-                                    }} className='btn mintbtn '>MINT</button>
+                                    <button onClick={() => myMint()} className='btn mintbtn '>MINT</button>
                                 </div>
                                 <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 3 tiger nfts CARD PER tx</span>
                             </div>

@@ -17,7 +17,7 @@ let thbLpTokenContractOf = new webSupply.eth.Contract(thbLpTokenAbi, thbLpTokenA
 let stakingCOntractOf = new webSupply.eth.Contract(stakingContractAbi, stakingContractAddress);
 
 export const getWallet = () => async (dispatch) => {
-    console.log("get wallet 121212");
+    // console.log("get wallet 121212");
     let address = await loadWeb3();
     dispatch({
         type: GET_WALLET_ADDRESS,
@@ -28,8 +28,8 @@ export const getWallet = () => async (dispatch) => {
 
 export const getUserThbBalance =()=> async(dispatch)=>{
     
-    console.log("get Action")
-    console.log("get getUserThbBalance 1212");
+    // console.log("get Action")
+    // console.log("get getUserThbBalance 1212");
     let address = await loadWeb3();
     if (address=="No Wallet"){
         console.log("Not Connected")
@@ -40,7 +40,7 @@ export const getUserThbBalance =()=> async(dispatch)=>{
         let userthbBalance = await thbTokenContractOf.methods.balanceOf(address).call();
         userthbBalance = web3.utils.fromWei(userthbBalance)
         userthbBalance =parseInt(userthbBalance)
-        console.log("userthbBalance ",userthbBalance);
+        // console.log("userthbBalance ",userthbBalance);
         dispatch({
             type:GET_USER_THB_BALANCE,
             payload:userthbBalance
@@ -52,8 +52,8 @@ export const getUserThbBalance =()=> async(dispatch)=>{
 
 export const getUserThbLpBalance =()=> async(dispatch)=>{
     
-    console.log("get Action")
-    console.log("get getUserThbBalance 1212");
+    // console.log("get Action")
+    // console.log("get getUserThbBalance 1212");
     let address = await loadWeb3();
     if (address=="No Wallet"){
         // toast.error("Not Connected")
@@ -65,7 +65,7 @@ export const getUserThbLpBalance =()=> async(dispatch)=>{
         let userThbLpBalance = await thbLpTokenContractOf.methods.balanceOf(address).call();
         userThbLpBalance =web3.utils.fromWei(userThbLpBalance)
         userThbLpBalance =parseInt(userThbLpBalance)
-        console.log("userThbLpBalance",userThbLpBalance);
+        // console.log("userThbLpBalance",userThbLpBalance);
     
         dispatch({
             type:GET_USER_THB_LP_BALANCE,
@@ -78,8 +78,8 @@ export const getUserThbLpBalance =()=> async(dispatch)=>{
 
 export const getUserTHbTamount =()=> async(dispatch)=>{
     
-    console.log("get Action")
-    console.log("get getUserThbBalance 1212");
+    // console.log("get Action")
+    // console.log("get getUserThbBalance 1212");
     let address = await loadWeb3();
     if (address=="No Wallet"){
         console.log("Not Connected")
@@ -113,7 +113,7 @@ export const getUserTHbLPTamount =()=> async(dispatch)=>{
         let tAmountlp = userThbLpData.Tamount;
         tAmountlp =web3.utils.fromWei(tAmountlp)
         tAmountlp =parseFloat(tAmountlp);
-        console.log("tAmountlp",tAmountlp)
+        // console.log("tAmountlp",tAmountlp)
         dispatch({
             type:GET_USER_TAMOUNT_LP,
             payload:tAmountlp
@@ -189,7 +189,7 @@ export const  getCurrentBpTokens =()=> async(dispatch)=>{
         let currentbp = await stakingCOntractOf.methods.currentBP().call();
         // currentbp =web3.utils.fromWei(currentbp);
         // currentbp =parseInt(currentbp);
-        console.log("Current bp in action",currentbp);
+        // console.log("Current bp in action",currentbp);
         dispatch({
             type:GET_CURRENT_BP_TOKENS,
             payload:currentbp
@@ -198,7 +198,7 @@ export const  getCurrentBpTokens =()=> async(dispatch)=>{
 export const  getMaxBpTokens =()=> async(dispatch)=>{
         const web3 = window.web3
         let maxbp = await stakingCOntractOf.methods.maxBPToken().call();
-        console.log("maxbp bp in action",maxbp);
+        // console.log("maxbp bp in action",maxbp);
         dispatch({
             type:GET_MAX_BP_TOKENS,
             payload:maxbp

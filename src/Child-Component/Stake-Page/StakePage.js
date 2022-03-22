@@ -13,8 +13,8 @@ import Group579 from "../../Assets/Group 579.png"
 import { thbTokenAddress, thbTokenAbi } from "../../Component/Utils/ThbToken"
 import { thbLpTokenAddress, thbLpTokenAbi } from '../../Component/Utils/ThbLpToken'
 import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
-
-
+import takingthbbnb from "../../Assets/taking-thb-bnb.png"
+import stakingthb from "../../Assets/staking-thb.png"
 function StakePage() {
   let stakeAmount = useRef(0);
   let stakeAmountLp = useRef(0);
@@ -384,7 +384,7 @@ function StakePage() {
             </div>
             <div className='row d-flex justify-content-center justify-content-evenly pt-4'>
               <div className='col-lg-4 col-11 '>
-                <div className='row Stakeboxs1 pt-3'>
+                <div className='row Stakeboxs1 pt-3 mt-3'>
                   <div className='col-10'>
                   <p className='text-white fs-5 fw-bold mt-1'><img src="https://i.ibb.co/pfXvJYN/02-1.png" width="35px" /> THB</p>
                   </div>
@@ -400,29 +400,27 @@ function StakePage() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className='col-12 pt-3'>
-                    <p className='text-white fs-5 fw-bold mt-1'><img src="https://i.ibb.co/pfXvJYN/02-1.png" width="35px" /> THB</p>
-                  </div> */}
+
                   <div className='col-md-12'>
-                    <img src="https://i.ibb.co/Z17SP2h/vector-99.png" className="StakeImagessss" />
+                    <img src={stakingthb} className="StakeImagessss" />
                   </div>
 
                   <div className='row d-flex justify-content-center mt-4 '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Wallet</p>
-                      <p className='text-end'>{thbBal} THB</p>
+                      <p className='text-end'>{thbBal.toLocaleString()} THB</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>BRL Point: </p>
-                      <p className='text-end'>{brlPoint}</p>
+                      <p className='text-end'>{brlPoint.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Staked:</p>
-                      <p className='text-end'>{tamount}</p>
+                      <p className='text-end'>{tamount.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
@@ -467,19 +465,18 @@ function StakePage() {
                     </div>
                   </div>
                 </div>
-                <ul className='game-order-list text-start' >
+                {/* <ul className='game-order-list text-start' >
                   <li className='gamelist' style={{ fontSize: "18px" }}>Stake THB token to earn Energy point.</li>
                   <li className='gamelist' style={{ fontSize: "18px" }}>You can Unstake anytime.</li>
-                  {/* <li className='gamelist' style={{ fontSize: "18px" }}>THB rewards are calculated per block</li> */}
+
                 </ul>
                 <ul className='StakeOrder'>
                   <li className='Stakelist'>4,000 Point = 1 random card</li>
-                  {/* <li className='Stakelist'>*Min staking 500 THB</li>
-                  <li className='Stakelist'>*Max staking 30,000 THB</li> */}
-                </ul>
+
+                </ul> */}
               </div>
               <div className='col-lg-4 col-11 '>
-                <div className='row Stakeboxs1 pt-3'>
+                <div className='row Stakeboxs1 pt-3 mt-3'>
                 <div className='col-10'>
                   <p className='text-white fs-5 fw-bold mt-1'><img src="https://i.ibb.co/pfXvJYN/02-1.png" width="35px" /> THB/BNB</p>
                   </div>
@@ -499,24 +496,24 @@ function StakePage() {
                     <p className='text-white fs-5 fw-bold mt-1'><img src="https://i.ibb.co/pfXvJYN/02-1.png" width="35px" /> THB/BNB</p>
                   </div> */}
                   <div className='col-md-12'>
-                    <img src="https://i.ibb.co/X32t6X6/100-2.png" className="StakeImagessss" />
+                    <img src={takingthbbnb} className="StakeImagessss" />
                   </div>
                   <div className='row d-flex justify-content-center mt-4 '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Wallet</p>
-                      <p className='text-end'>{thbLpBal} THB-LP</p>
+                      <p className='text-end'>{thbLpBal.toLocaleString()} THB-LP</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>BRL Point: </p>
-                      <p className='text-end'>{brlLPPoint}</p>
+                      <p className='text-end'>{brlLPPoint.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
                     <div className='col-md-12' id="Balanceview">
                       <p className='fw-bold text-start' style={{ color: "#F8B815" }}>Staked:</p>
-                      <p className='text-end'>{tamountlp}</p>
+                      <p className='text-end'>{tamountlp.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className='row d-flex justify-content-center '>
@@ -558,7 +555,7 @@ function StakePage() {
                     </div>
                   </div>
                 </div>
-                <ul className='game-order-list text-start' >
+                {/* <ul className='game-order-list text-start' >
                   <li className='gamelist' style={{ fontSize: "18px" }}>Stake THB/BNB token to earn Energy point.</li>
                   <li className='gamelist' style={{ fontSize: "18px" }}>You can not Unstake until end of time.</li>
                   <li className='gamelist' style={{ fontSize: "18px" }}>THB rewards are calculated per block.</li>
@@ -566,9 +563,7 @@ function StakePage() {
                 <ul className='StakeOrder'>
                   <li className='Stakelist'>THB/BNP staking = 10,000 point a day * 1BNB value base</li>
                   <li className='Stakelist'>4,000 Point = 1 random card</li>
-                  {/* <li className='Stakelist'>* Min staking 0.1 BNB</li>
-                  <li className='Stakelist'>* Max staking 6 BNB</li> */}
-                </ul>
+                </ul> */}
               </div>
 
             </div>

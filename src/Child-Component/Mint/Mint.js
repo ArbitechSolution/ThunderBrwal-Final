@@ -6,6 +6,7 @@ import "./Mint.css"
 import { IoMdClose } from "react-icons/io";
 import Spinner from './Spinner';
 import axios from 'axios';
+import mints from "../../Assets/mint.png"
 import { getUserBrawlMintPoint } from '../../redux/redux/actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import CloseButton from 'react-bootstrap/CloseButton'
@@ -338,7 +339,7 @@ const getEventsForMinting=async()=>{
                         <div className='row pt-4 pb-4 d-flex justify-content-center '>
                             <div className='col-md-6 d-flex justify-content-center align-items-center'>
                                 <img alt='greetings' src="https://i.ibb.co/yyNVLVb/Rectangle-554.png" className="mintImage1" />
-                                <img alt='greetings' src="https://i.ibb.co/BPqHrwB/tiger-1.jpg" className="mintImage2" />
+                                <img alt='greetings' src={mints} className="mintImage2" />
                             </div>
                             <div className='col-md-6 d-flex flex-column justify-content-center align-items-center'>
                                 <div className='text-start'>

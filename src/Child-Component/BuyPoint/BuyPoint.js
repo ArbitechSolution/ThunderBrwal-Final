@@ -18,6 +18,24 @@ function BuyPoint() {
     let [usersConvertedpoints, setUsersConvertedPoints]=useState(0);
 
 
+const getRecievingAmount =async()=>{
+
+    if (acc == "No Wallet") {
+        console.error("No allet");
+    }
+    else if (acc == "Wrong Network") {
+        console.error(" Wrong wallet");
+
+    } else if (acc == "Connect Wallet") {
+        console.error("Connect Wallet");
+    } else {
+        
+    }
+
+}
+
+
+
     const getUserBalance =async()=>{
 
         if (acc == "No Wallet") {

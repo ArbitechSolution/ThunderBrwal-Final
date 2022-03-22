@@ -91,46 +91,56 @@ function Mint() {
 
     // Minting Funtions
     const myMint = async () => {
-        console.log("my ACC=", acc)
-        if (acc == "No Wallet") {
-            toast.error("No Wallet Connected")
-        }
-        else if (acc == "Wrong Network") {
-            toast.error("Wrong Newtwork please connect to test net")
-        } else if (acc == "Connect Wallet") {
-            toast.error("Not Connected")
-        } else {
-            console.log("mintFor");
-            const web3 = window.web3;
-            let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
-            let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
-            let supply = await nftContractOf.methods.totalSupply().call();
-            let maxSupply = await nftContractOf.methods.maxsupply().call();
-            let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
-            if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
-                if (parseFloat(maxSupply) >= parseFloat(supply)) {
-                    setIsLoading(true)
-                    await nftContractOf.methods.mint(value).send({
-                        from: acc
-                    }).on("receipt", (receipt) => {
-                        console.log("mintValue", receipt);
-                    })
-                    toast.success("Transaction Confirmed")
-                    dispatch(getUserBrawlMintPoint())
-                   await allImagesNfts();
-                    setModalShow(true);
-                    setIsLoading(false)
-
-                } else {
-                    toast.error("Maximum minting reached")
+        try{
+            console.log("my ACC=", acc)
+            if (acc == "No Wallet") {
+                toast.error("No Wallet Connected")
+            }
+            else if (acc == "Wrong Network") {
+                toast.error("Wrong Newtwork please connect to test net")
+            } else if (acc == "Connect Wallet") {
+                toast.error("Not Connected")
+            } else {
+                
+                console.log("mintFor");
+                const web3 = window.web3;
+                let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
+                let supply = await nftContractOf.methods.totalSupply().call();
+                let maxSupply = await nftContractOf.methods.maxsupply().call();
+                let myBrawl = web3.utils.toWei(brawlMintPoints.toString())
+                if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
+                    if (parseFloat(maxSupply) >= parseFloat(supply)) {
+                        setIsLoading(true)
+                        await nftContractOf.methods.mint(value).send({
+                            from: acc
+                        }).on("receipt", (receipt) => {
+                            console.log("mintValue", receipt);
+                        })
+                        toast.success("Transaction Confirmed")
+                        dispatch(getUserBrawlMintPoint())
+                       await allImagesNfts();
+                        setModalShow(true);
+                        setIsLoading(false)
+    
+                    } else {
+                        setIsLoading(false)
+    
+                        toast.error("Maximum minting reached")
+                    }
+    
                 }
-
+                else {
+                    setIsLoading(false)
+                    toast.error("You do not have enought Brawl points")
+                }
             }
-            else {
-                toast.error("You do not have enought Brawl points")
-            }
-
+        }catch(e){
+            setIsLoading(false)
+            console.log("Error While Mintinng",e);
         }
+
+       
     }
 
 const getEventsForMinting=async()=>{

@@ -46,13 +46,17 @@ function MyCollection() {
             let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
             let walletLength = walletOfOwner.length
             setMyWalletLength(walletLength)
-            console.log("walletOfOwner", walletLength);
+            console.log("walletOfOwner", walletOfOwner[0]);
+            console.log("finalLimit", finalLimit);
+            console.log("initialLimit", initialLimit);
+
             
             if (parseInt(walletLength) > 0) {
-                if(finalLimit<parseInt(walletLength))
+                if(initialLimit<parseInt(walletLength))
                 {
-                    for (let i = initialLimit; i < finalLimit; i++) {
+                    for (let i = initialLimit; i < walletLength; i++) {
                         try {
+                            console.log("Getting Response");
                             let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
                             let imageUrl = res.data.image;
                             let dna = res.data.dna
@@ -285,7 +289,7 @@ function MyCollection() {
                                             <img src={items.imageUrl} className='myCollectionsImage ' />
                                             {/* <span className='imageText text-white'  >&nbsp;&nbsp;{items.d}</span> */}
                                             <div>
-                                                <span className='imageText text-white'  >&nbsp;&nbsp;{items.num}</span>
+                                                <span className='imageText text-white'  >&nbsp;&nbsp;ID : {items.num}</span>
                                                 <p className='collectionsText mt-3'>#20211 Tiger Master</p>
                                                 <p className='collectionsTextSmall'>Common</p>
                                             </div>

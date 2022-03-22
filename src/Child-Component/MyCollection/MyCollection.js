@@ -9,7 +9,7 @@ import { getWallet } from '../../redux/redux/actions/actions';
 import { IoMdClose } from "react-icons/io";
 import { InputGroup, FormControl } from 'react-bootstrap'
 import tick2 from "../../Assets/tick (2) 2.png"
-
+import Frame27 from "../../Assets/Frame 27.png"
 function MyCollection() {
     
     let dispatch = useDispatch();
@@ -21,8 +21,9 @@ function MyCollection() {
     let [test, setTest] = useState([]);
     let [mywalletLength, setMyWalletLength]=useState();
     let [initialLimit, setInitiaLimit] = useState(0);
-    let [finalLimit, setFinalLimit] = useState(6)
-    let [num, setnum] = useState(0);
+    let [finalLimit, setFinalLimit] = useState(12)
+    let [dispalyimage,setDispalyImage] = useState([])
+    // let [num, setnum] = useState(0);
     let { acc } = useSelector(state => state.connectWallet);
 
     let toAddress = useRef("")
@@ -46,7 +47,7 @@ function MyCollection() {
             let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
             let walletLength = walletOfOwner.length
             setMyWalletLength(walletLength)
-            // console.log("walletOfOwner", walletOfOwner[0]);
+            console.log("walletOfOwner", walletOfOwner);
             // console.log("finalLimit", finalLimit);
             // console.log("initialLimit", initialLimit);
 
@@ -54,16 +55,21 @@ function MyCollection() {
             if (parseInt(walletLength) > 0) {
                 if(initialLimit<parseInt(walletLength))
                 {
-                    for (let i = initialLimit; i < walletLength; i++) {
+                    let myImgArry= []
+                    for (let i = initialLimit; i <finalLimit; i++) {
                         try {
                             // console.log("Getting Response");
                             let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
                             let imageUrl = res.data.image;
                             let dna = res.data.dna
-                            simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna}]
-                            // console.log("simplleArray", simplleArray);
-                            setImageArray(simplleArray)
-                            // console.log("Getting Response", res.data.image);
+                            let names = res.data.name
+                            
+                            myImgArry =[...myImgArry, imageUrl]
+                            setDispalyImage(myImgArry)
+                            simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna,names:names}]
+                            console.log("simplleArray", myImgArry);
+                            setImageArray(simplleArray);
+                            console.log("Getting Response", res.data.image);
                         } catch (e) {
                             console.log("Error while Fetching Api", e)
                         }
@@ -73,24 +79,41 @@ function MyCollection() {
         }
     }
     const ClickNext = () => {
-        if (finalLimit <mywalletLength && initialLimit >= 0) {
-            // console.log("More");
-            setInitiaLimit(initialLimit + 6)
-            setFinalLimit(finalLimit + 6)
 
+        if (finalLimit <mywalletLength && initialLimit >= 0) {
+            let a = finalLimit+12
+            if(a>mywalletLength){
+                console.log("here",mywalletLength);
+
+                setInitiaLimit(initialLimit+12)
+                setFinalLimit(mywalletLength)
+                allImagesNfts();
+            }else{
+                console.log("Leseee",finalLimit);
+                console.log("initialLimit",initialLimit);
+                setInitiaLimit(parseInt(initialLimit) + 12)
+                setFinalLimit(parseInt(finalLimit) + 12)
+                allImagesNfts();
+            }
         }
     }
     const ClickPrevious = () => {
-        if (initialLimit <= mywalletLength && finalLimit > 6) {
-            setInitiaLimit(initialLimit - 6)
-            setFinalLimit(finalLimit - 6)
-            // console.log("Less");
-
-
-        }
+        if (initialLimit <= mywalletLength && finalLimit > 12) {
+            if(finalLimit>12){
+                setInitiaLimit(initialLimit - 12)
+                setFinalLimit(finalLimit - 12)
+                allImagesNfts();
+            }else{
+                setInitiaLimit(0)
+                setFinalLimit(12)
+                allImagesNfts();
+            }
+            console.log("Less",finalLimit);
+       }
     }
 
     const clickedImage = (index) => {
+        console.log("You Clicked",index);
         setClickedIndexes(index)
         setModalShow(true)
     }
@@ -141,9 +164,9 @@ function MyCollection() {
     useEffect(() => {
         allImagesNfts();
     }, [acc])
-    useEffect(() => {
-        allImagesNfts();
-    }, [finalLimit])
+    // useEffect(() => {
+    //     allImagesNfts();
+    // }, [finalLimit])
 
 
 
@@ -169,34 +192,20 @@ function MyCollection() {
                         <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
                             <h4 className='collectionsTextLarge m-2  '>NFT card transfer</h4>
                             <div className='col-lg-4 col-md-5 mycollections p-2 m-2'>
-                                <img src={imageArray[clickedIndexes]} className='myCollectionsImage ' />
+                                <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
                                     <p className='collectionsText mt-3'>#20211 Tiger Master</p>
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
                             </div>
-                            <div className="row mt-2">
-                                <div className="col-md-12">
-                                    <span className="buypoint-span">From</span>
-                                    <InputGroup >
-                                        <FormControl
-
-                                            className="pointinput form-control"
-                                            type="number"
-                                            placeholder="0"
-                                            aria-label="Recipient's username with two button addons"
-                                        />
-
-                                    </InputGroup>
-                                </div>
-                            </div>
+                            
                             <div className="row mt-2">
                                 <div className="col-md-12">
                                     <span className="buypoint-span">To</span>
                                     <InputGroup >
                                         <FormControl
-
+                                            ref={toAddress}
                                             className="pointinput form-control"
                                             type="number"
                                             placeholder="0"
@@ -238,7 +247,7 @@ function MyCollection() {
                         <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
                             <h4 className='collectionsTextLarge m-2  '>NFT card transfer</h4>
                             <div className='col-lg-4 col-md-5 mycollections p-2 m-2'>
-                                <img src={imageArray[clickedIndexes]} className='myCollectionsImage ' />
+                                <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
                                     <p className='collectionsText mt-3'>#20211 Tiger Master</p>
@@ -248,13 +257,10 @@ function MyCollection() {
                             <div className='row d-flex justify-content-center mt-2'>
                                 <div className='col-md-10 col-11 buypintox '>
                                     <div className='row d-flex justify-content-center mt-4 mb-4'>
-                                        <div className='col-12 d-flex justify-content-evenly'>
-                                            <span className='buyPointText'>Price:</span>
-                                            <span className='buyPointText1'>1 BNB= 3,636.36 POINT</span>
-                                        </div>
+                                       
                                         <div className='col-12 d-flex justify-content-evenly mt-4'>
-                                            <span className='buyPointText'>You’ll receive:</span>
-                                            <span className='buyPointText1'>3,636.36 POINT</span>
+                                            <span className='buyPointText'>To</span>
+                                            <span className='buyPointText1'></span>
                                         </div>
                                     </div>
                                 </div>
@@ -282,18 +288,23 @@ function MyCollection() {
                             </div>
 
                             <div className='row d-flex justify-content-center mt-3'>
-                                {imageArray.map((items, index) => {
+                                {imageArray.slice(initialLimit,finalLimit).map((items, index) => {
 
                                     return (
-                                        <div className='col-lg-3 col-md-5 mycollections p-2 m-2'>
+                                        <div className='col-lg-2 col-md-5 mycollections p-2 m-1'>
                                             <img src={items.imageUrl} className='myCollectionsImage ' />
                                             {/* <span className='imageText text-white'  >&nbsp;&nbsp;{items.d}</span> */}
                                             <div>
-                                                <span className='imageText text-white'  >&nbsp;&nbsp;ID : {items.num}</span>
-                                                <p className='collectionsText mt-3'>#20211 Tiger Master</p>
-                                                <p className='collectionsTextSmall'>Common</p>
+                                                {/* <span className='imageText text-white'  >&nbsp;&nbsp;ID : {items.num}</span> */}
+                                                <p className='collectionsText mt-3'>ID : {items.num}</p>
+                                                <div className='d-flex flex-row justify-content-between align-items-center mb-3'>
+                                                <span className='collectionsTextSmall'>{items.names}</span>
+                                                <div className='small-boxxx d-flex justify-content-around align-items-center'>
+                                                  <img src={Frame27} width="20px"/> 
+                                                   <sapn style={{color: "white"}}>1</sapn>
+                                                </div>
+                                                </div>
                                             </div>
-
                                             <div className="d-grid gap-2">
                                                 <button onClick={() => clickedImage(index)} className='btn btnStakePage' size="lg">
                                                     Transfer

@@ -229,8 +229,8 @@ const getEventsForMinting=async()=>{
                                     })
                                 }
                             </div>
-                            <div className=" row d-flex justify-content-center justify-content-md-around btnmodelhere">
-                                <div className="col-md-4 col-10">
+                            <div className="row d-flex justify-content-center justify-content-md-between btnmodelhere" >
+                                <div className="col-md-3 col-10 mt-2">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
                                         BREED
@@ -239,7 +239,7 @@ const getEventsForMinting=async()=>{
                                     </div>
 
                                 </div>
-                                <div className="col-md-4 col-10">
+                                <div className="col-md-3 col-10 mt-2">
                                 <div className="d-grid gap-2">
                                         <button className='undermodelbtn2 ' size="lg">
                                         ACCEPT
@@ -247,7 +247,7 @@ const getEventsForMinting=async()=>{
 
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-10">
+                                <div className="col-md-5 col-10 mt-2">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
                                         DO IT LATER
@@ -258,77 +258,6 @@ const getEventsForMinting=async()=>{
                         </Modal.Body>
                     </Modal> : <></>
             }
-            {/* {
-                modalShow ? <Modal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    className='d-flex StakePageImage'
-                    >
-                    <Modal.Header className='StakePageImage'>
-                        <div className='pb-4 '>
-                            <div className=' d-flex justify-content-center'>
-                                <div className=' d-flex mt-2'>
-                                    <CloseButton onClick={() => setModalShow(false)} variant="white" />
-                                </div>
-                            </div>
-                            <div className="row d-flex justify-content-center mt-3">
-                                <div className='col-md-12 d-flex justify-content-lg-end'>
-                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
-                                </div>
-                            </div>
-                            <div className='row d-flex justify-content-center mt-3' >
-                                <div className='col-md-12'>
-                                    <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
-                                </div>
-
-
-
-                            </div>
-                            <div>
-                                <p className='simpleText'>
-                                    You got a Tiger mask card now!
-                                </p>
-                            </div>
-
-
-                            <div className="uperimg row d-flex flex-row justify-content-center">
-                                {
-                                    imageArray.map((items, index) => {
-
-                                        return (
-                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
-                                                <img alt='greetings' src={imageArray[index]} className="model-i" />
-
-                                            </div>
-                                        )
-                                    })
-                                }
-
-
-                            </div>
-
-
-                            <div className=" row d-flex justify-content-center justify-content-around btnmodelhere">
-                                <div className="col-md-4 col-10">
-                                    <div className="d-grid gap-2">
-                                        <button className='undermodelbtn ' size="lg">
-                                        BREED
-                                        </button>
-
-                                    </div>
-
-                                </div>
-                                <div className="col-md-4 col-10">
-                                    <button className='undermodelbtn2'>ACCEPT</button>
-                                </div>
-                            </div>
-                        </div>
-                    </Modal.Header>
-                </Modal > : <></>
-            } */}
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>

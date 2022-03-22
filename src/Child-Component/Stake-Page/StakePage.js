@@ -64,7 +64,7 @@ function StakePage() {
     } else {
       try {
         let enteredVal = stakeAmount.current.value;
-        console.log("U NEterd", enteredVal);
+        // console.log("U NEterd", enteredVal);
         const web3 = window.web3;
         let thbTokenContractOf = new web3.eth.Contract(thbTokenAbi, thbTokenAddress);
         let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
@@ -115,7 +115,7 @@ function StakePage() {
 
   // Unstake Function for Thb
   const unstake = async () => {
-    console.log("ACC=", acc)
+    // console.log("ACC=", acc)
     if (acc == "No Wallet") {
       toast.error("Not Connected to Wallet")
 
@@ -172,7 +172,7 @@ function StakePage() {
       try {
 
         let enteredVal = stakeAmountLp.current.value;
-        console.log("U NEterd", enteredVal);
+        // console.log("U NEterd", enteredVal);
         const web3 = window.web3;
         let thbLpTokenContractOf = new web3.eth.Contract(thbLpTokenAbi, thbLpTokenAddress);
         let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
@@ -233,7 +233,7 @@ function StakePage() {
       try {
 
         let timestamp = Math.floor(new Date().getTime() / 1000)
-        console.log("timestamp", timestamp);
+        // console.log("timestamp", timestamp);
 
         const web3 = window.web3;
         let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
@@ -241,7 +241,7 @@ function StakePage() {
         let userLP = await stakingCOntractOf.methods.UserLP(acc).call()
         let depositTimes = userLP.Deposit_time
         let AddTime = +lpLockTime + +depositTimes;
-        console.log("AddTime", AddTime);
+        // console.log("AddTime", AddTime);
         if (tamountlp > 0) {
           if (timestamp >= AddTime) {
             await stakingCOntractOf.methods.withdrawLPtoken().send({
@@ -273,7 +273,7 @@ function StakePage() {
 
   // // function For redeeming THB
   const redeemTHB = async () => {
-    console.log("ACC=", acc)
+    // console.log("ACC=", acc)
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
     }
@@ -286,7 +286,7 @@ function StakePage() {
         const web3 = window.web3
         let redeemContract = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
         const bPBlance = await redeemContract.methods.BPcalculator(acc).call();
-        console.log("BPBlance", bPBlance);
+        // console.log("BPBlance", bPBlance);
         if (bPBlance > 0) {
 
           await redeemContract.methods.redeem().send({
@@ -314,7 +314,7 @@ function StakePage() {
 
   // // function for redeeming LPThb
   const RedeemLPTHP = async () => {
-    console.log("ACC=", acc)
+    // console.log("ACC=", acc)
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
     }

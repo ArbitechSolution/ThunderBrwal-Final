@@ -69,17 +69,17 @@ function Mint() {
 
                     let inputId = await nftContractOf.methods.mintids(i).call(); 
 
-                    console.log("walletOfOwner", inputId);
+                    // console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
-                    console.log("Indexes", i);
-                    console.log("Indexes2", inputId);
+                    // console.log("Indexes", i);
+                    // console.log("Indexes2", inputId);
 
                     let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${inputId}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
 
-                    console.log("Getting Response", res);
+                    // console.log("Getting Response", res);
                 } catch (e) {
                     console.log("Error while Fetching Api", e)
                 }
@@ -102,7 +102,7 @@ function Mint() {
                 toast.error("Not Connected")
             } else {
                 
-                console.log("mintFor");
+                // console.log("mintFor");
                 const web3 = window.web3;
                 let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                 let mintingPrice = await nftContractOf.methods.MinitngPrice().call();
@@ -157,8 +157,8 @@ const getEventsForMinting=async()=>{
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
           let ahan =  await nftContractOf.events.allEvents({ fromBlock: 'latest' })
           let event = nftContractOf.events.Transfer();
-            console.log("My Events", ahan);
-            console.log("Specific Events=",event);
+            // console.log("My Events", ahan);
+            // console.log("Specific Events=",event);
         }
 
 

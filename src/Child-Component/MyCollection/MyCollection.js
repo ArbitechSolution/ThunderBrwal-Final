@@ -24,7 +24,7 @@ function MyCollection() {
     let [finalLimit, setFinalLimit] = useState(6)
     let [num, setnum] = useState(0);
     let { acc } = useSelector(state => state.connectWallet);
-    console.log("acc", acc);
+
     let toAddress = useRef("")
 
     const allImagesNfts = async () => {
@@ -39,16 +39,16 @@ function MyCollection() {
         }
 
         else {
-            console.log("Inside")
+            // console.log("Inside")
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
             let simplleArray = [];
             let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
             let walletLength = walletOfOwner.length
             setMyWalletLength(walletLength)
-            console.log("walletOfOwner", walletOfOwner[0]);
-            console.log("finalLimit", finalLimit);
-            console.log("initialLimit", initialLimit);
+            // console.log("walletOfOwner", walletOfOwner[0]);
+            // console.log("finalLimit", finalLimit);
+            // console.log("initialLimit", initialLimit);
 
             
             if (parseInt(walletLength) > 0) {
@@ -56,14 +56,14 @@ function MyCollection() {
                 {
                     for (let i = initialLimit; i < walletLength; i++) {
                         try {
-                            console.log("Getting Response");
+                            // console.log("Getting Response");
                             let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
                             let imageUrl = res.data.image;
                             let dna = res.data.dna
                             simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna}]
-                            console.log("simplleArray", simplleArray);
+                            // console.log("simplleArray", simplleArray);
                             setImageArray(simplleArray)
-                            console.log("Getting Response", res.data.image);
+                            // console.log("Getting Response", res.data.image);
                         } catch (e) {
                             console.log("Error while Fetching Api", e)
                         }
@@ -74,7 +74,7 @@ function MyCollection() {
     }
     const ClickNext = () => {
         if (finalLimit <mywalletLength && initialLimit >= 0) {
-            console.log("More");
+            // console.log("More");
             setInitiaLimit(initialLimit + 6)
             setFinalLimit(finalLimit + 6)
 
@@ -84,7 +84,7 @@ function MyCollection() {
         if (initialLimit <= mywalletLength && finalLimit > 6) {
             setInitiaLimit(initialLimit - 6)
             setFinalLimit(finalLimit - 6)
-            console.log("Less");
+            // console.log("Less");
 
 
         }

@@ -37,7 +37,7 @@ function BuyPoint() {
             userBNBBalance= web3.utils.fromWei(userBNBBalance);
             userBNBBalance=parseFloat(userBNBBalance).toFixed(4)
             setUserBnbBalance(userBNBBalance)
-            console.log("UserBnb balance",userBNBBalance);
+            // console.log("UserBnb balance",userBNBBalance);
 
         }catch(e){
             console.error("Error whgile getting users Bnb Balance");
@@ -50,8 +50,8 @@ function BuyPoint() {
     let { currentBp } = useSelector(state => state.setCurrentBpTokens)
     let { maxBpTokens } = useSelector(state => state.setMaxBpTokens)
     let { acc } = useSelector(state => state.connectWallet)
-    console.log("Current Bp = ", currentBp)
-    console.log("maxBpTokens Bp = ", maxBpTokens)
+    // console.log("Current Bp = ", currentBp)
+    // console.log("maxBpTokens Bp = ", maxBpTokens)
     let userEnterd = useRef()
 
 
@@ -60,7 +60,7 @@ const closeModal=()=>{
 }
 
     const buyWithBnb = async () => {
-        console.log("Inside");
+        // console.log("Inside");
         // console.log("ACC=",acc)
         if (acc == "No Wallet") {
             toast.error("No allet");
@@ -81,7 +81,7 @@ const closeModal=()=>{
                 userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
                 
 
-                console.log("userEnterdValue", userBNBBalance);
+                // console.log("userEnterdValue", userBNBBalance);
                 let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
                 let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
                 setUsersConvertedPoints(converted)

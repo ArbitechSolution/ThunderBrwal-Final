@@ -16,6 +16,7 @@ function BuyPoint() {
     let [userBnbBalance, setUserBnbBalance]=useState();
     let [userSpent, setBnbSpent]=useState(0)
     let [usersConvertedpoints, setUsersConvertedPoints]=useState(0);
+    let [youWillRecieve, setYouWillrecive]=useState(0)
 
 
 const getRecievingAmount =async()=>{
@@ -29,6 +30,20 @@ const getRecievingAmount =async()=>{
     } else if (acc == "Connect Wallet") {
         console.error("Connect Wallet");
     } else {
+        const web3 = window.web3;
+        let userEnterdValue = userEnterd.current.value;
+
+        if(parseFloat(userEnterdValue)>0){
+            userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
+            let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+            let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
+            setYouWillrecive(converted)
+        }
+        else{
+            setYouWillrecive(0)
+        }
+
+       
         
     }
 
@@ -217,7 +232,9 @@ const closeModal=()=>{
                                 <span className='point-buy-txt'>Available:{userBnbBalance} BNB</span>
                                 <InputGroup >
                                     <FormControl
+
                                         ref={userEnterd}
+                                        onChange={()=>getRecievingAmount()}
                                         className="pointinput form-control"
                                         type="number"
                                         placeholder="0"
@@ -268,7 +285,7 @@ const closeModal=()=>{
                                     </div>
                                     <div className='col-12 d-flex justify-content-evenly mt-4'>
                                         <span className='buyPointText'>You’ll receive:</span>
-                                        <span className='buyPointText1'>3,636.36 POINT</span>
+                                        <span className='buyPointText1'>{youWillRecieve} POINT</span>
                                     </div>
                                 </div>
                             </div>

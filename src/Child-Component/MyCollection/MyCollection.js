@@ -53,6 +53,16 @@ function MyCollection() {
 
             }
         }
+        const testAllImage = async () => {
+            try{
+
+                
+                let res = await axios.get('/config/2.json')
+                console.log("responce", res);
+            }catch(e){
+                console.log("error testAllImage", e);
+            }
+        }
 
     const allImagesNfts = async () => {
         if (acc == "No Wallet") {
@@ -85,7 +95,7 @@ function MyCollection() {
                     for (let i = 0; i <walletLength; i++) {
                         try {
                             // console.log("Getting Response");
-                            let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
+                            let res = await axios.get(`/config/${walletOfOwner[i]}.json`)
                             let imageUrl = res.data.image;
                             let dna = res.data.dna
                             let names = res.data.name
@@ -159,6 +169,7 @@ function MyCollection() {
     }
     useEffect(() => {
         allImagesNfts();
+        testAllImage()
     }, [acc])
     // useEffect(() => {
     //     allImagesNfts();

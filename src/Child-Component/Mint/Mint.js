@@ -102,7 +102,7 @@ function Mint() {
                     // console.log("Indexes", i);
                     // console.log("Indexes2", inputId);
 
-                    let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${inputId}.json`)
+                    let res = await axios.get(`/config/${inputId}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
@@ -144,8 +144,11 @@ function Mint() {
                         await nftContractOf.methods.mint(value).send({
                             from: acc
                         }).on("receipt", (receipt) => {
+
                             console.log("mintValue", receipt);
-                            // obj=receipt
+
+                            setTransctionData(receipt)
+
                         })
                         // setTransctionData(obj)
                         toast.success("Transaction Confirmed")

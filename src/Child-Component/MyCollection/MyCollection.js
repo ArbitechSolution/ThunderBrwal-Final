@@ -44,7 +44,7 @@ function MyCollection() {
     
         const loadLess=()=>{
             let b = finalLimit-12
-            if (b<=0){
+            if (b<=12){
                 setFinalLimit(12);
                 setInitialLimit(0);
             }else{
@@ -124,9 +124,10 @@ function MyCollection() {
             console.log("Connect Wallet");
         } else {
             let userEnteredAddress = toAddress.current.value;
+            console.log("userEnteredAddress", userEnteredAddress);
             const web3 = window.web3;
             let stringLength = userEnteredAddress.length;
-            if (parseInt(stringLength) == 42) {
+            if (parseInt(stringLength) >0) {
                 try {
                     let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                     let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
@@ -198,10 +199,10 @@ function MyCollection() {
                                 <div className="col-md-12">
                                     <span className="buypoint-span">To</span>
                                     <InputGroup >
-                                        <FormControl
+                                        <input
                                             ref={toAddress}
                                             className="pointinput form-control"
-                                            type="number"
+                                            // type="number"
                                             placeholder="0"
                                             aria-label="Recipient's username with two button addons"
                                         />

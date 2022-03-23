@@ -19,14 +19,40 @@ function MyCollection() {
     let [clickedIndexes, setClickedIndexes] = useState()
     let [imageArray, setImageArray] = useState([]);
     let [test, setTest] = useState([]);
+    let [initialLimit, setInitialLimit]=useState(0);
+    let [finalLimit, setFinalLimit]=useState(12)
     let [mywalletLength, setMyWalletLength]=useState();
-    let [initialLimit, setInitiaLimit] = useState(0);
-    let [finalLimit, setFinalLimit] = useState(12)
     let [dispalyimage,setDispalyImage] = useState([])
     // let [num, setnum] = useState(0);
     let { acc } = useSelector(state => state.connectWallet);
 
     let toAddress = useRef("")
+
+    const loadMore=()=>{
+        
+        let a=finalLimit+12
+        if(a>=mywalletLength){
+            setInitialLimit(initialLimit+12)
+            console.log("Loading More Up");
+            setFinalLimit(mywalletLength)
+        }else{
+            console.log("Loading More");
+            setInitialLimit(initialLimit+12);
+            setFinalLimit(finalLimit+12)
+        }
+    }
+    
+        const loadLess=()=>{
+            let b = finalLimit-12
+            if (b<=0){
+                setFinalLimit(12);
+                setInitialLimit(0);
+            }else{
+                setInitialLimit(initialLimit-12);
+                setFinalLimit(finalLimit-12)      
+
+            }
+        }
 
     const allImagesNfts = async () => {
         if (acc == "No Wallet") {
@@ -53,10 +79,10 @@ function MyCollection() {
 
             
             if (parseInt(walletLength) > 0) {
-                if(initialLimit<parseInt(walletLength))
+                // if(initialLimit<parseInt(walletLength))
                 {
                     let myImgArry= []
-                    for (let i = initialLimit; i <finalLimit; i++) {
+                    for (let i = 0; i <walletLength; i++) {
                         try {
                             // console.log("Getting Response");
                             let res = await axios.get(`https://ipfs.io/ipfs/QmRGryuWHLvVoem37Z6d9TbhBgqBk3CarLjWWf7tBBJQwh/${walletOfOwner[i]}.json`)
@@ -78,39 +104,7 @@ function MyCollection() {
             }
         }
     }
-    const ClickNext = () => {
-
-        if (finalLimit <mywalletLength && initialLimit >= 0) {
-            let a = finalLimit+12
-            if(a>mywalletLength){
-                console.log("here",mywalletLength);
-
-                setInitiaLimit(initialLimit+12)
-                setFinalLimit(mywalletLength)
-                allImagesNfts();
-            }else{
-                console.log("Leseee",finalLimit);
-                console.log("initialLimit",initialLimit);
-                setInitiaLimit(parseInt(initialLimit) + 12)
-                setFinalLimit(parseInt(finalLimit) + 12)
-                allImagesNfts();
-            }
-        }
-    }
-    const ClickPrevious = () => {
-        if (initialLimit <= mywalletLength && finalLimit > 12) {
-            if(finalLimit>12){
-                setInitiaLimit(initialLimit - 12)
-                setFinalLimit(finalLimit - 12)
-                allImagesNfts();
-            }else{
-                setInitiaLimit(0)
-                setFinalLimit(12)
-                allImagesNfts();
-            }
-            console.log("Less",finalLimit);
-       }
-    }
+ 
 
     const clickedImage = (index) => {
         console.log("You Clicked",index);
@@ -315,9 +309,9 @@ function MyCollection() {
                                 })}
                             </div>
                         </div>
-                        <div className='row d-flex flex-row justify-content-center justify-content-evenly' >
-
-                            <div className='col-1 d-flex align-items-center justify-content-center' onClick={ClickPrevious} style={{ cursor: "pointer" }}>
+                        <div 
+                         className='row d-flex flex-row justify-content-center justify-content-evenly' >
+                            <div  onClick={()=>loadLess()} className='col-1 d-flex align-items-center justify-content-center' style={{ cursor: "pointer" }}>
                                 <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                                 <img src="https://i.ibb.co/NjDtXXY/Vector12.png" style={{ position: " relative" }} />
                             </div>
@@ -328,9 +322,8 @@ function MyCollection() {
                                 </div>
                                 {/* <span className='MyCollectionspan'>/{mywalletLength}</span> */}
                             </div>
-
                             {/* <button className='btn '> */}
-                            <div className='col-1 d-flex align-items-center justify-content-center ms-4' onClick={ClickNext} style={{ cursor: "pointer" }}>
+                            <div onClick={()=>loadMore()} className='col-1 d-flex align-items-center justify-content-center ms-4' style={{ cursor: "pointer" }}>
                                 <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                                 <img src="https://i.ibb.co/n1ZWTmj/Vector13.png" style={{ position: " relative" }} />
                             </div>

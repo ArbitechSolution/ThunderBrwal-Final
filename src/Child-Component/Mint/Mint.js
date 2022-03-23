@@ -22,6 +22,8 @@ function Mint() {
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
     let [isLoading, setIsLoading] = useState(false)
+    let [transctionData, setTransctionData]=useState({})
+    let [isDetail, setIsDetail]=useState(false)
     let dispatch = useDispatch()
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
@@ -117,9 +119,11 @@ function Mint() {
                             from: acc
                         }).on("receipt", (receipt) => {
                             console.log("mintValue", receipt);
+                            setTransctionData(receipt)
                         })
                         toast.success("Transaction Confirmed")
                         dispatch(getUserBrawlMintPoint())
+                        setIsDetail(true)
                        await allImagesNfts();
                         setModalShow(true);
                         setIsLoading(false)
@@ -143,6 +147,7 @@ function Mint() {
 
 
     }
+    console.log("transctionData", transctionData);
 
 const getEventsForMinting=async()=>{
     try{
@@ -318,7 +323,29 @@ const getEventsForMinting=async()=>{
                                 </div>
                             </div>
                         </div>
+                       {isDetail && <div className='row'>
+                            <div className='col-md-12 col-11 mint-Page-border '>
+                                <div className='row pt-3 text-start text-sm-center '>
+                                    <div className='col-sm-4'>
+                                        <span className='Mint-Time text-start'>{new Date().toLocaleTimeString()}</span>
+                                    </div>
+                                    <div className='col-sm-2'>
+                                        <span className='Mint-Time'>type</span>
+                                    </div>
+                                    <div className='col-sm-2'>
+                                        <span className='Mint-Time'>{value}</span>
+                                    </div>
+                                    <div className='col-sm-1'>
+                                        <span className='Mint-Time'>true</span>
+                                    </div>
+                                    <div className='col-sm-3'>
+                                        <span className='Mint-Time'> <a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0,3)+"..."+transctionData.transactionHash?.substring(transctionData.transactionHash?.length-3)}</a> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>}
                     </div>
+
                 </div>
             </div>
         </div>

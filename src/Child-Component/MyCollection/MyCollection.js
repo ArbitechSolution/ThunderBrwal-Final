@@ -11,7 +11,7 @@ import { InputGroup, FormControl } from 'react-bootstrap'
 import tick2 from "../../Assets/tick (2) 2.png"
 import Frame27 from "../../Assets/Frame 27.png"
 function MyCollection() {
-    
+
     let dispatch = useDispatch();
     let [btnTxt, setBtTxt] = useState("Connect");
     let [modalShow, setModalShow] = useState(false)
@@ -29,7 +29,7 @@ function MyCollection() {
     let toAddress = useRef("")
 
     const loadMore=()=>{
-        
+
         let a=finalLimit+12
         if(a>=mywalletLength){
             setInitialLimit(initialLimit+12)
@@ -41,7 +41,7 @@ function MyCollection() {
             setFinalLimit(finalLimit+12)
         }
     }
-    
+
         const loadLess=()=>{
             let b = finalLimit-12
             if (b<=12){
@@ -49,7 +49,7 @@ function MyCollection() {
                 setInitialLimit(0);
             }else{
                 setInitialLimit(initialLimit-12);
-                setFinalLimit(finalLimit-12)      
+                setFinalLimit(finalLimit-12)
 
             }
         }
@@ -77,7 +77,7 @@ function MyCollection() {
             // console.log("finalLimit", finalLimit);
             // console.log("initialLimit", initialLimit);
 
-            
+
             if (parseInt(walletLength) > 0) {
                 // if(initialLimit<parseInt(walletLength))
                 {
@@ -89,7 +89,7 @@ function MyCollection() {
                             let imageUrl = res.data.image;
                             let dna = res.data.dna
                             let names = res.data.name
-                            
+
                             myImgArry =[...myImgArry, imageUrl]
                             setDispalyImage(myImgArry)
                             simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna,names:names}]
@@ -100,11 +100,11 @@ function MyCollection() {
                             console.log("Error while Fetching Api", e)
                         }
                     }
-                }    
+                }
             }
         }
     }
- 
+
 
     const clickedImage = (index) => {
         console.log("You Clicked",index);
@@ -195,7 +195,7 @@ function MyCollection() {
                                     <p className='collectionsTextSmall'>Common</p>
                                 </div>
                             </div>
-                            
+
                             <div className="row mt-2">
                                 <div className="col-md-12">
                                     <span className="buypoint-span">To</span>
@@ -204,6 +204,7 @@ function MyCollection() {
                                             ref={toAddress}
                                             className="pointinput form-control"
                                             // type="number"
+                                            min={1}
                                             placeholder="0"
                                             aria-label="Recipient's username with two button addons"
                                         />
@@ -253,7 +254,7 @@ function MyCollection() {
                             <div className='row d-flex justify-content-center mt-2'>
                                 <div className='col-md-10 col-11 buypintox '>
                                     <div className='row d-flex justify-content-center mt-4 mb-4'>
-                                       
+
                                         <div className='col-12 d-flex justify-content-evenly mt-4'>
                                             <span className='buyPointText'>To</span>
                                             <span className='buyPointText1'></span>
@@ -296,7 +297,7 @@ function MyCollection() {
                                                 <div className='d-flex flex-row justify-content-between align-items-center mb-3'>
                                                 <span className='collectionsTextSmall'>{items.names}</span>
                                                 <div className='small-boxxx d-flex justify-content-around align-items-center'>
-                                                  <img src={Frame27} width="20px"/> 
+                                                  <img src={Frame27} width="20px"/>
                                                    <sapn style={{color: "white"}}>1</sapn>
                                                 </div>
                                                 </div>
@@ -311,7 +312,7 @@ function MyCollection() {
                                 })}
                             </div>
                         </div>
-                        <div 
+                        <div
                          className='row d-flex flex-row justify-content-center justify-content-evenly' >
                             <div  onClick={()=>loadLess()} className='col-1 d-flex align-items-center justify-content-center' style={{ cursor: "pointer" }}>
                                 <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />

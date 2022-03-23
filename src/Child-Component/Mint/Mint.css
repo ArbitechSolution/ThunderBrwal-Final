@@ -16,6 +16,13 @@
     width: 362px;
 }
 
+.mintpopuo {
+    background-color: rgba(0, 0, 0, 0.25);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 5px;
+    border: 1px solid #F3961E;
+}
+
 .mintspane {
     font-style: normal;
     font-weight: 700;
@@ -175,19 +182,23 @@
 }
 
 .uperimg {
-    background-image: url("../../Assets/Mask group9900.png");
+    background-image: url("../../Assets/Mask group1000.png");
     background-repeat: no-repeat;
-    background-position:top;
     background-size: cover;
+    box-shadow: 0px 0px 10px #F8B815;
     width: 240px;
     height: 240px;
     display: flex;
     flex-direction: row;
 
 }
-
+.stakeimage-mint{
+    width: 500px;
+}
 .model-i {
-    width: 200px;
+    width: 185px;
+    height: 185px;
+    box-shadow: 0px 0px 10px #F8B815;
 }
 
 .mintImage45 {
@@ -251,8 +262,12 @@
     justify-content: center;
 } */
 
-@media(max-width: 600px) {
+@media(max-width: 770px) {
     .Congratimage {
         width: 270px;
+    }
+    .stakeimage-mint {
+        display: none;
+        /* width: 430px; */
     }
 }

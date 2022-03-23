@@ -1,10 +1,10 @@
 import React from 'react'
 import BuyPoint from './Child-Component/BuyPoint/BuyPoint'
 
-function BuyPointPage() {
+function BuyPointPage({ChangeMint}) {
   return (
     <div>
-        <BuyPoint/>
+        <BuyPoint ChangeMint={ChangeMint}/>
     </div>
   )
 }

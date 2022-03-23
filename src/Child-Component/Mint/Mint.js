@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
+// import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount, getUserBrLp, getUserBrl } from '../../redux/redux/actions/actions';
+
 import "./Mint.css"
 import { IoMdClose } from "react-icons/io";
 import Spinner from './Spinner';
@@ -15,20 +17,43 @@ import Modal from "react-bootstrap/Modal";
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
-
+import zero from "../../Assets/0.png"
+import one from "../../Assets/1.png"
 function Mint() {
 
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
     let [isLoading, setIsLoading] = useState(false)
-    let [transctionData, setTransctionData]=useState({})
-    let [isDetail, setIsDetail]=useState(false)
+    let [transctionData, setTransctionData] = useState({})
+    let [isDetail, setIsDetail] = useState(false)
     let dispatch = useDispatch()
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
-    // console.log("getBrawlPointMint",acc)
+    let [btnTxt, setBtTxt] = useState("Connect Wallet")
 
+    // console.log("getBrawlPointMint",acc)
+    // const getAccount = () => {
+    //     dispatch(getUserThbBalance())
+    //     dispatch(getWallet())
+    //     dispatch(getUserThbLpBalance())
+    //     dispatch(getUserTHbTamount())
+    //     dispatch(getUserTHbLPTamount())
+    //     if (acc == "No Wallet") {
+    //         setBtTxt("Connect Wallet")
+    //     }
+    //     else if (acc == "Wrong Network") {
+    //         setBtTxt("Wrong Network")
+    //     }
+    //     else if (acc == "Connect Wallet") {
+    //         setBtTxt("Connect Wallet")
+    //     }
+    //     else {
+    //         let myAcc = acc?.substring(0, 4) + "..." + acc?.substring(acc?.length - 4);
+    //         setBtTxt(myAcc);
+
+    //     }
+    // }
     const increaseValue = () => {
         if (value < 3) {
             setValue(++value)
@@ -67,7 +92,7 @@ function Mint() {
 
 
             let simplleArray = [];
-            for (let i = 0; i <value; i++) {
+            for (let i = 0; i < value; i++) {
                 try {
 
                     let inputId = await nftContractOf.methods.mintids(i).call();
@@ -94,7 +119,7 @@ function Mint() {
 
     // Minting Funtions
     const myMint = async () => {
-        try{
+        try {
             console.log("my ACC=", acc)
             if (acc == "No Wallet") {
                 toast.error("No Wallet Connected")
@@ -115,16 +140,18 @@ function Mint() {
                 if (parseFloat(myBrawl) >= parseFloat(mintingPrice)) {
                     if (parseFloat(maxSupply) >= parseFloat(supply)) {
                         setIsLoading(true)
+                        let obj = {}
                         await nftContractOf.methods.mint(value).send({
                             from: acc
                         }).on("receipt", (receipt) => {
                             console.log("mintValue", receipt);
-                            setTransctionData(receipt)
+                            // obj=receipt
                         })
+                        // setTransctionData(obj)
                         toast.success("Transaction Confirmed")
                         dispatch(getUserBrawlMintPoint())
                         setIsDetail(true)
-                       await allImagesNfts();
+                        await allImagesNfts();
                         setModalShow(true);
                         setIsLoading(false)
 
@@ -140,38 +167,38 @@ function Mint() {
                     toast.error("You do not have enought Brawl points")
                 }
             }
-        }catch(e){
+        } catch (e) {
             setIsLoading(false)
-            console.log("Error While Mintinng",e);
+            console.log("Error While Mintinng", e);
         }
 
 
     }
     console.log("transctionData", transctionData);
 
-const getEventsForMinting=async()=>{
-    try{
-        if (acc == "No Wallet") {
-            console.error("No Wallet Connected")
-        }
-        else if (acc == "Wrong Network") {
-            console.error("Wrong Newtwork please connect to test net")
-        } else if (acc == "Connect Wallet") {
-            console.error("Not Connected")
-        } else {
-            const web3 = window.web3;
-            let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
-          let ahan =  await nftContractOf.events.allEvents({ fromBlock: 'latest' })
-          let event = nftContractOf.events.Transfer();
-            // console.log("My Events", ahan);
-            // console.log("Specific Events=",event);
-        }
+    const getEventsForMinting = async () => {
+        try {
+            if (acc == "No Wallet") {
+                console.error("No Wallet Connected")
+            }
+            else if (acc == "Wrong Network") {
+                console.error("Wrong Newtwork please connect to test net")
+            } else if (acc == "Connect Wallet") {
+                console.error("Not Connected")
+            } else {
+                const web3 = window.web3;
+                let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+                let ahan = await nftContractOf.events.allEvents({ fromBlock: 'latest' })
+                let event = nftContractOf.events.Transfer();
+                // console.log("My Events", ahan);
+                // console.log("Specific Events=",event);
+            }
 
 
-    }catch(e){
-        console.log("Error While getting",e);
+        } catch (e) {
+            console.log("Error While getting", e);
+        }
     }
-}
 
 
 
@@ -185,9 +212,9 @@ const getEventsForMinting=async()=>{
     return (
         <div className='StakePageImage-Mint'>
             {
-                isLoading && <Spinner/>
+                isLoading && <Spinner />
             }
- {
+            {
                 modalShow ?
                     <Modal
                         show={modalShow}
@@ -196,22 +223,27 @@ const getEventsForMinting=async()=>{
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
-
+                    // className='StakePageImage'
                     >
-                        <Modal.Header className=' StakePageImage' >
-                            <Modal.Title id="contained-modal-title-vcenter">
-                                <IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} />
-                                {/* <h2 className='collectionsTextLarge m-2'> Confirm</h2> */}
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
-                        <div className="row d-flex justify-content-end mt-3">
-                                <div className='col-md-12 d-flex justify-end-lg-end'>
-                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+
+                        <div className='StakePageImage mintpopuo'>
+                            {/* <Modal.Body className='StakePageImage mintpopuo d-flex justify-content-center align-items-center flex-column'> */}
+                            <div className='d-flex justify-content-end mt-1'><IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} /></div>
+                            <div className='row mt-3'>
+                                <div className='col-md-6 offset-2  d-flex justify-content-start align-items-center'>
+                                    <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage-mint" />
+                                </div>
+                                <div className='col-lg-4 col-11 d-flex justify-content-end'>
+                                <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                                 </div>
                             </div>
+                            {/* <div className="row mt-3">
+                                    <div className='col-md-11 d-flex justify-content-lg-end'>
+                                        <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                    </div>
+                                </div> */}
                             <div className='row d-flex justify-content-center mt-3' >
-                                <div className='col-md-12'>
+                                <div className='col-md-12 d-flex justify-content-center'>
                                     <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
                                 </div>
                             </div>
@@ -220,13 +252,21 @@ const getEventsForMinting=async()=>{
                                     You got a Tiger mask card now!
                                 </p>
                             </div>
-                            <div className="row d-flex flex-row justify-content-center">
-
+                            <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
+                                {/* <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
+                                    <img src={zero} className="model-i" />
+                                </div>
+                                <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
+                                    <img src={one} className="model-i" />
+                                </div>
+                                <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
+                                    <img src={zero} className="model-i" />
+                                </div> */}
                                 {
                                     imageArray.map((items, index) => {
 
                                         return (
-                                            <div className='col-lg-3 uperimg col-md-5 p-3 m-2'>
+                                            <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
                                                 <img alt='greetings' src={imageArray[index]} className="model-i" />
 
                                             </div>
@@ -234,20 +274,20 @@ const getEventsForMinting=async()=>{
                                     })
                                 }
                             </div>
-                            <div className="row d-flex justify-content-center justify-content-md-between btnmodelhere" >
+                            <div className="row d-flex justify-content-center justify-content-md-around btnmodelhere mb-4" >
                                 <div className="col-md-3 col-10 mt-2">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
-                                        BREED
+                                            BREED
                                         </button>
 
                                     </div>
 
                                 </div>
                                 <div className="col-md-3 col-10 mt-2">
-                                <div className="d-grid gap-2">
+                                    <div className="d-grid gap-2">
                                         <button className='undermodelbtn2 ' size="lg">
-                                        ACCEPT
+                                            ACCEPT
                                         </button>
 
                                     </div>
@@ -255,17 +295,26 @@ const getEventsForMinting=async()=>{
                                 <div className="col-md-5 col-10 mt-2">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
-                                        DO IT LATER
+                                            DO IT LATER
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        </Modal.Body>
+                            {/* </Modal.Body> */}
+                        </div>
                     </Modal> : <></>
             }
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>
+                        {/* <div className='row '>
+                            <div className='col-md-8 offset-md-2 d-flex align-items-center'>
+                                <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
+                            </div>
+                            <div className='col-md-2 d-flex justify-content-end'>
+                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                            </div>
+                        </div> */}
                         <div className='row'>
                             <div className='col-md-12'>
                                 <img alt='greetings' src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
@@ -297,7 +346,10 @@ const getEventsForMinting=async()=>{
                                     <a className='ms-4' onClick={increaseValue} style={{ cursor: "pointer" }}><img src="https://i.ibb.co/ZGpn9P7/Group-188.png" width="60px" /></a>
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
-                                    <button onClick={() => myMint()} className='btn mintbtn '>MINT</button>
+                                    <button onClick={() => {
+                                        // myMint()
+                                        setModalShow(true);
+                                    }} className='btn mintbtn '>MINT</button>
                                 </div>
                                 <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 3 tiger nfts CARD PER tx</span>
                             </div>
@@ -323,7 +375,7 @@ const getEventsForMinting=async()=>{
                                 </div>
                             </div>
                         </div>
-                       {isDetail && <div className='row'>
+                        {isDetail && <div className='row'>
                             <div className='col-md-12 col-11 mint-Page-border '>
                                 <div className='row pt-3 text-start text-sm-center '>
                                     <div className='col-sm-4'>
@@ -339,7 +391,7 @@ const getEventsForMinting=async()=>{
                                         <span className='Mint-Time'>true</span>
                                     </div>
                                     <div className='col-sm-3'>
-                                        <span className='Mint-Time'> <a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0,3)+"..."+transctionData.transactionHash?.substring(transctionData.transactionHash?.length-3)}</a> </span>
+                                        <span className='Mint-Time'> <a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0, 3) + "..." + transctionData.transactionHash?.substring(transctionData.transactionHash?.length - 3)}</a> </span>
                                     </div>
                                 </div>
                             </div>

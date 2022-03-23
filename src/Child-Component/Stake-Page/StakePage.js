@@ -434,6 +434,7 @@ function StakePage() {
                         ref={stakeAmount}
                         className="stakeinput form-control mx-3"
                         placeholder="0"
+                        min={1}
                         type="Number"
                         name="second_input"
                       />
@@ -526,7 +527,8 @@ function StakePage() {
                         // name="first_input"
                         className="stakeinput form-control mx-3"
                         placeholder="0"
-                        type="Number"
+                        min={1}
+                        type="number"
                         name="second_input"
                       />
                     </div>

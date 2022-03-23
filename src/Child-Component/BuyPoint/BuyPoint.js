@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import User from "../../Assets/User.png"
 import { IoMdClose } from "react-icons/io";
 
-function BuyPoint() {
+function BuyPoint({ChangeMint,ChnageMain}) {
     let dispatch = useDispatch();
     const [modalShow, setModalShow] = useState(false);
     let [userBnbBalance, setUserBnbBalance]=useState();
@@ -43,8 +43,8 @@ const getRecievingAmount =async()=>{
             setYouWillrecive(0)
         }
 
-       
-        
+
+
     }
 
 }
@@ -90,6 +90,7 @@ const getRecievingAmount =async()=>{
 
 const closeModal=()=>{
     setModalShow(false)
+    // ChnageMain();
 }
 
     const buyWithBnb = async () => {
@@ -110,9 +111,9 @@ const closeModal=()=>{
                 let userEnterdValue = userEnterd.current.value;
                 setBnbSpent(userEnterdValue);
                 let userBNBBalance = await web3.eth.getBalance(acc);
-                
+
                 userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
-                
+
 
                 // console.log("userEnterdValue", userBNBBalance);
                 let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
@@ -205,16 +206,16 @@ const closeModal=()=>{
                                                     <div className='row d-flex justify-content-center mt-5 mb-4'>
                                                         <div className='col-md-5 mt-2'>
                                                             <div className="d-grid gap-2">
-                                                                <button onClick={()=>closeModal()} className="btn btnBuy18" size="lg">
+                                                                <a href="#" onClick={()=>closeModal()} className="btn btnBuy18" size="lg" >
                                                                     Back
-                                                                </button>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                         <div className='col-md-7 mt-2'>
                                                             <div className="d-grid gap-2">
-                                                                <button className="btn btnBuy" size="lg">
+                                                                <a className="btn btnBuy" size="lg " href="#Mint" onClick={() => { ChangeMint(); window.scrollTo(0, 0); }} >
                                                                     View Status
-                                                                </button>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -238,20 +239,13 @@ const closeModal=()=>{
                                         className="pointinput form-control"
                                         type="number"
                                         placeholder="0"
+                                        min={1}
                                         aria-label="Recipient's username with two button addons"
                                     />
-                                    <button className='btn btn-text pointinput'>1 MAX</button>
+                                    <button className='btn btn-text pointinput'>MAX</button>
                                     <button className='btn pointinput'>BNB</button>
                                 </InputGroup>
-                                {/* <input
-                                    ref={userEnterd}
-                                    className="pointinput form-control"
-                                    placeholder="0"
-                                    type="Number"
 
-                                    name="second_input"
-
-                                /> */}
                             </div>
                         </div>
                         <div className='row d-flex justify-content-center mt-5'>

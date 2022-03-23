@@ -171,7 +171,7 @@ function Home() {
           ChangeMyCollection={ChangeMyCollection}
           ChangeBuyPoint={ChangeBuyPoint}
         />
-        <BuyPointPage />
+        <BuyPointPage ChangeMint={ChangeMint}/>
         {/* <FooterDown />
         <Footer /> */}
       </>

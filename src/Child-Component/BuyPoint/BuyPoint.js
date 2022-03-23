@@ -10,48 +10,53 @@ import Modal from 'react-bootstrap/Modal'
 import User from "../../Assets/User.png"
 import { IoMdClose } from "react-icons/io";
 
-function BuyPoint({ChangeMint,ChnageMain}) {
+function BuyPoint({ ChangeMint, ChnageMain }) {
     let dispatch = useDispatch();
     const [modalShow, setModalShow] = useState(false);
-    let [userBnbBalance, setUserBnbBalance]=useState();
-    let [userSpent, setBnbSpent]=useState(0)
-    let [usersConvertedpoints, setUsersConvertedPoints]=useState(0);
-    let [youWillRecieve, setYouWillrecive]=useState(0)
+    let [userBnbBalance, setUserBnbBalance] = useState();
+    let [userSpent, setBnbSpent] = useState(0)
+    let [usersConvertedpoints, setUsersConvertedPoints] = useState(0);
+    let [youWillRecieve, setYouWillrecive] = useState(0)
 
 
-const getRecievingAmount =async()=>{
+    const getRecievingAmount = async () => {
 
-    if (acc == "No Wallet") {
-        console.error("No allet");
-    }
-    else if (acc == "Wrong Network") {
-        console.error(" Wrong wallet");
-
-    } else if (acc == "Connect Wallet") {
-        console.error("Connect Wallet");
-    } else {
-        const web3 = window.web3;
-        let userEnterdValue = userEnterd.current.value;
-
-        if(parseFloat(userEnterdValue)>0){
-            userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
-            let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
-            let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
-            setYouWillrecive(converted)
+        if (acc == "No Wallet") {
+            console.error("No allet");
         }
-        else{
-            setYouWillrecive(0)
+        else if (acc == "Wrong Network") {
+            console.error(" Wrong wallet");
+
+        } else if (acc == "Connect Wallet") {
+            console.error("Connect Wallet");
+        } else {
+            const web3 = window.web3;
+            let userEnterdValue = userEnterd.current.value;
+
+            if (parseFloat(userEnterdValue) > 0) {
+                userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
+                let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+                let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
+                converted = parseFloat(converted)
+                let bpPercent = await stakingCOntractOf.methods.Bppercent().call();
+                bpPercent = web3.utils.fromWei(bpPercent);
+                bpPercent = parseFloat(bpPercent)
+                let multipliedValue = converted * bpPercent
+                setYouWillrecive(multipliedValue)
+            }
+            else {
+                setYouWillrecive(0)
+            }
+
+
+
         }
-
-
 
     }
 
-}
 
 
-
-    const getUserBalance =async()=>{
+    const getUserBalance = async () => {
 
         if (acc == "No Wallet") {
             console.error("No allet");
@@ -64,18 +69,18 @@ const getRecievingAmount =async()=>{
         } else {
 
 
-        try{
-            const web3 = window.web3;
-            let userBNBBalance = await web3.eth.getBalance(acc);
-            userBNBBalance= web3.utils.fromWei(userBNBBalance);
-            userBNBBalance=parseFloat(userBNBBalance).toFixed(4)
-            setUserBnbBalance(userBNBBalance)
-            // console.log("UserBnb balance",userBNBBalance);
+            try {
+                const web3 = window.web3;
+                let userBNBBalance = await web3.eth.getBalance(acc);
+                userBNBBalance = web3.utils.fromWei(userBNBBalance);
+                userBNBBalance = parseFloat(userBNBBalance).toFixed(4)
+                setUserBnbBalance(userBNBBalance)
+                // console.log("UserBnb balance",userBNBBalance);
 
-        }catch(e){
-            console.error("Error whgile getting users Bnb Balance");
+            } catch (e) {
+                console.error("Error whgile getting users Bnb Balance");
+            }
         }
-    }
     }
 
 
@@ -88,10 +93,10 @@ const getRecievingAmount =async()=>{
     let userEnterd = useRef()
 
 
-const closeModal=()=>{
-    setModalShow(false)
-    // ChnageMain();
-}
+    const closeModal = () => {
+        setModalShow(false)
+        // ChnageMain();
+    }
 
     const buyWithBnb = async () => {
         // console.log("Inside");
@@ -178,7 +183,7 @@ const closeModal=()=>{
                             >
                                 <Modal.Header className='StakePageImage' style={{ color: "white" }} >
                                     <Modal.Title id="contained-modal-title-vcenter">
-                                    <IoMdClose onClick={() => setModalShow(false)} size={28} style={{color: "white",cursor: "pointer"}} />
+                                        <IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} />
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body className='StakePageImage'>
@@ -197,7 +202,7 @@ const closeModal=()=>{
                                                     </div>
                                                     <div className='d-flex justify-content-between mt-5'>
                                                         <span className='model-p99'>Converted:</span>
-                                                        <span className='model-p98'>{usersConvertedpoints} POINT</span>
+                                                        <span className='model-p98'>{youWillRecieve} POINT</span>
                                                     </div>
                                                     <div className='d-flex justify-content-between mt-3'>
                                                         <span className='model-p99'>Price:</span>
@@ -206,7 +211,7 @@ const closeModal=()=>{
                                                     <div className='row d-flex justify-content-center mt-5 mb-4'>
                                                         <div className='col-md-5 mt-2'>
                                                             <div className="d-grid gap-2">
-                                                                <a href="#" onClick={()=>closeModal()} className="btn btnBuy18" size="lg" >
+                                                                <a href="#" onClick={() => closeModal()} className="btn btnBuy18" size="lg" >
                                                                     Back
                                                                 </a>
                                                             </div>
@@ -235,7 +240,7 @@ const closeModal=()=>{
                                     <FormControl
 
                                         ref={userEnterd}
-                                        onChange={()=>getRecievingAmount()}
+                                        onChange={() => getRecievingAmount()}
                                         className="pointinput form-control"
                                         type="number"
                                         placeholder="0"

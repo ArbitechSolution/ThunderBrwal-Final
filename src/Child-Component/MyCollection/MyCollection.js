@@ -56,7 +56,7 @@ function MyCollection() {
         const testAllImage = async () => {
             try{
 
-                
+
                 let res = await axios.get('/config/2.json')
                 console.log("responce", res);
             }catch(e){
@@ -299,7 +299,7 @@ function MyCollection() {
                                 {imageArray.slice(initialLimit,finalLimit).map((items, index) => {
 
                                     return (
-                                        <div className='col-lg-2 col-md-5 mycollections p-2 m-1'>
+                                        <div className='col-lg-3 col-md-5 mycollections p-2 m-1'>
                                             <img src={items.imageUrl} className='myCollectionsImage ' />
                                             {/* <span className='imageText text-white'  >&nbsp;&nbsp;{items.d}</span> */}
                                             <div>

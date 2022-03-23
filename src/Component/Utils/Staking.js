@@ -1,4 +1,4 @@
-export const stakingContractAddress = "0x454A59081446e28b6e025d1A282c3319Cd0F71Ad";
+export const stakingContractAddress = "0x8297FEf60A6F120c4038CB93E9E361cA696aD957";
 export const stakingContractAbi = [{
     "inputs": [{
         "internalType": "contract IERC20",
@@ -51,6 +51,16 @@ export const stakingContractAbi = [{
     "stateMutability": "view",
     "type": "function"
 }, {
+    "inputs": [],
+    "name": "BPPrice",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
     "inputs": [{
         "internalType": "address",
         "name": "addr",
@@ -71,6 +81,16 @@ export const stakingContractAbi = [{
         "type": "address"
     }],
     "name": "BPcalculatorforLP",
+    "outputs": [{
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "Bppercent",
     "outputs": [{
         "internalType": "uint256",
         "name": "",

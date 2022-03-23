@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
-// import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount, getUserBrLp, getUserBrl } from '../../redux/redux/actions/actions';
+import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount, getUserBrLp, getUserBrl } from '../../redux/redux/actions/actions';
 
 import "./Mint.css"
 import { IoMdClose } from "react-icons/io";
@@ -33,27 +33,27 @@ function Mint() {
     let [btnTxt, setBtTxt] = useState("Connect Wallet")
 
     // console.log("getBrawlPointMint",acc)
-    // const getAccount = () => {
-    //     dispatch(getUserThbBalance())
-    //     dispatch(getWallet())
-    //     dispatch(getUserThbLpBalance())
-    //     dispatch(getUserTHbTamount())
-    //     dispatch(getUserTHbLPTamount())
-    //     if (acc == "No Wallet") {
-    //         setBtTxt("Connect Wallet")
-    //     }
-    //     else if (acc == "Wrong Network") {
-    //         setBtTxt("Wrong Network")
-    //     }
-    //     else if (acc == "Connect Wallet") {
-    //         setBtTxt("Connect Wallet")
-    //     }
-    //     else {
-    //         let myAcc = acc?.substring(0, 4) + "..." + acc?.substring(acc?.length - 4);
-    //         setBtTxt(myAcc);
+    const getAccount = () => {
+        dispatch(getUserThbBalance())
+        dispatch(getWallet())
+        dispatch(getUserThbLpBalance())
+        dispatch(getUserTHbTamount())
+        dispatch(getUserTHbLPTamount())
+        if (acc == "No Wallet") {
+            setBtTxt("Connect Wallet")
+        }
+        else if (acc == "Wrong Network") {
+            setBtTxt("Wrong Network")
+        }
+        else if (acc == "Connect Wallet") {
+            setBtTxt("Connect Wallet")
+        }
+        else {
+            let myAcc = acc?.substring(0, 4) + "..." + acc?.substring(acc?.length - 4);
+            setBtTxt(myAcc);
 
-    //     }
-    // }
+        }
+    }
     const increaseValue = () => {
         if (value < 3) {
             setValue(++value)
@@ -310,19 +310,19 @@ function Mint() {
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-12 col-11 Stakeboxs pt-4 pb-4'>
-                        {/* <div className='row '>
-                            <div className='col-md-8 offset-md-2 d-flex align-items-center'>
+                        <div className='row '>
+                            <div className='col-md-8 offset-md-2 d-flex justify-content-start align-items-center'>
                                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
                             <div className='col-md-2 d-flex justify-content-end'>
                                 <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                             </div>
-                        </div> */}
-                        <div className='row'>
+                        </div>
+                        {/* <div className='row'>
                             <div className='col-md-12'>
                                 <img alt='greetings' src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
-                        </div>
+                        </div> */}
                         <div className='row'>
                             <div className='col-12'>
                                 <p className='stakepageP'>Mint</p>
@@ -350,8 +350,8 @@ function Mint() {
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-lg-5 mt-3'>
                                     <button onClick={() => {
-                                        // myMint()
-                                        setModalShow(true);
+                                        myMint()
+                                        // setModalShow(true);
                                     }} className='btn mintbtn '>MINT</button>
                                 </div>
                                 <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 3 tiger nfts CARD PER tx</span>

@@ -138,6 +138,7 @@ function MyCollection() {
                     toast.success("Transaction confirmed")
                     setModalShowone(true)
                     setModalShow(false)
+                    allImagesNfts();
                 } catch (e) {
                     toast.error("Transaction Failed")
                     console.log("Error While Transfering Nft", e);

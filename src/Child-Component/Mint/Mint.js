@@ -315,7 +315,7 @@ function Mint() {
                                 <div className='text-start'>
                                     <span className='mintspane'>Your Brawl:</span>&nbsp; &nbsp;
 
-                                    <span className='mintspane1'>{brawlMintPoints}&nbsp;
+                                    <span className='mintspane1'>{brawlMintPoints.toLocaleString()}&nbsp;
                                         {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
                                         Point
                                     </span>

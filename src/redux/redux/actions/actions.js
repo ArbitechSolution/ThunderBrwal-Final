@@ -176,7 +176,7 @@ export const getUserBrawlMintPoint = () => async (dispatch) => {
         let bpCalculator = await stakingCOntractOf.methods.balances(address).call();
         bpCalculator = web3.utils.fromWei(bpCalculator)
         // bpCalculator = bpCalculator.toLocaleString(undefined, { minimumFractionDigits: 1 })
-        bpCalculator = parseFloat(bpCalculator).toLocaleString()
+        bpCalculator = parseFloat(bpCalculator)
         dispatch({
             type: GET_USER_MINT_BRAWL_POINTS,
             payload: bpCalculator

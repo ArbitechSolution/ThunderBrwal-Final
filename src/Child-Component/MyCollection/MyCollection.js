@@ -19,50 +19,67 @@ function MyCollection() {
     let [clickedIndexes, setClickedIndexes] = useState()
     let [imageArray, setImageArray] = useState([]);
     let [test, setTest] = useState([]);
-    let [initialLimit, setInitialLimit]=useState(0);
-    let [finalLimit, setFinalLimit]=useState(12)
-    let [mywalletLength, setMyWalletLength]=useState();
-    let [dispalyimage,setDispalyImage] = useState([])
+    let [initialLimit, setInitialLimit] = useState(0);
+    let [finalLimit, setFinalLimit] = useState(12)
+    let [mywalletLength, setMyWalletLength] = useState();
+    let [dispalyimage, setDispalyImage] = useState([])
+    let [pageNumber, setPageNumber] = useState(1)
+    let [totalPages, setTotalPages] = useState(1)
     // let [num, setnum] = useState(0);
+    let [popupshowaddress,setPopupshowaddress] = useState()
     let { acc } = useSelector(state => state.connectWallet);
 
     let toAddress = useRef("")
 
-    const loadMore=()=>{
+    const loadMore = () => {
 
-        let a=finalLimit+12
-        if(a>=mywalletLength){
-            setInitialLimit(initialLimit+12)
+        let a = finalLimit + 12
+        if (a >= mywalletLength) {
+            setInitialLimit(initialLimit + 12)
+            if (pageNumber < totalPages) {
+
+                setPageNumber(pageNumber + 1)
+            }
             console.log("Loading More Up");
             setFinalLimit(mywalletLength)
-        }else{
+        } else {
             console.log("Loading More");
-            setInitialLimit(initialLimit+12);
-            setFinalLimit(finalLimit+12)
+            if (pageNumber < totalPages) {
+
+                setPageNumber(pageNumber + 1)
+            }
+            setInitialLimit(initialLimit + 12);
+            setFinalLimit(finalLimit + 12)
         }
     }
 
-        const loadLess=()=>{
-            let b = finalLimit-12
-            if (b<=12){
-                setFinalLimit(12);
-                setInitialLimit(0);
-            }else{
-                setInitialLimit(initialLimit-12);
-                setFinalLimit(finalLimit-12)
+    const loadLess = () => {
+        let b = finalLimit - 12
 
+        if (b <= 12) {
+
+            setFinalLimit(12);
+            setInitialLimit(0);
+            if (pageNumber > 1) {
+                setPageNumber(pageNumber - 1)
             }
+        } else {
+            setInitialLimit(initialLimit - 12);
+            setPageNumber(pageNumber - 1)
+            setFinalLimit(finalLimit - 12)
+
         }
-        const testAllImage = async () => {
-            try{
+    }
+    const testAllImage = async () => {
+        try {
 
 
-                let res = await axios.get('/config/2.json')
-                console.log("responce", res);
-            }catch(e){
-                console.log("error testAllImage", e);
-            }
+            let res = await axios.get('/config/2.json')
+            console.log("responce", res);
+        } catch (e) {
+            console.log("error testAllImage", e);
         }
+    }
 
     const allImagesNfts = async () => {
         if (acc == "No Wallet") {
@@ -76,6 +93,8 @@ function MyCollection() {
         }
 
         else {
+
+
             // console.log("Inside")
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
@@ -87,12 +106,15 @@ function MyCollection() {
             // console.log("finalLimit", finalLimit);
             // console.log("initialLimit", initialLimit);
 
-
+            let ttlPage = parseInt(walletLength) / 12;
+            ttlPage = Math.ceil(ttlPage);
+            setTotalPages(ttlPage)
+            console.log("Total Pages", ttlPage);
             if (parseInt(walletLength) > 0) {
                 // if(initialLimit<parseInt(walletLength))
                 {
-                    let myImgArry= []
-                    for (let i = 0; i <walletLength; i++) {
+                    let myImgArry = []
+                    for (let i = 0; i < walletLength; i++) {
                         try {
                             // console.log("Getting Response");
                             let res = await axios.get(`/config/${walletOfOwner[i]}.json`)
@@ -100,9 +122,9 @@ function MyCollection() {
                             let dna = res.data.dna
                             let names = res.data.name
 
-                            myImgArry =[...myImgArry, imageUrl]
+                            myImgArry = [...myImgArry, imageUrl]
                             setDispalyImage(myImgArry)
-                            simplleArray = [...simplleArray, {imageUrl:imageUrl, num:dna,names:names}]
+                            simplleArray = [...simplleArray, { imageUrl: imageUrl, num: dna, names: names }]
                             console.log("simplleArray", myImgArry);
                             setImageArray(simplleArray);
                             console.log("Getting Response", res.data.image);
@@ -117,7 +139,7 @@ function MyCollection() {
 
 
     const clickedImage = (index) => {
-        console.log("You Clicked",index);
+        console.log("You Clicked", index);
         setClickedIndexes(index)
         setModalShow(true)
     }
@@ -135,9 +157,10 @@ function MyCollection() {
         } else {
             let userEnteredAddress = toAddress.current.value;
             console.log("userEnteredAddress", userEnteredAddress);
+            setPopupshowaddress(userEnteredAddress)
             const web3 = window.web3;
             let stringLength = userEnteredAddress.length;
-            if (parseInt(stringLength) >0) {
+            if (parseInt(stringLength) > 0) {
                 try {
                     let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
                     let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
@@ -147,6 +170,7 @@ function MyCollection() {
                     })
                     toast.success("Transaction confirmed")
                     setModalShowone(true)
+
                     setModalShow(false)
                     allImagesNfts();
                 } catch (e) {
@@ -198,7 +222,7 @@ function MyCollection() {
                         </Modal.Header>
                         <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
                             <h4 className='collectionsTextLarge m-2  '>NFT card transfer</h4>
-                            <div className='col-lg-4 col-md-5 mycollections p-2 m-2'>
+                            <div className='col-lg-4 col-md-5 mycollections p-3 m-2'>
                                 <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
@@ -238,7 +262,7 @@ function MyCollection() {
             {
                 modalShowone ?
                     <Modal
-                        show={modalShow}
+                        show={modalShowone}
                         onHide={() => setModalShowone(false)}
                         // {...props}
                         size="lg"
@@ -254,7 +278,7 @@ function MyCollection() {
                         </Modal.Header>
                         <Modal.Body className='StakePageImage d-flex justify-content-center align-items-center flex-column'>
                             <h4 className='collectionsTextLarge m-2  '>NFT card transfer</h4>
-                            <div className='col-lg-4 col-md-5 mycollections p-2 m-2'>
+                            <div className='col-lg-4 col-md-5 mycollections p-4 m-2'>
                                 <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
@@ -263,24 +287,22 @@ function MyCollection() {
                                 </div>
                             </div>
                             <div className='row d-flex justify-content-center mt-2'>
-                                <div className='col-md-10 col-11 buypintox '>
+                                <div className='col-md-12 col-12 buypintoxaddress '>
                                     <div className='row d-flex justify-content-center mt-4 mb-4'>
-
-                                        <div className='col-12 d-flex justify-content-evenly mt-4'>
-                                            <span className='buyPointText'>To</span>
-                                            <span className='buyPointText1'></span>
+                                        <div className='col-12 mt-4'>
+                                            <p className='buyPointText'>To</p>
+                                            <p className='addressText1'>{popupshowaddress}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className='row'>
+                            <div className='row mt-3'>
                                 <div className='col-12 successfully-tag'>
-                                    <img src={tick2} width="50px"/> Card successfully transfered!
+                                    <img src={tick2} width="50px" /> Card successfully transfered!
                                 </div>
                             </div>
                         </Modal.Body>
-                    </Modal>:<></>
+                    </Modal> : <></>
             }
             <div className="StakePageImagess">
                 <div className='container pt-3'>
@@ -296,7 +318,7 @@ function MyCollection() {
                             </div>
 
                             <div className='row d-flex justify-content-center mt-3'>
-                                {imageArray.slice(initialLimit,finalLimit).map((items, index) => {
+                                {imageArray.slice(initialLimit, finalLimit).map((items, index) => {
 
                                     return (
                                         <div className='col-lg-3 col-md-5 mycollections p-2 m-1'>
@@ -306,11 +328,11 @@ function MyCollection() {
                                                 {/* <span className='imageText text-white'  >&nbsp;&nbsp;ID : {items.num}</span> */}
                                                 <p className='collectionsText mt-3'>ID : {items.num}</p>
                                                 <div className='d-flex flex-row justify-content-between align-items-center mb-3'>
-                                                <span className='collectionsTextSmall'>{items.names}</span>
-                                                <div className='small-boxxx d-flex justify-content-around align-items-center'>
-                                                  <img src={Frame27} width="20px"/>
-                                                   <sapn style={{color: "white"}}>1</sapn>
-                                                </div>
+                                                    <span className='collectionsTextSmall'>{items.names}</span>
+                                                    <div className='small-boxxx d-flex justify-content-around align-items-center'>
+                                                        <img src={Frame27} width="20px" />
+                                                        <sapn style={{ color: "white" }}>1</sapn>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="d-grid gap-2">
@@ -324,20 +346,20 @@ function MyCollection() {
                             </div>
                         </div>
                         <div
-                         className='row d-flex flex-row justify-content-center justify-content-evenly' >
-                            <div  onClick={()=>loadLess()} className='col-1 d-flex align-items-center justify-content-center' style={{ cursor: "pointer" }}>
+                            className='row d-flex flex-row justify-content-center justify-content-evenly' >
+                            <div onClick={() => loadLess()} className='col-1 d-flex align-items-center justify-content-center' style={{ cursor: "pointer" }}>
                                 <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                                 <img src="https://i.ibb.co/NjDtXXY/Vector12.png" style={{ position: " relative" }} />
                             </div>
                             <div className='col-lg-3 col-md-5 col d-flex flex-row align-items-center justify-content-evenly'>
                                 {/* <span className='MyCollectionspan'>{mywalletLength}</span> */}
                                 <div className='bosCollection'>
-                                    <span className='mycollectionsP '>{acc=="No Wallet" || acc == "Wrong Network" || acc == "Connect Wallet" ? "" : finalLimit }/{mywalletLength}</span>
+                                    <span className='mycollectionsP '>{acc == "No Wallet" || acc == "Wrong Network" || acc == "Connect Wallet" ? "" : pageNumber}/{totalPages}</span>
                                 </div>
                                 {/* <span className='MyCollectionspan'>/{mywalletLength}</span> */}
                             </div>
                             {/* <button className='btn '> */}
-                            <div onClick={()=>loadMore()} className='col-1 d-flex align-items-center justify-content-center ms-4' style={{ cursor: "pointer" }}>
+                            <div onClick={() => loadMore()} className='col-1 d-flex align-items-center justify-content-center ms-4' style={{ cursor: "pointer" }}>
                                 <img src="https://i.ibb.co/FBMT5Lv/Rectangle-551.png" style={{ position: "absolute" }} />
                                 <img src="https://i.ibb.co/n1ZWTmj/Vector13.png" style={{ position: " relative" }} />
                             </div>

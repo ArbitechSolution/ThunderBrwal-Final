@@ -290,14 +290,8 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                             </div>
                         </div>
                         <div className='row d-flex justify-content-center mt-5'>
-                            <div className='col-md-2 mt-2'>
-                                <div className="d-grid gap-2">
-                                    <button className="btn btnBuy18" size="lg">
-                                        Back
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='col-md-2 mt-2'>
+
+                            <div className='col-md-3 mt-2'>
                                 <div className="d-grid gap-2">
                                     <button onClick={() => {
                                         buyWithBnb()

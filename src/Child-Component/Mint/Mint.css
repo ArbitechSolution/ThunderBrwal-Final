@@ -1,6 +1,5 @@
 .StakePageImage-Mint {
     background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
-    /* background: rgba(0, 0, 0, 0.2); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -192,15 +191,34 @@
     flex-direction: row;
 
 }
+.uperimg-two{
+    background-image: url("../../Assets/Group 505.png");
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    background-position:center;
+}
+.mintinage-two{
+    background-image: url("../../Assets/Group 505.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    height: 400px;
+    width: 400px;
+}
 .stakeimage-mint{
     width: 500px;
+}
+.model-iii {
+    width: 185px;
+    height: 185px;
+    box-shadow: 0px 0px 10px #F8B815;
 }
 .model-i {
     width: 185px;
     height: 185px;
     box-shadow: 0px 0px 10px #F8B815;
 }
-
 .mintImage45 {
     /* position: relative; */
     width: 300px;

@@ -204,7 +204,7 @@ function Mint() {
     }
 
 
-
+    let getbrawlpoint = parseFloat(brawlMintPoints).toFixed(1);
 
 
     useEffect(() => {
@@ -222,29 +222,23 @@ function Mint() {
                     <Modal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
-                        // {...props}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
-                    // className='StakePageImage'
+
                     >
 
                         <div className='StakePageImage mintpopuo'>
-                            {/* <Modal.Body className='StakePageImage mintpopuo d-flex justify-content-center align-items-center flex-column'> */}
+
                             <div className='d-flex justify-content-end mt-1'><IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} /></div>
                             <div className='row mt-3'>
                                 <div className='col-md-6 offset-2  d-flex justify-content-start align-items-center'>
                                     <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage-mint" />
                                 </div>
                                 <div className='col-lg-4 col-11 d-flex justify-content-end'>
-                                <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                                 </div>
                             </div>
-                            {/* <div className="row mt-3">
-                                    <div className='col-md-11 d-flex justify-content-lg-end'>
-                                        <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
-                                    </div>
-                                </div> */}
                             <div className='row d-flex justify-content-center mt-3' >
                                 <div className='col-md-12 d-flex justify-content-center'>
                                     <img alt='greetings' src='https://i.ibb.co/NmqhYRk/Group-504.png' className='Congratimage' />
@@ -256,16 +250,9 @@ function Mint() {
                                 </p>
                             </div>
                             <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
-                                {/* <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
-                                    <img src={zero} className="model-i" />
-                                </div>
-                                <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
-                                    <img src={one} className="model-i" />
-                                </div>
-                                <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
-                                    <img src={zero} className="model-i" />
-                                </div> */}
-                                {
+                                {imageArray.length == 1 ? <div className='col-3 mintinage-two d-flex flex-row justify-content-center align-items-center'>
+                                    <img src={zero} className="model-iii" />
+                                </div> : <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">{
                                     imageArray.map((items, index) => {
 
                                         return (
@@ -275,9 +262,10 @@ function Mint() {
                                             </div>
                                         )
                                     })
-                                }
+                                }</div>}
+
                             </div>
-                            <div className="row d-flex justify-content-center justify-content-md-around btnmodelhere mb-4" >
+                            <div className="row d-flex justify-content-center justify-content-md-evenly btnmodelhere mb-4" >
                                 <div className="col-md-3 col-10 mt-2">
                                     <div className="d-grid gap-2">
                                         <button className='undermodelbtn ' size="lg">
@@ -289,21 +277,15 @@ function Mint() {
                                 </div>
                                 <div className="col-md-3 col-10 mt-2">
                                     <div className="d-grid gap-2">
-                                        <button className='undermodelbtn2 ' size="lg">
+                                        <button className='undermodelbtn2 ' size="lg" onClick={() => setModalShow(false)}>
                                             ACCEPT
                                         </button>
 
                                     </div>
                                 </div>
-                                <div className="col-md-5 col-10 mt-2">
-                                    <div className="d-grid gap-2">
-                                        <button className='undermodelbtn ' size="lg">
-                                            DO IT LATER
-                                        </button>
-                                    </div>
-                                </div>
+
                             </div>
-                            {/* </Modal.Body> */}
+
                         </div>
                     </Modal> : <></>
             }
@@ -315,14 +297,9 @@ function Mint() {
                                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
                             <div className='col-md-2 d-flex justify-content-end'>
-                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Connect metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                             </div>
                         </div>
-                        {/* <div className='row'>
-                            <div className='col-md-12'>
-                                <img alt='greetings' src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
-                            </div>
-                        </div> */}
                         <div className='row'>
                             <div className='col-12'>
                                 <p className='stakepageP'>Mint</p>
@@ -337,12 +314,13 @@ function Mint() {
                             <div className='col-md-6 d-flex flex-column justify-content-center align-items-center'>
                                 <div className='text-start'>
                                     <span className='mintspane'>Your Brawl:</span>&nbsp; &nbsp;
-                                    <span className='mintspane1'>{brawlMintPoints} Point</span>
+
+                                    <span className='mintspane1'>{brawlMintPoints}&nbsp;
+                                        {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
+                                        Point
+                                    </span>
                                 </div>
-                                {/* <div className='text-start pt-lg-3 pt-2'>
-                            <span className='mintspane'>BRL Spend:</span>&nbsp; &nbsp;
-                            <span className='mintspane1'>100 Point</span>
-                            </div> */}
+
                                 <div className='d-flex flex-row pt-lg-5 pt-3'>
                                     <a onClick={decreaseValue} style={{ cursor: "pointer" }}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px" /></a>
                                     <div className='mintboxsss mt-1 ms-4'>{value}</div>
@@ -359,46 +337,34 @@ function Mint() {
                         </div>
                         <div className='row'>
                             <div className='col-md-12 col-11 mint-Page-border '>
-                                <div className='row pt-3 text-start text-sm-center '>
-                                    <div className='col-sm-4'>
-                                        <span className='Mint-Time text-start'>Time</span>
-                                    </div>
-                                    <div className='col-sm-2'>
-                                        <span className='Mint-Time'>Type</span>
-                                    </div>
-                                    <div className='col-sm-2'>
-                                        <span className='Mint-Time'>Amount</span>
-                                    </div>
-                                    <div className='col-sm-1'>
-                                        <span className='Mint-Time'>Status</span>
-                                    </div>
-                                    <div className='col-sm-3'>
-                                        <span className='Mint-Time'>TX</span>
-                                    </div>
-                                </div>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" className='Mint-Time text-start'>Time</th>
+                                            <th scope="col" className='Mint-Time'>Type</th>
+                                            <th scope="col" className='Mint-Time'>Amount</th>
+                                            <th scope="col" className='Mint-Time'>Status</th>
+                                            <th scope="col" className='Mint-Time'>TX</th>
+                                        </tr>
+                                    </thead>
+                                    {
+
+                                        isDetail &&
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" className='Mint-Time text-start'>{new Date().toLocaleTimeString()}</th>
+                                                <td className='Mint-Time'>Mint</td>
+                                                <td className='Mint-Time'>{value}</td>
+                                                <td className='Mint-Time'>true</td>
+                                                <td className='Mint-Time'><a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0, 3) + "..." + transctionData.transactionHash?.substring(transctionData.transactionHash?.length - 3)}</a></td>
+                                            </tr>
+
+                                        </tbody>
+                                    }
+                                </table>
                             </div>
                         </div>
-                        {isDetail && <div className='row'>
-                            <div className='col-md-12 col-11 mint-Page-border '>
-                                <div className='row pt-3 text-start text-sm-center '>
-                                    <div className='col-sm-4'>
-                                        <span className='Mint-Time text-start'>{new Date().toLocaleTimeString()}</span>
-                                    </div>
-                                    <div className='col-sm-2'>
-                                        <span className='Mint-Time'>type</span>
-                                    </div>
-                                    <div className='col-sm-2'>
-                                        <span className='Mint-Time'>{value}</span>
-                                    </div>
-                                    <div className='col-sm-1'>
-                                        <span className='Mint-Time'>true</span>
-                                    </div>
-                                    <div className='col-sm-3'>
-                                        <span className='Mint-Time'> <a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0, 3) + "..." + transctionData.transactionHash?.substring(transctionData.transactionHash?.length - 3)}</a> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>}
                     </div>
 
                 </div>

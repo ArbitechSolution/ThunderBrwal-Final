@@ -334,8 +334,8 @@ function Mint() {
                             <div className='col-md-6 d-flex flex-column justify-content-center align-items-center'>
                                 <div className='text-start'>
                                     <span className='mintspane'>Your Brawl:</span>&nbsp; &nbsp;
-
-                                    <span className='mintspane1'>{brawlMintPoints.toLocaleString()}&nbsp;
+                                    {/* .toLocaleString() */}
+                                    <span className='mintspane1'>{(brawlMintPoints).toLocaleString(undefined,{ minimumFractionDigits: 1 ,maximumFractionDigits: 1})}&nbsp;
                                         {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
                                         Point
                                     </span>

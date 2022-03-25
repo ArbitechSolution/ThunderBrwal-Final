@@ -236,7 +236,7 @@ function Mint() {
                                     <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage-mint" />
                                 </div>
                                 <div className='col-lg-4 col-11 d-flex justify-content-end'>
-                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                    <button className='btn btnstake'>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                                 </div>
                             </div>
                             <div className='row d-flex justify-content-center mt-3' >
@@ -250,10 +250,20 @@ function Mint() {
                                 </p>
                             </div>
                             <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
-                                {imageArray.length == 1 ? <div className='col-3 mintinage-two d-flex flex-row justify-content-center align-items-center'>
+                                {imageArray.map((items, index) => {
+
+                                    return (
+                                        <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
+                                            <img alt='greetings' src={imageArray[index]} className="model-i" />
+
+                                        </div>
+                                    )
+                                })
+                                }
+                                {/* {imageArray.length == 1 ? <div className='col-3 mintinage-two d-flex flex-row justify-content-center align-items-center'>
                                     <img src={zero} className="model-iii" />
-                                </div> : <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">{
-                                    imageArray.map((items, index) => {
+                                </div> : <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
+                                    { imageArray.map((items, index) => {
 
                                         return (
                                             <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
@@ -262,8 +272,18 @@ function Mint() {
                                             </div>
                                         )
                                     })
-                                }</div>}
+                                }
+                                </div>} */}
+                                {/* {imageArray.map((items, index) => {
 
+                                    return (
+                                        <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
+                                            <img alt='greetings' src={imageArray[index]} className="model-i" />
+
+                                        </div>
+                                    )
+                                })
+                                } */}
                             </div>
                             <div className="row d-flex justify-content-center justify-content-md-evenly btnmodelhere mb-4" >
                                 <div className="col-md-3 col-10 mt-2">
@@ -297,7 +317,7 @@ function Mint() {
                                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
                             <div className='col-md-2 d-flex justify-content-end'>
-                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Connect metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                             </div>
                         </div>
                         <div className='row'>
@@ -356,7 +376,7 @@ function Mint() {
                                                 <th scope="row" className='Mint-Time text-start'>{new Date().toLocaleTimeString()}</th>
                                                 <td className='Mint-Time'>Mint</td>
                                                 <td className='Mint-Time'>{value}</td>
-                                                <td className='Mint-Time'>true</td>
+                                                <td className='Mint-Time'>True</td>
                                                 <td className='Mint-Time'><a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0, 3) + "..." + transctionData.transactionHash?.substring(transctionData.transactionHash?.length - 3)}</a></td>
                                             </tr>
 

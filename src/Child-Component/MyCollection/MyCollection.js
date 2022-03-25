@@ -313,7 +313,7 @@ function MyCollection() {
                                     <p className='stakepageP'>My NFT Collection</p>
                                 </div>
                                 <div className='col-md-3 d-flex justify-content-end'>
-                                    <button onClick={() => getWalletAddress()} className='btn btnstake'>{acc === "No Wallet" ? "Insatll metamask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                    <button onClick={() => getWalletAddress()} className='btn btnstake'>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                                 </div>
                             </div>
 

@@ -209,13 +209,13 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                                                         <span className='model-p98'>1 BNB= 3,636.36 POINT</span>
                                                     </div>
                                                     <div className='row d-flex justify-content-center mt-5 mb-4'>
-                                                        <div className='col-md-5 mt-2'>
+                                                        {/* <div className='col-md-5 mt-2'>
                                                             <div className="d-grid gap-2">
                                                                 <a href="#" onClick={() => closeModal()} className="btn btnBuy18" size="lg" >
                                                                     Back
                                                                 </a>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                         <div className='col-md-7 mt-2'>
                                                             <div className="d-grid gap-2">
                                                                 <a className="btn btnBuy" size="lg " href="#Mint" onClick={() => { ChangeMint(); window.scrollTo(0, 0); }} >

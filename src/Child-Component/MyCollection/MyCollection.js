@@ -23,10 +23,11 @@ function MyCollection() {
     let [finalLimit, setFinalLimit] = useState(12)
     let [mywalletLength, setMyWalletLength] = useState();
     let [dispalyimage, setDispalyImage] = useState([])
+    let [dispalynamedata, setDisplayNameData] = useState([])
     let [pageNumber, setPageNumber] = useState(1)
     let [totalPages, setTotalPages] = useState(1)
     // let [num, setnum] = useState(0);
-    let [popupshowaddress,setPopupshowaddress] = useState()
+    let [popupshowaddress, setPopupshowaddress] = useState()
     let { acc } = useSelector(state => state.connectWallet);
 
     let toAddress = useRef("")
@@ -114,6 +115,7 @@ function MyCollection() {
                 // if(initialLimit<parseInt(walletLength))
                 {
                     let myImgArry = []
+                    let myNameDate = []
                     for (let i = 0; i < walletLength; i++) {
                         try {
                             // console.log("Getting Response");
@@ -124,8 +126,11 @@ function MyCollection() {
 
                             myImgArry = [...myImgArry, imageUrl]
                             setDispalyImage(myImgArry)
+                            myNameDate = [...myNameDate,names]
+                            setDisplayNameData(myNameDate)
                             simplleArray = [...simplleArray, { imageUrl: imageUrl, num: dna, names: names }]
                             console.log("simplleArray", myImgArry);
+                            // setDispalyImage(simplleArray)
                             setImageArray(simplleArray);
                             console.log("Getting Response", res.data.image);
                         } catch (e) {
@@ -226,8 +231,8 @@ function MyCollection() {
                                 <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
-                                    <p className='collectionsText mt-3'>#20211 Tiger Master</p>
-                                    <p className='collectionsTextSmall'>Common</p>
+                                    <p className='collectionsText mt-3'>{dispalynamedata[clickedIndexes]}</p>
+                                    {/* <p className='collectionsTextSmall'>Common</p> */}
                                 </div>
                             </div>
 
@@ -246,6 +251,9 @@ function MyCollection() {
 
                                     </InputGroup>
                                 </div>
+                            </div>
+                            <div className='col-8 mt-3'>
+                                <p className='Transfer-address-id text-center'>Please confirm that your Transfer address supports the BSC network.</p>
                             </div>
                             <div className="d-grid gap-2 mt-3">
 
@@ -282,8 +290,8 @@ function MyCollection() {
                                 <img src={dispalyimage[clickedIndexes]} className='myCollectionsImage ' />
 
                                 <div>
-                                    <p className='collectionsText mt-3'>#20211 Tiger Master</p>
-                                    <p className='collectionsTextSmall'>Common</p>
+                                    <p className='collectionsText mt-3'>{dispalynamedata[clickedIndexes]}</p>
+                                    {/* <p className='collectionsTextSmall'>Common</p> */}
                                 </div>
                             </div>
                             <div className='row d-flex justify-content-center mt-2'>

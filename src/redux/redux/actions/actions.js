@@ -2,7 +2,7 @@
 import {
     GET_USER_THB_BALANCE, GET_WALLET_ADDRESS, GET_USER_THB_LP_BALANCE,
     GET_USER_BRL, GET_USER_TAMOUNT, GET_USER_TAMOUNT_LP, GET_USER_BRL_LP,
-    GET_USER_MINT_BRAWL_POINTS, GET_CURRENT_BP_TOKENS, GET_MAX_BP_TOKENS
+    GET_USER_MINT_BRAWL_POINTS, GET_CURRENT_BP_TOKENS, GET_MAX_BP_TOKENS,LP_LOCK_TIME,USER_DEPOSIT_TIME
 } from '../types/types'
 import { loadWeb3 } from '../../../Component/Api/api'
 import Web3 from "web3";
@@ -198,7 +198,7 @@ export const getCurrentBpTokens = () => async (dispatch) => {
     })
 }
 export const getMaxBpTokens = () => async (dispatch) => {
-    const web3 = window.web3
+
     let maxbp = await stakingCOntractOf.methods.maxBPToken().call();
     // console.log("maxbp bp in action",maxbp);
     dispatch({
@@ -206,3 +206,43 @@ export const getMaxBpTokens = () => async (dispatch) => {
         payload: maxbp
     })
 }
+
+export const getLpLockTime = () => async (dispatch) => {
+    
+    let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call();
+    // console.log("maxbp bp in action",maxbp);
+    dispatch({
+        type: LP_LOCK_TIME,
+        payload: lpLockTime
+    })
+}
+export const getUserDepositTime = () => async (dispatch) => {
+     let decidedVar= true;
+    
+    let address = await loadWeb3();
+    if (address == "No Wallet") {
+        console.log("Not Connected")
+    } else if (address == "Wrong Network") {
+        console.log("Wrong Network")
+    } else {
+        let timestamp = Math.floor(new Date().getTime() / 1000)
+    let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call()
+    let userLP = await stakingCOntractOf.methods.UserLP(address).call()
+    let depositTimes = userLP.Deposit_time;
+    
+    console.log("depositTimes in action ", depositTimes);
+    let addedTime =  parseInt(depositTimes)+ parseInt(lpLockTime);
+    if (timestamp>addedTime ){
+        decidedVar=false
+    }else{
+        decidedVar = true
+    }
+    // console.log("maxbp bp in action",maxbp);
+    dispatch({
+        type: USER_DEPOSIT_TIME,
+        payload: decidedVar
+    })
+}
+}
+
+

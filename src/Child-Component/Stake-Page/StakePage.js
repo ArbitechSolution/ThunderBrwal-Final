@@ -4,7 +4,8 @@ import "./StakePage.css"
 // import B from "../../Assets/--02 1.png"
 // import vector99 from "../../Assets/vector 99.png"
 // import vector100 from "../../Assets/100 2.png"
-import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount, getUserBrLp, getUserBrl } from '../../redux/redux/actions/actions';
+import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount,getLpLockTime,
+   getUserBrLp, getUserBrl,getUserDepositTime } from '../../redux/redux/actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { ImInfo } from 'react-icons/im';
@@ -16,6 +17,9 @@ import { stakingContractAddress, stakingContractAbi } from '../../Component/Util
 import takingthbbnb from "../../Assets/taking-thb-bnb.png"
 import stakingthb from "../../Assets/staking-thb.png"
 function StakePage() {
+
+  let [myDisableBtn,setmyDisableBtn] = useState(true)
+
   let stakeAmount = useRef(0);
   let stakeAmountLp = useRef(0);
   let [btnTxt, setBtTxt] = useState("Connect Wallet")
@@ -27,7 +31,40 @@ function StakePage() {
   let { tamountlp } = useSelector(state => state.tAmountLp)
   let { brlPoint } = useSelector(state => state.getUserBrlpoint)
   let { brlLPPoint } = useSelector(state => state.getUserBrLplpoint)
+  let {lpLockTime} = useSelector (state => state.setLpLockTime)
+  let {userDepositTime} = useSelector(state=> state.setLpDepositTime)
 
+
+    console.log("userDepositTime",userDepositTime);
+    // console.log("AddTime",AddTime);
+     
+
+    // const myDisFunc =()=>{
+    //   let AddTime = parseInt(lpLockTime) + parseInt(userDepositTime);
+      
+    //   if (parseInt(timestamp)>= parseInt(AddTime)){
+    // console.log("AddTime if",AddTime);
+
+    //     setmyDisableBtn(false)
+
+    //   }else{
+    // console.log("AddTime else" ,AddTime);
+
+    //     setmyDisableBtn(true)
+    //   }
+    // }
+
+
+
+
+// const disableButon =()=>{
+
+//     console.log("timestamp disableButon",timestamp);
+//     console.log("lpLockTime disableButon",lpLockTime);
+//     console.log("DEPOSIT_TIME disableButon",userDepositTime);
+
+    
+//    }
   const getAccount = () => {
     dispatch(getUserThbBalance())
     dispatch(getWallet())
@@ -194,8 +231,12 @@ function StakePage() {
               dispatch(getUserTHbLPTamount())
               dispatch(getUserThbBalance())
               dispatch(getUserThbLpBalance())
+              dispatch(getLpLockTime())
+              dispatch(getUserDepositTime())
               dispatch(getUserBrLp())
               dispatch(getUserBrl())
+              setmyDisableBtn(true)
+
             } else {
               toast.error("You have staked already. Unstake and try again.")
             }
@@ -271,8 +312,13 @@ function StakePage() {
     }
   }
 
+
+
+
+
   // // function For redeeming THB
   const redeemTHB = async () => {
+
     // console.log("ACC=", acc)
     if (acc == "No Wallet") {
       setBtTxt("Connect Wallet")
@@ -349,20 +395,33 @@ function StakePage() {
       }
     }
   }
-  useEffect(() => {
-    setInterval(() => {
-      dispatch(getUserBrLp())
-      dispatch(getUserBrl())
-    }, 60000)
 
+
+
+
+
+
+  // useEffect(()=>{
+  //   setInterval(() => {
+  //   }, 500)
+  // },[])
+
+useEffect(()=>{
+  setInterval(() => {
+    dispatch(getUserBrLp())
+    dispatch(getUserBrl())
+    dispatch(getUserDepositTime())
+  }, 3000)
+},[])
+
+  useEffect(() => { 
+    dispatch(getLpLockTime())
+    dispatch(getUserDepositTime())
     dispatch(getWallet())
     dispatch(getUserTHbTamount())
     dispatch(getUserTHbLPTamount())
     dispatch(getUserThbBalance())
     dispatch(getUserThbLpBalance())
-    dispatch(getUserBrLp())
-    dispatch(getUserBrl())
-
   }, [])
   return (
     <div className='StakePageImage'>
@@ -543,14 +602,14 @@ function StakePage() {
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button onClick={() => unstakeLp()} className='btn btnStakePage' size="lg">
+                        <button disabled={userDepositTime} onClick={() => unstakeLp()} className='btn btnStakePage' size="lg">
                           Unstake
                         </button>
                       </div>
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button onClick={() => RedeemLPTHP()} className='btn btnStakePage' size="lg">
+                        <button  onClick={() => RedeemLPTHP()} className='btn btnStakePage' size="lg">
                           Redeem
                         </button>
                       </div>

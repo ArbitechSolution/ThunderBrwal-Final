@@ -1,5 +1,10 @@
 import {USER_DEPOSIT_TIME} from "../types/types"
-let initialState ={userDepositTime:true};
+let initialState ={userDepositTime:{
+    days:0,
+    hours:0,
+    minutes:0,
+    seconds:0
+}};
 
 export const setLpDepositTime =(state= initialState,action)=>{
     switch(action.type){

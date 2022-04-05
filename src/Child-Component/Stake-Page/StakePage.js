@@ -18,10 +18,13 @@ import takingthbbnb from "../../Assets/taking-thb-bnb.png"
 import stakingthb from "../../Assets/staking-thb.png"
 function StakePage() {
 
-  let [myDisableBtn,setmyDisableBtn] = useState(true)
 
   let stakeAmount = useRef(0);
   let stakeAmountLp = useRef(0);
+  let [ days, setDays] = useState(0);
+  let [hours, setHours] = useState(0);
+  let [minutes, setMinutes] =useState(0);
+  let [seconds, setSeconds] = useState(0);
   let [btnTxt, setBtTxt] = useState("Connect Wallet")
   let dispatch = useDispatch();
   let { acc } = useSelector(state => state.connectWallet)
@@ -31,40 +34,10 @@ function StakePage() {
   let { tamountlp } = useSelector(state => state.tAmountLp)
   let { brlPoint } = useSelector(state => state.getUserBrlpoint)
   let { brlLPPoint } = useSelector(state => state.getUserBrLplpoint)
-  let {lpLockTime} = useSelector (state => state.setLpLockTime)
+  // let {lpLockTime} = useSelector (state => state.setLpLockTime)
   let {userDepositTime} = useSelector(state=> state.setLpDepositTime)
 
 
-    console.log("userDepositTime",userDepositTime);
-    // console.log("AddTime",AddTime);
-     
-
-    // const myDisFunc =()=>{
-    //   let AddTime = parseInt(lpLockTime) + parseInt(userDepositTime);
-      
-    //   if (parseInt(timestamp)>= parseInt(AddTime)){
-    // console.log("AddTime if",AddTime);
-
-    //     setmyDisableBtn(false)
-
-    //   }else{
-    // console.log("AddTime else" ,AddTime);
-
-    //     setmyDisableBtn(true)
-    //   }
-    // }
-
-
-
-
-// const disableButon =()=>{
-
-//     console.log("timestamp disableButon",timestamp);
-//     console.log("lpLockTime disableButon",lpLockTime);
-//     console.log("DEPOSIT_TIME disableButon",userDepositTime);
-
-    
-//    }
   const getAccount = () => {
     dispatch(getUserThbBalance())
     dispatch(getWallet())
@@ -148,7 +121,6 @@ function StakePage() {
       }
     }
   }
-
 
   // Unstake Function for Thb
   const unstake = async () => {
@@ -235,7 +207,6 @@ function StakePage() {
               dispatch(getUserDepositTime())
               dispatch(getUserBrLp())
               dispatch(getUserBrl())
-              setmyDisableBtn(true)
 
             } else {
               toast.error("You have staked already. Unstake and try again.")
@@ -282,7 +253,6 @@ function StakePage() {
         let userLP = await stakingCOntractOf.methods.UserLP(acc).call()
         let depositTimes = userLP.Deposit_time
         let AddTime = +lpLockTime + +depositTimes;
-        // console.log("AddTime", AddTime);
         if (tamountlp > 0) {
           if (timestamp >= AddTime) {
             await stakingCOntractOf.methods.withdrawLPtoken().send({
@@ -296,7 +266,7 @@ function StakePage() {
             dispatch(getUserBrLp())
             dispatch(getUserBrl())
           } else {
-            toast.error("Unlocked Time Not Reached !")
+            toast.error(`Unlock Time Not Reached!   Remaining Time: ${userDepositTime.days} Days ${userDepositTime.hours} hours ${userDepositTime.minutes} Minutes ${userDepositTime.seconds} seconds`)
           }
 
 
@@ -311,10 +281,6 @@ function StakePage() {
       }
     }
   }
-
-
-
-
 
   // // function For redeeming THB
   const redeemTHB = async () => {
@@ -397,10 +363,6 @@ function StakePage() {
   }
 
 
-
-
-
-
   // useEffect(()=>{
   //   setInterval(() => {
   //   }, 500)
@@ -411,6 +373,7 @@ useEffect(()=>{
     dispatch(getUserBrLp())
     dispatch(getUserBrl())
     dispatch(getUserDepositTime())
+    // getRemainingTime()
   }, 3000)
 },[])
 
@@ -422,6 +385,7 @@ useEffect(()=>{
     dispatch(getUserTHbLPTamount())
     dispatch(getUserThbBalance())
     dispatch(getUserThbLpBalance())
+    // getRemainingTime()
   }, [])
   return (
     <div className='StakePageImage'>
@@ -602,7 +566,7 @@ useEffect(()=>{
                     </div>
                     <div className='col-md-6 col-11 pb-3'>
                       <div className="d-grid gap-2">
-                        <button disabled={userDepositTime} onClick={() => unstakeLp()} className='btn btnStakePage' size="lg">
+                        <button onClick={() => unstakeLp()} className='btn btnStakePage' size="lg">
                           Unstake
                         </button>
                       </div>

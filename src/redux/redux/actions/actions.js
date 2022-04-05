@@ -189,9 +189,6 @@ export const getCurrentBpTokens = () => async (dispatch) => {
 
     const web3 = window.web3
     let currentbp = await stakingCOntractOf.methods.currentBP().call();
-    // currentbp =web3.utils.fromWei(currentbp);
-    // currentbp =parseInt(currentbp);
-    // console.log("Current bp in action",currentbp);
     dispatch({
         type: GET_CURRENT_BP_TOKENS,
         payload: currentbp
@@ -200,7 +197,6 @@ export const getCurrentBpTokens = () => async (dispatch) => {
 export const getMaxBpTokens = () => async (dispatch) => {
 
     let maxbp = await stakingCOntractOf.methods.maxBPToken().call();
-    // console.log("maxbp bp in action",maxbp);
     dispatch({
         type: GET_MAX_BP_TOKENS,
         payload: maxbp
@@ -210,7 +206,6 @@ export const getMaxBpTokens = () => async (dispatch) => {
 export const getLpLockTime = () => async (dispatch) => {
     
     let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call();
-    // console.log("maxbp bp in action",maxbp);
     dispatch({
         type: LP_LOCK_TIME,
         payload: lpLockTime
@@ -218,6 +213,7 @@ export const getLpLockTime = () => async (dispatch) => {
 }
 export const getUserDepositTime = () => async (dispatch) => {
      let decidedVar= true;
+     let tiemObj ={};
     
     let address = await loadWeb3();
     if (address == "No Wallet") {
@@ -228,19 +224,73 @@ export const getUserDepositTime = () => async (dispatch) => {
         let timestamp = Math.floor(new Date().getTime() / 1000)
     let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call()
     let userLP = await stakingCOntractOf.methods.UserLP(address).call()
+    let remainingTime;
     let depositTimes = userLP.Deposit_time;
-    
-    console.log("depositTimes in action ", depositTimes);
     let addedTime =  parseInt(depositTimes)+ parseInt(lpLockTime);
-    if (timestamp>addedTime ){
-        decidedVar=false
+    if (timestamp<addedTime ){
+
+        remainingTime = parseInt(addedTime)-parseInt(timestamp);
+
+        if (parseInt(remainingTime)>0){
+            let d = Math.floor(remainingTime / (3600*24));
+            let h = Math.floor(remainingTime % (3600*24) / 3600);
+            let m = Math.floor(remainingTime % 3600 / 60);
+            let s = Math.floor(remainingTime % 60);
+
+            // tiemObj = {
+            //     days:d,
+            //     hours:h,
+            //     minutes:m,
+            //     seconds:s
+            // }
+            if(d>0){
+                tiemObj = {...tiemObj, days:d}
+                
+            }else{
+            console.log("Less Than Zero");
+            tiemObj = {...tiemObj, days:0}
+
+            }if(h>0){
+                tiemObj = {...tiemObj, hours:h}
+            }else{
+                tiemObj = {...tiemObj, hours:0}
+
+                console.log("Less Than Zero");
+
+            }if(m>0){
+                tiemObj = {...tiemObj, minutes:m}
+
+            }else{
+                console.log("Less Than Zero");
+                tiemObj = {...tiemObj, minutes:0}
+
+
+            }if(s>0){
+                tiemObj = {...tiemObj, seconds:s}
+              
+            }else{
+                console.log("Less Than Zero");
+                tiemObj = {...tiemObj, seconds:0}
+
+            }
+          }
+
+
+        // decidedVar=false
     }else{
-        decidedVar = true
+        remainingTime =0;
+           tiemObj = {
+                days:0,
+                hours:0,
+                minutes:0,
+                seconds:0
+            }
+        // decidedVar = true
     }
     // console.log("maxbp bp in action",maxbp);
     dispatch({
         type: USER_DEPOSIT_TIME,
-        payload: decidedVar
+        payload: tiemObj
     })
 }
 }

@@ -8,6 +8,8 @@ import Vector33 from "../../Child-Component/Breed/Vector33.png"
 import { InputGroup, FormControl } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 import User from "../../Assets/User.png"
+import { getWallet } from '../../redux/redux/actions/actions';
+
 import { IoMdClose } from "react-icons/io";
 
 function BuyPoint({ ChangeMint, ChnageMain }) {
@@ -151,12 +153,16 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
             }
         }
     }
+    const getWalletAddress = () => {
+        dispatch(getWallet());
+        // allImagesNfts()
 
+    }   
     useEffect(() => {
         dispatch(getMaxBpTokens());
         dispatch(getCurrentBpTokens());
         getUserBalance();
-    }, [])
+    }, [acc])
     return (
         <div className='StakePageImage-Mint'>
             <div className='container pt-3'>
@@ -168,9 +174,15 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                             </div>
                         </div>
                         <div className='row'>
-                            <div className='col-12'>
-                                <p className='stakepageP mt-2'>BRWL POINT Converter Calculator</p>
+                        <div className='col-3'>
+                                {/* <p className='stakepageP mt-2'>BRWL POINT Converter Calculator</p> */}
                             </div>
+                            <div className='col-5'>
+                                <p className='stakepageP mt-3'>BRWL POINT Converter Calculator</p>
+                            </div>
+                            <div className='col-3 d-flex justify-content-end'>
+                                    <button onClick={() => getWalletAddress()} className='btn btnstake '>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                </div>
                         </div>
                         <div className='row d-flex justify-content-center mt-3'>
                             {modalShow ? <Modal

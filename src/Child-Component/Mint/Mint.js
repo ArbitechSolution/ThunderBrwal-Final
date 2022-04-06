@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
 // import tiger1 from "../../Assets/tiger 1.jpg"
 import { getWallet, getUserThbBalance, getUserThbLpBalance, getUserTHbTamount, getUserTHbLPTamount, getUserBrLp, getUserBrl } from '../../redux/redux/actions/actions';
-
+import useSound from 'use-sound';
 import "./Mint.css"
 import { IoMdClose } from "react-icons/io";
 import Spinner from './Spinner';
@@ -14,13 +14,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import CloseButton from 'react-bootstrap/CloseButton'
 import { toast } from 'react-toastify';
 import Modal from "react-bootstrap/Modal";
+import On from "../../Assets/On.png"
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
 import zero from "../../Assets/0.png"
 import one from "../../Assets/1.png"
+import mintSound  from '../../Assets/mintSound.wav'
 function Mint() {
-
+    const [play , { stop }] = useSound(mintSound);
+    let [playSound, setPlaysound] = useState(true)
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
     let [modalShow, setModalShow] = useState(false);
@@ -32,6 +35,17 @@ function Mint() {
     let { acc } = useSelector(state => state.connectWallet)
     let [btnTxt, setBtTxt] = useState("Connect Wallet")
 
+
+
+    const playingSound =()=>{
+        if(playSound){
+            console.log("Playing The Music");
+            play()
+        }else{
+            stop()
+            console.log("Stopped The Music");
+        }
+    }
     // console.log("getBrawlPointMint",acc)
     const getAccount = () => {
         dispatch(getUserThbBalance())
@@ -206,11 +220,17 @@ function Mint() {
 
     let getbrawlpoint = parseFloat(brawlMintPoints).toFixed(1);
 
+useEffect(()=>{
+    playingSound()
+
+},[])
 
     useEffect(() => {
         dispatch(getUserBrawlMintPoint())
         getEventsForMinting();
-    }, [])
+        play()
+        playingSound()
+    }, [playSound])
 
     return (
         <div className='StakePageImage-Mint'>
@@ -246,7 +266,7 @@ function Mint() {
                             </div>
                             <div>
                                 <p className='simpleText'>
-                                    You got a Tiger mask card now!
+                                    You got a Chundung card now!
                                 </p>
                             </div>
                             <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
@@ -325,9 +345,16 @@ function Mint() {
                                 <p className='stakepageP'>Mint</p>
                             </div>
                         </div>
-
-                        <div className='row pt-4 pb-4 d-flex justify-content-center '>
+                        <div >
+                           <div className='row'>
+                               <div className='col-9'>
+                                   
+                        <img onClick={()=> setPlaysound(!playSound)}  src={On} alt ="Sound Icon"/>
+                                   </div> 
+                                   </div> 
+                        <div className='row pt-4 pb-4 d-flex justify-content-center'>
                             <div className='col-md-6 d-flex justify-content-center align-items-center'>
+                                
                                 <img alt='greetings' src="https://i.ibb.co/yyNVLVb/Rectangle-554.png" className="mintImage1" />
                                 <img alt='greetings' src={mints} className="mintImage2" />
                             </div>
@@ -355,6 +382,8 @@ function Mint() {
                                 <span className='mintspan23 pt-lg-5 pt-3'>MAXIMUM OF 3 tiger nfts CARD PER tx</span>
                             </div>
                         </div>
+                        </div>
+                        
                         <div className='row'>
                             <div className='col-md-12 col-11 mint-Page-border '>
 

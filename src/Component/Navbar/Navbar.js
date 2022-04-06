@@ -32,11 +32,11 @@ function NavbarId({ ChnageMain, ChangeStake, ChangeMint, ChangeTraits, ChangeBre
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li className="navbar-li"><a className="dropdown-item text-white" href="#StakePages" onClick={() => {ChangeStake();window.scrollTo(0, 0);}}>STAKE & POINT </a></li>
                                             <li><a className="dropdown-item text-white" href="#Mint" onClick={() => { ChangeMint(); window.scrollTo(0, 0); }}>MINT</a></li>
-                                            <li><a className="dropdown-item text-white" href="#breed" onClick={() => { ChangeBreed(); window.scrollTo(0, 0); }}>BREED</a></li>
+                                            {/* <li><a className="dropdown-item text-white" href="#breed" onClick={() => { ChangeBreed(); window.scrollTo(0, 0); }}>BREED</a></li> */}
                                             <li><a className="dropdown-item text-white" href="#"onClick={() => { ChangeBuyPoint(); window.scrollTo(0, 0); }}>BUY POINT</a></li>
-                                            <li><a className="dropdown-item text-white" href="#">NFT STAKING</a></li>
-                                            <li><a className="dropdown-item text-white" href="#Traits" onClick={() => { ChangeTraits(); window.scrollTo(0, 0); }}>TRAITS</a></li>
-                                            <li><a className="dropdown-item text-white" href="#">RANKING</a></li>
+                                            {/* <li><a className="dropdown-item text-white" href="#">NFT STAKING</a></li> */}
+                                            {/* <li><a className="dropdown-item text-white" href="#Traits" onClick={() => { ChangeTraits(); window.scrollTo(0, 0); }}>TRAITS</a></li> */}
+                                            {/* <li><a className="dropdown-item text-white" href="#">RANKING</a></li> */}
                                             <li><a className="dropdown-item text-white" href="#MyCollection" onClick={() => { ChangeMyCollection(); window.scrollTo(0, 0); }}>MY COLLECTION</a></li>
                                         </ul>
                                     </li>

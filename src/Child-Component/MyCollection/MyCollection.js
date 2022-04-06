@@ -337,10 +337,10 @@ function MyCollection() {
                                                 <p className='collectionsText mt-3'>ID : {items.num}</p>
                                                 <div className='d-flex flex-row justify-content-between align-items-center mb-3'>
                                                     <span className='collectionsTextSmall'>{items.names}</span>
-                                                    <div className='small-boxxx d-flex justify-content-around align-items-center'>
+                                                    {/* <div className='small-boxxx d-flex justify-content-around align-items-center'>
                                                         <img src={Frame27} width="20px" />
                                                         <sapn style={{ color: "white" }}>1</sapn>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                             <div className="d-grid gap-2">

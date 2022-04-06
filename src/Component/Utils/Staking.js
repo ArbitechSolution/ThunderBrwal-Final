@@ -1,4 +1,4 @@
-export const stakingContractAddress = "0x0b2eC6D82a95378B6406de0088CBEB4577a60530";
+export const stakingContractAddress = "0x8D67feF3d7697182EF15880089fF03A073073320";
 export const stakingContractAbi = [{
     "inputs": [{
         "internalType": "contract IERC20",

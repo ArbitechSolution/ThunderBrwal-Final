@@ -23,6 +23,7 @@ import one from "../../Assets/1.png"
 import mintSound  from '../../Assets/mintSound.wav'
 function Mint() {
     const [play , { stop }] = useSound(mintSound);
+    const [audio] = useState(new Audio(mintSound));
     let [playSound, setPlaysound] = useState(true)
     let [value, setValue] = useState(1)
     let [imageArray, setImageArray] = useState([]);
@@ -38,9 +39,9 @@ function Mint() {
 
 
     const playingSound =()=>{
-        if(playSound){
+        if(playSound){      
+            play()  
             console.log("Playing The Music");
-            play()
         }else{
             stop()
             console.log("Stopped The Music");
@@ -48,6 +49,7 @@ function Mint() {
     }
     // console.log("getBrawlPointMint",acc)
     const getAccount = () => {
+        play()
         dispatch(getUserThbBalance())
         dispatch(getWallet())
         dispatch(getUserThbLpBalance())
@@ -214,23 +216,38 @@ function Mint() {
 
         } catch (e) {
             console.log("Error While getting", e);
-        }
+        }   
     }
 
-
     let getbrawlpoint = parseFloat(brawlMintPoints).toFixed(1);
-
-useEffect(()=>{
-    playingSound()
+    // useEffect(() => {
+    //     playSound ? audio.play() : audio.pause();
+    //   },
+    //   [playSound]
+    // );
+    // useEffect(() => {
+    //     audio.addEventListener('ended', () => setPlaysound(false));
+    //     return () => {
+    //       audio.removeEventListener('ended', () => setPlaysound(false));
+    //     };
+    //   }, []);
+    useEffect(()=>{
+    // let   audio = new Audio(mintSound)
+// window.Audio
+// audio.addEventListener('ended', () => this.setState({ play: true }));
+// window.addEventListener('onload', () => play());
+// setPlaysound(true);
+// playingSound()
 
 },[])
 
+
     useEffect(() => {
-        dispatch(getUserBrawlMintPoint())
+        // dispatch(getUserBrawlMintPoint())
         getEventsForMinting();
-        play()
         playingSound()
     }, [playSound])
+
 
     return (
         <div className='StakePageImage-Mint'>

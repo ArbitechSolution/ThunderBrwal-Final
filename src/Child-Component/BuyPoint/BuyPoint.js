@@ -114,13 +114,23 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         } else {
         try{
             const web3= window.web3
-
+            let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
+            let bpPercent = await stakingCOntractOf.methods.Bppercent().call();
             let userBNBBalance = await web3.eth.getBalance(acc);
+            let converted = await stakingCOntractOf.methods.BNBToBP(userBNBBalance.toString()).call();
             userBNBBalance = web3.utils.fromWei(userBNBBalance);
             userBNBBalance= parseFloat(userBnbBalance).toFixed(4)
             userEnterd.current.value=userBNBBalance;
+            userBNBBalance = parseInt(userBNBBalance);
+            
+                converted = parseFloat(converted)
+                bpPercent = web3.utils.fromWei(bpPercent);
+                bpPercent = parseFloat(bpPercent)
+                let multipliedValue = converted * bpPercent
+                console.log("multipliedValue",multipliedValue);
+                setYouWillrecive(multipliedValue)
         }catch(e){
-            console.log("Error While geting Max Balance");
+            console.log("Error While geting Max Balance",e);
         }
     }
     }

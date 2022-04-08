@@ -35,9 +35,7 @@ function Mint() {
     let { brawlMintPoints } = useSelector(state => state.getBrawlPointMint);
     let { acc } = useSelector(state => state.connectWallet)
     let [btnTxt, setBtTxt] = useState("Connect Wallet")
-
-
-
+    // let i=0;
     const playingSound =()=>{
         if(playSound){      
             play()  
@@ -49,7 +47,7 @@ function Mint() {
     }
     // console.log("getBrawlPointMint",acc)
     const getAccount = () => {
-        play()
+    //   play()
         dispatch(getUserThbBalance())
         dispatch(getWallet())
         dispatch(getUserThbLpBalance())
@@ -100,6 +98,12 @@ function Mint() {
             console.log("Inside")
             const web3 = window.web3;
             let nftContractOf = new web3.eth.Contract(nftContractAbi, nftContratAddress);
+            let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call()
+            let walletLength = walletOfOwner.length
+            console.log("walletOfOwner", walletOfOwner);
+            console.log("walletLength", walletLength);
+            let loopValue = parseInt(walletLength)- value;
+
 
             // console.log(" my Number", await nftContractOf.methods)
             //             let inputId = await nftContractOf.methods.mintids(0).call();
@@ -108,17 +112,17 @@ function Mint() {
 
 
             let simplleArray = [];
-            for (let i = 0; i < value; i++) {
+            for (let i = 0; i < walletLength; i++) {
                 try {
 
-                    let inputId = await nftContractOf.methods.mintids(i).call();
+                    // let inputId = await nftContractOf.methods.mintids(i).call();
 
                     // console.log("walletOfOwner", inputId);
                     // let walletLength = inputId.length
                     // console.log("Indexes", i);
                     // console.log("Indexes2", inputId);
 
-                    let res = await axios.get(`/config/${inputId}.json`)
+                    let res = await axios.get(`/config/${walletOfOwner[loopValue+i]}.json`)
                     let imageUrl = res.data.image;
                     simplleArray = [...simplleArray, imageUrl]
                     setImageArray(simplleArray)
@@ -190,10 +194,8 @@ function Mint() {
             setIsLoading(false)
             console.log("Error While Mintinng", e);
         }
-
-
     }
-    console.log("transctionData", transctionData);
+    // console.log("transctionData", transctionData);
 
     const getEventsForMinting = async () => {
         try {
@@ -220,30 +222,30 @@ function Mint() {
     }
 
     let getbrawlpoint = parseFloat(brawlMintPoints).toFixed(1);
-    // useEffect(() => {
-    //     playSound ? audio.play() : audio.pause();
-    //   },
-    //   [playSound]
-    // );
-    // useEffect(() => {
-    //     audio.addEventListener('ended', () => setPlaysound(false));
-    //     return () => {
-    //       audio.removeEventListener('ended', () => setPlaysound(false));
-    //     };
-    //   }, []);
+    useEffect(() => {
+        playSound ? audio.play() : audio.pause();
+      },
+      [playSound]
+    );
+    useEffect(() => {
+        audio.addEventListener('ended', () => setPlaysound(false));
+        return () => {
+          audio.removeEventListener('ended', () => setPlaysound(false));
+        };
+      }, []);
     useEffect(()=>{
-    // let   audio = new Audio(mintSound)
+    let   audio = new Audio(mintSound)
 // window.Audio
-// audio.addEventListener('ended', () => this.setState({ play: true }));
-// window.addEventListener('onload', () => play());
-// setPlaysound(true);
+audio.addEventListener('ended', () => this.setState({ play: true }));
+window.addEventListener('onload', () => play());
+setPlaysound(true);
 // playingSound()
 
 },[])
 
 
     useEffect(() => {
-        // dispatch(getUserBrawlMintPoint())
+        dispatch(getUserBrawlMintPoint())
         getEventsForMinting();
         playingSound()
     }, [playSound])
@@ -261,12 +263,8 @@ function Mint() {
                         onHide={() => setModalShow(false)}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
-                        centered
-
-                    >
-
+                        centered>
                         <div className='StakePageImage mintpopuo'>
-
                             <div className='d-flex justify-content-end mt-1'><IoMdClose onClick={() => setModalShow(false)} size={28} style={{ color: "white", cursor: "pointer" }} /></div>
                             <div className='row mt-3'>
                                 <div className='col-md-6 offset-2  d-flex justify-content-start align-items-center'>
@@ -288,7 +286,6 @@ function Mint() {
                             </div>
                             <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
                                 {imageArray.map((items, index) => {
-
                                     return (
                                         <div className='col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2'>
                                             <img alt='greetings' src={imageArray[index]} className="model-i" />
@@ -328,9 +325,7 @@ function Mint() {
                                         <button className='undermodelbtn ' size="lg">
                                             BREED
                                         </button>
-
                                     </div>
-
                                 </div>
                                 <div className="col-md-3 col-10 mt-2">
                                     <div className="d-grid gap-2">
@@ -340,9 +335,7 @@ function Mint() {
 
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </Modal> : <></>
             }
@@ -364,14 +357,12 @@ function Mint() {
                         </div>
                         <div >
                            <div className='row'>
-                               <div className='col-9'>
-                                   
+                               <div className='col-9'>                                   
                         <img onClick={()=> setPlaysound(!playSound)}  src={On} alt ="Sound Icon"/>
                                    </div> 
                                    </div> 
                         <div className='row pt-4 pb-4 d-flex justify-content-center'>
-                            <div className='col-md-6 d-flex justify-content-center align-items-center'>
-                                
+                            <div className='col-md-6 d-flex justify-content-center align-items-center'>                                
                                 <img alt='greetings' src="https://i.ibb.co/yyNVLVb/Rectangle-554.png" className="mintImage1" />
                                 <img alt='greetings' src={mints} className="mintImage2" />
                             </div>
@@ -384,7 +375,6 @@ function Mint() {
                                         Point
                                     </span>
                                 </div>
-
                                 <div className='d-flex flex-row pt-lg-5 pt-3'>
                                     <a onClick={decreaseValue} style={{ cursor: "pointer" }}><img src="https://i.ibb.co/FswxxGJ/Group-187.png" width="60px" /></a>
                                     <div className='mintboxsss mt-1 ms-4'>{value}</div>
@@ -400,10 +390,8 @@ function Mint() {
                             </div>
                         </div>
                         </div>
-                        
                         <div className='row'>
                             <div className='col-md-12 col-11 mint-Page-border '>
-
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
@@ -415,7 +403,6 @@ function Mint() {
                                         </tr>
                                     </thead>
                                     {
-
                                         isDetail &&
                                         <tbody>
                                             <tr>
@@ -425,14 +412,12 @@ function Mint() {
                                                 <td className='Mint-Time'>True</td>
                                                 <td className='Mint-Time'><a href={`https://testnet.bscscan.com/tx/${transctionData.transactionHash}`} target="blank">{transctionData.transactionHash?.substring(0, 3) + "..." + transctionData.transactionHash?.substring(transctionData.transactionHash?.length - 3)}</a></td>
                                             </tr>
-
                                         </tbody>
                                     }
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

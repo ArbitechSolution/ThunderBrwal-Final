@@ -151,7 +151,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                 let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
                 setUsersConvertedPoints(converted)
                 if (parseFloat(userEnterdValue) > 0) {
-                    if (parseFloat(userBNBBalance) >= parseFloat(userEnterdValue)) {
+                    if (parseFloat(userBNBBalance) > parseFloat(userEnterdValue)) {
                         if (parseFloat(currentBp) <= parseFloat(maxBpTokens)) {
                             userEnterdValue = userEnterdValue.toString()
                             await stakingCOntractOf.methods.BuywithBNb().send({

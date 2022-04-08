@@ -100,11 +100,35 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         // ChnageMain();
     }
 
+    const getMaxUserBal=async()=>{
+          // console.log("Inside");
+        // console.log("ACC=",acc)
+        if (acc == "No Wallet") {
+            toast.error("No Wallet");
+        }
+        else if (acc == "Wrong Network") {
+            toast.error(" Wrong wallet");
+
+        } else if (acc == "Connect Wallet") {
+            toast.error("Connect Wallet");
+        } else {
+        try{
+            const web3= window.web3
+
+            let userBNBBalance = await web3.eth.getBalance(acc);
+            userBNBBalance = web3.utils.fromWei(userBNBBalance);
+            userBNBBalance= parseFloat(userBnbBalance).toFixed(4)
+            userEnterd.current.value=userBNBBalance;
+        }catch(e){
+            console.log("Error While geting Max Balance");
+        }
+    }
+    }
     const buyWithBnb = async () => {
         // console.log("Inside");
         // console.log("ACC=",acc)
         if (acc == "No Wallet") {
-            toast.error("No allet");
+            toast.error("No Wallet");
         }
         else if (acc == "Wrong Network") {
             toast.error(" Wrong wallet");
@@ -178,10 +202,10 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                                 {/* <p className='stakepageP mt-2'>BRWL POINT Converter Calculator</p> */}
                             </div>
                             <div className='col-5'>
-                                <p className='stakepageP mt-3'>BRWL POINT Converter Calculator</p>
+                                <p className='stakepageP mt-1'>BRWL POINT Converter Calculator</p>
                             </div>
                             <div className='col-3 d-flex justify-content-end'>
-                                    <button onClick={() => getWalletAddress()} className='btn btnstake '>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                    <button onClick={() => getWalletAddress()} className='btn btnstake '>{acc === "No Wallet" ? "Connect " : acc === "Connect Wallet" ? "Connect" : acc === "Connect to Rinkebey" ? "Connect" : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                                 </div>
                         </div>
                         <div className='row d-flex justify-content-center mt-3'>
@@ -259,7 +283,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                                         min={1}
                                         aria-label="Recipient's username with two button addons"
                                     />
-                                    <button className='btn btn-text pointinput'>MAX</button>
+                                    <button onClick={()=> getMaxUserBal()} className='btn btn-text pointinput'>MAX</button>
                                     <button className='btn pointinput'>BNB</button>
                                 </InputGroup>
 

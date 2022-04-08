@@ -347,7 +347,7 @@ setPlaysound(true);
                                 <img src="https://i.ibb.co/SJLFXL2/Vector10.png" className="stakeimage" />
                             </div>
                             <div className='col-md-2 d-flex justify-content-end'>
-                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Connect MetaMask" : acc === "Connect Wallet" ? acc : acc === "Connect to Rinkebey" ? acc : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
+                                <button className='btn btnstake' onClick={getAccount}>{acc === "No Wallet" ? "Connect " : acc === "Connect Wallet" ? "Connect" : acc === "Connect to Rinkebey" ? "Connect" : acc.substring(0, 5) + "..." + acc.substring(acc.length - 5)}</button>
                             </div>
                         </div>
                         <div className='row'>

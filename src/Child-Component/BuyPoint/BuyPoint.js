@@ -167,7 +167,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                             await stakingCOntractOf.methods.BuywithBNb().send({
                                 from: acc,
                                 value: userEnterdValue
-
                             })
                             setModalShow(true)
                             toast.success("Transaction confirmed")

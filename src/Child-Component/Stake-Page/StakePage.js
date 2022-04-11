@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { ImInfo } from 'react-icons/im';
 import Group578 from "../../Assets/Group 578.png"
 import Group579 from "../../Assets/Group 579.png"
+import Group509 from "../../Assets/Group 509.png"
 import { thbTokenAddress, thbTokenAbi } from "../../Component/Utils/ThbToken"
 import { thbLpTokenAddress, thbLpTokenAbi } from '../../Component/Utils/ThbLpToken'
 import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
@@ -511,7 +512,7 @@ useEffect(()=>{
                         <div class="social__content">
                           <ImInfo className='social__icon' />
                           <div class="social__tooltip social__tooltip-bottom">
-                            <img src={Group579} className="staking-info-pic"/>
+                            <img src={Group509} className="staking-info-pic"/>
                           </div>
                         </div>
                       </div>

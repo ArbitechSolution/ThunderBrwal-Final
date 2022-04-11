@@ -15,6 +15,7 @@ import CloseButton from 'react-bootstrap/CloseButton'
 import { toast } from 'react-toastify';
 import Modal from "react-bootstrap/Modal";
 import On from "../../Assets/On.png"
+import Off from "../../Assets/Off.png"
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft"
 // import Group187 from "../../Assets/Group 187.png"
 // import Group188 from "../../Assets/Group 188.png"
@@ -22,7 +23,7 @@ import zero from "../../Assets/0.png"
 import one from "../../Assets/1.png"
 import mintSound  from '../../Assets/mintSound.wav'
 function Mint() {
-    const [play , { stop }] = useSound(mintSound);
+    const [play, { stop, isPlaying }] = useSound(mintSound);
     const [audio] = useState(new Audio(mintSound));
     let [playSound, setPlaysound] = useState(true)
     let [value, setValue] = useState(1)
@@ -36,15 +37,15 @@ function Mint() {
     let { acc } = useSelector(state => state.connectWallet)
     let [btnTxt, setBtTxt] = useState("Connect Wallet")
     // let i=0;
-    const playingSound =()=>{
-        if(playSound){      
-            play()  
-            console.log("Playing The Music");
-        }else{
-            stop()
-            console.log("Stopped The Music");
-        }
-    }
+    // const playingSound =()=>{
+    //     if(playSound){      
+    //         play()  
+    //         console.log("Playing The Music");
+    //     }else{
+    //         stop()
+    //         console.log("Stopped The Music");
+    //     }
+    // }
     // console.log("getBrawlPointMint",acc)
     const getAccount = () => {
     //   play()
@@ -223,32 +224,35 @@ function Mint() {
 
     let getbrawlpoint = parseFloat(brawlMintPoints).toFixed(1);
     useEffect(() => {
-        playSound ? audio.play() : audio.pause();
+         audio.play()
       },
-      [playSound]
+      []
     );
-    useEffect(() => {
-        audio.addEventListener('ended', () => setPlaysound(false));
-        return () => {
-          audio.removeEventListener('ended', () => setPlaysound(false));
-        };
-      }, []);
-    useEffect(()=>{
-    let   audio = new Audio(mintSound)
-// window.Audio
-audio.addEventListener('ended', () => this.setState({ play: true }));
-window.addEventListener('onload', () => play());
-setPlaysound(true);
-// playingSound()
+//     useEffect(() => {
+//         audio.addEventListener('ended', () => setPlaysound(true));
+//         return () => {
+//           audio.removeEventListener('ended', () => setPlaysound(true));
+//         };
+//       }, []);
+//     useEffect(()=>{
+//     let   audio = new Audio(mintSound)
+// // window.Audio
+// audio.addEventListener('ended', () => this.setState({ play: true }));
+// window.addEventListener('onload', () => play());
+// setPlaysound(true);
+// // playingSound()
 
-},[])
+// },[])
+
+
 
 
     useEffect(() => {
         dispatch(getUserBrawlMintPoint())
         getEventsForMinting();
-        playingSound()
-    }, [playSound])
+        // play()
+        // playingSound()
+    }, [])
 
 
     return (
@@ -357,8 +361,27 @@ setPlaysound(true);
                         </div>
                         <div >
                            <div className='row'>
-                               <div className='col-9'>                                   
-                        <img onClick={()=> setPlaysound(!playSound)}  src={On} alt ="Sound Icon"/>
+                               <div className='col-9'>
+                               {/* <PlayButton
+                                        active={isPlaying}
+                                        size={60}
+                                        iconColor="var(--color-background)"
+                                        idleBackgroundColor="var(--color-text)"
+                                        activeBackgroundColor="var(--color-primary)"
+                                        play={play}
+                                        stop={stop}
+                                        /> */}
+                                   {
+                                   playSound?
+                                 <img onClick={()=> {
+                                    setPlaysound(!playSound) 
+                                    play()}
+                                 }  src={On} alt ="Sound Icon"/>: 
+                                 <img onClick={()=> {
+                                    setPlaysound(!playSound) 
+                                    stop()}}  src={Off} alt ="Sound Icon"/>
+                                   }                                   
+                        {/* <img onClick={()=> setPlaysound(!playSound)}  src={On} alt ="Sound Icon"/> */}
                                    </div> 
                                    </div> 
                         <div className='row pt-4 pb-4 d-flex justify-content-center'>

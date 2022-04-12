@@ -42,6 +42,7 @@ function Mint() {
   let { brawlMintPoints } = useSelector((state) => state.getBrawlPointMint);
   let { acc } = useSelector((state) => state.connectWallet);
   let [btnTxt, setBtTxt] = useState("Connect Wallet");
+  const path =window.location.hash;
   const [playing, toggle] = useAudio(mintSound);
 
   useEffect(() => {
@@ -50,11 +51,12 @@ function Mint() {
     }, 1000);
   }, []);
 
+ 
+
   const playingSound = () => {
-    toggle();
+      toggle();    
   };
   const getAccount = () => {
-    //   play()
     dispatch(getUserThbBalance());
     dispatch(getWallet());
     dispatch(getUserThbLpBalance());

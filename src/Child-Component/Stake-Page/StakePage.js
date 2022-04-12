@@ -17,9 +17,9 @@ import { thbLpTokenAddress, thbLpTokenAbi } from '../../Component/Utils/ThbLpTok
 import { stakingContractAddress, stakingContractAbi } from '../../Component/Utils/Staking'
 import takingthbbnb from "../../Assets/taking-thb-bnb.png"
 import stakingthb from "../../Assets/staking-thb.png"
+
+
 function StakePage() {
-
-
   let stakeAmount = useRef(0);
   let stakeAmountLp = useRef(0);
   let [ days, setDays] = useState(0);
@@ -378,7 +378,17 @@ useEffect(()=>{
   }, 3000)
 },[])
 
+// useEffect(() => {
+//   setTimeout(() => {
+//     return () => {
+     
+//     };
+//   }, 1000);
+// }, []);
+
+
   useEffect(() => { 
+   
     dispatch(getLpLockTime())
     dispatch(getUserDepositTime())
     dispatch(getWallet())

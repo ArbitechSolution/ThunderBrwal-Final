@@ -3,10 +3,11 @@ import { useMemo, useEffect, useState } from "react";
 const useAudio = (url) => {
   const audio = useMemo(() => new Audio(url), []);
   const [playing, setPlaying] = useState(false);
-
   const toggle = () => setPlaying(!playing);
 
   useEffect(() => {
+  console.log("Playin in use Audio ",playing);
+
     playing ? audio.play() : audio.pause();
   }, [playing]);
 
@@ -14,6 +15,7 @@ const useAudio = (url) => {
     audio.addEventListener("ended", () => setPlaying(false));
     return () => {
       audio.removeEventListener("ended", () => setPlaying(false));
+      audio.pause();
     };
   }, []);
 

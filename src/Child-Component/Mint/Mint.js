@@ -42,7 +42,7 @@ function Mint() {
   let { brawlMintPoints } = useSelector((state) => state.getBrawlPointMint);
   let { acc } = useSelector((state) => state.connectWallet);
   let [btnTxt, setBtTxt] = useState("Connect Wallet");
-  const path =window.location.hash;
+  const path = window.location.hash;
   const [playing, toggle] = useAudio(mintSound);
 
   useEffect(() => {
@@ -51,10 +51,8 @@ function Mint() {
     }, 1000);
   }, []);
 
- 
-
   const playingSound = () => {
-      toggle();    
+    toggle();
   };
   const getAccount = () => {
     dispatch(getUserThbBalance());
@@ -77,18 +75,15 @@ function Mint() {
   const increaseValue = () => {
     if (value < 3) {
       setValue(++value);
-      console.log("setValue", value);
     }
   };
   const decreaseValue = () => {
     if (value > 1) {
       setValue(--value);
-      console.log("setValue", value);
     }
   };
   // Getting pics after Minting
   const allImagesNfts = async () => {
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       console.log("wallet");
     } else if (acc == "Wrong Network") {
@@ -96,7 +91,6 @@ function Mint() {
     } else if (acc == "Connect Wallet") {
       console.log("Connect Wallet");
     } else {
-      console.log("Inside");
       const web3 = window.web3;
       let nftContractOf = new web3.eth.Contract(
         nftContractAbi,
@@ -104,33 +98,17 @@ function Mint() {
       );
       let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call();
       let walletLength = walletOfOwner.length;
-      console.log("walletOfOwner", walletOfOwner);
-      console.log("walletLength", walletLength);
       let loopValue = parseInt(walletLength) - value;
-
-      // console.log(" my Number", await nftContractOf.methods)
-      //             let inputId = await nftContractOf.methods.mintids(0).call();
-      //         let apiParameter = parseInt(inputId)
-      // console.log(" my Number", apiParameter)
 
       let simplleArray = [];
       for (let i = 0; i < walletLength; i++) {
         try {
-          // let inputId = await nftContractOf.methods.mintids(i).call();
-
-          // console.log("walletOfOwner", inputId);
-          // let walletLength = inputId.length
-          // console.log("Indexes", i);
-          // console.log("Indexes2", inputId);
-
           let res = await axios.get(
             `/config/${walletOfOwner[loopValue + i]}.json`
           );
           let imageUrl = res.data.image;
           simplleArray = [...simplleArray, imageUrl];
           setImageArray(simplleArray);
-
-          // console.log("Getting Response", res);
         } catch (e) {
           console.log("Error while Fetching Api", e);
         }
@@ -149,7 +127,6 @@ function Mint() {
       } else if (acc == "Connect Wallet") {
         toast.error("Not Connected");
       } else {
-        // console.log("mintFor");
         const web3 = window.web3;
         let nftContractOf = new web3.eth.Contract(
           nftContractAbi,
@@ -195,7 +172,6 @@ function Mint() {
       console.log("Error While Mintinng", e);
     }
   };
-  // console.log("transctionData", transctionData);
 
   const getEventsForMinting = async () => {
     try {
@@ -215,8 +191,6 @@ function Mint() {
           fromBlock: "latest",
         });
         let event = nftContractOf.events.Transfer();
-        // console.log("My Events", ahan);
-        // console.log("Specific Events=",event);
       }
     } catch (e) {
       console.log("Error While getting", e);

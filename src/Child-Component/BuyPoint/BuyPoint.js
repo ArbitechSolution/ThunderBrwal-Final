@@ -20,7 +20,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
     let [usersConvertedpoints, setUsersConvertedPoints] = useState(0);
     let [youWillRecieve, setYouWillrecive] = useState(0)
 
-
     const getRecievingAmount = async () => {
 
         if (acc == "No Wallet") {
@@ -55,8 +54,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         }
 
     }
-
-
 
     const getUserBalance = async () => {
 
@@ -152,10 +149,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                 let userEnterdValue = userEnterd.current.value;
                 setBnbSpent(userEnterdValue);
                 let userBNBBalance = await web3.eth.getBalance(acc);
-
                 userEnterdValue = web3.utils.toWei(userEnterdValue.toString())
-
-
                 // console.log("userEnterdValue", userBNBBalance);
                 let stakingCOntractOf = new web3.eth.Contract(stakingContractAbi, stakingContractAddress);
                 let converted = await stakingCOntractOf.methods.BNBToBP(userEnterdValue).call();
@@ -189,7 +183,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
     const getWalletAddress = () => {
         dispatch(getWallet());
         // allImagesNfts()
-
     }   
     useEffect(() => {
         dispatch(getMaxBpTokens());
@@ -335,7 +328,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                             </div>
                         </div>
                         <div className='row d-flex justify-content-center mt-5'>
-
                             <div className='col-md-3 mt-2'>
                                 <div className="d-grid gap-2">
                                     <button onClick={() => {
@@ -347,13 +339,10 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
-
 export default BuyPoint

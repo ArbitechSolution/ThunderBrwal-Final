@@ -146,7 +146,13 @@
   .mymediasound {
     display: flex;
     justify-content: end;
-    margin-right: 1rem !important;
+    /* margin-right: 1rem !important; */
+  }
+  .imagesRes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -165,6 +171,14 @@
     justify-content: end;
 
     /* margin-right: 1rem !important; */
+  }
+
+  .imagesRes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
   }
   /* .Mint-Time{
         font-style: normal;

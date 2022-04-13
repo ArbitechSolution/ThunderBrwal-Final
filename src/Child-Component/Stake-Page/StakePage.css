@@ -272,7 +272,7 @@ input[placeholder],
     background: linear-gradient(90deg, #f3961e 1.7%, #ff5043 100%);
     border-radius: 90px;
     font-style: normal;
-    font-size: 17px;
+    font-size: 17   px;
     line-height: 18px;
     color: #ffffff;
   }

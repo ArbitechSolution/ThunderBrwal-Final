@@ -35,6 +35,8 @@ function Mint() {
   let [imageArray, setImageArray] = useState([]);
   let [modalShow, setModalShow] = useState(false);
   let [isLoading, setIsLoading] = useState(false);
+  let [dispalyimage, setDispalyImage] = useState([]);
+  let [dispalynamedata, setDisplayNameData] = useState([]);
   let [transctionData, setTransctionData] = useState({});
   let [isDetail, setIsDetail] = useState(false);
   let dispatch = useDispatch();
@@ -99,6 +101,8 @@ function Mint() {
       let walletLength = walletOfOwner.length;
       let loopValue = parseInt(walletLength) - value;
 
+      let myImgArry = [];
+      let myNameDate = [];
       let simplleArray = [];
       for (let i = 0; i < walletLength; i++) {
         try {
@@ -106,8 +110,21 @@ function Mint() {
             `/config/${walletOfOwner[loopValue + i]}.json`
           );
           let imageUrl = res.data.image;
-          simplleArray = [...simplleArray, imageUrl];
+          let dna = res.data.dna;
+          let names = res.data.name;
+
+          myImgArry = [...myImgArry, imageUrl];
+          setDispalyImage(myImgArry);
+          myNameDate = [...myNameDate, names];
+          setDisplayNameData(myNameDate);
+          simplleArray = [
+            ...simplleArray,
+            { imageUrl: imageUrl, num: dna, names: names },
+          ];
+          console.log("simplleArray", myImgArry);
+          // setDispalyImage(simplleArray)
           setImageArray(simplleArray);
+          console.log("Getting Response", res.data.image);
         } catch (e) {
           console.log("Error while Fetching Api", e);
         }
@@ -149,7 +166,7 @@ function Mint() {
 
                 setTransctionData(receipt);
               });
-            // setTransctionData(obj)
+            setTransctionData(obj);
             toast.success("Transaction Confirmed");
             dispatch(getUserBrawlMintPoint());
             setIsDetail(true);
@@ -257,15 +274,41 @@ function Mint() {
             <div>
               <p className="simpleText">You got a Chundung card now!</p>
             </div>
-            <div className="row d-flex flex-row justify-content-center justify-content-evenly mb-3">
+            <div className="col-12 d-flex  justify-content-center justify-content-md-evenly  mb-3 imagesRes">
               {imageArray.map((items, index) => {
                 return (
-                  <div className="col-lg-3 uperimg col-md-5 d-flex justify-content-center align-items-center mt-2">
-                    <img
-                      alt="greetings"
-                      src={imageArray[index]}
-                      className="model-i"
-                    />
+                  <div className="">
+                    <div className="col-lg-3 uperimg col-md-5 d-flex  justify-content-center align-items-center mt-2">
+                      <img
+                        alt="greetings"
+                        src={items.imageUrl}
+                        className="model-i"
+                      />
+                    </div>
+                    <div className="d-flex  justify-content-center">
+                      <p className="collectionsText mt-3">
+                        Chundung# {items.num}
+                      </p>
+
+                      {/* <div className="d-flex flex-row justify-content-between align-items-center mb-3"></div> */}
+                    </div>
+                    <div className="d-flex  justify-content-center">
+                      <p className="collectionsText ">
+                        {items.num < 69
+                          ? "Common"
+                          : items.num < 89
+                          ? "Uncommon"
+                          : items.num < 97
+                          ? "Rare"
+                          : items.num < 99
+                          ? "Unique"
+                          : items.num < 150
+                          ? "Legendary"
+                          : "Mythic"}
+                      </p>
+
+                      {/* <div className="d-flex flex-row justify-content-between align-items-center mb-3"></div> */}
+                    </div>
                   </div>
                 );
               })}

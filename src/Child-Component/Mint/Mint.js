@@ -185,7 +185,8 @@ function Mint() {
       }
     } catch (e) {
       setIsLoading(false);
-      console.log("Error While Mintinng", e);
+      toast.error("Transaction Failed");
+      console.log("Error While Minting", e);
     }
   };
 

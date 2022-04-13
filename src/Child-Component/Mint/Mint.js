@@ -231,7 +231,7 @@ function Mint() {
                   className="stakeimage-mint"
                 />
               </div>
-              <div className="col-lg-4 col-11 d-flex justify-content-end">
+              <div className="col-lg-4 col-10 d-flex justify-content-end">
                 <button className="btn btnstake">
                   {acc === "No Wallet"
                     ? "Connect MetaMask"

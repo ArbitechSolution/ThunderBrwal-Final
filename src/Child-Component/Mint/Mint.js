@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import Vector10 from "../../Assets/Vector10.png"
 // import Rectangle554 from "../../Assets/Rectangle 554.png"
-// import tiger1 from "../../Assets/tiger 1.jpg"
 import {
   getWallet,
   getUserThbBalance,
@@ -349,10 +348,10 @@ function Mint() {
                 <p className="stakepageP">Mint</p>
               </div>
             </div>
-            <div>
-              <div className="row">
-                <div className="col-9">
-                  {/* <PlayButton
+            {/* <div> */}
+            <div className="row ">
+              <div className="col-lg-9  col-11  mymediasound">
+                {/* <PlayButton
                                         active={isPlaying}
                                         size={60}
                                         iconColor="var(--color-background)"
@@ -361,72 +360,72 @@ function Mint() {
                                         play={play}
                                         stop={stop}
                                         /> */}
-                  {!playing ? (
-                    <img onClick={playingSound} src={Off} alt="Sound Icon" />
-                  ) : (
-                    <img onClick={playingSound} src={On} alt="Sound Icon" />
-                  )}
-                </div>
-              </div>
-              <div className="row pt-4 pb-4 d-flex justify-content-center">
-                <div className="col-md-6 d-flex justify-content-center align-items-center">
-                  <img
-                    alt="greetings"
-                    src="https://i.ibb.co/yyNVLVb/Rectangle-554.png"
-                    className="mintImage1"
-                  />
-                  <img alt="greetings" src={mints} className="mintImage2" />
-                </div>
-                <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                  <div className="text-start">
-                    <span className="mintspane">Your Brawl:</span>&nbsp; &nbsp;
-                    {/* .toLocaleString() */}
-                    <span className="mintspane1">
-                      {brawlMintPoints.toLocaleString(undefined, {
-                        minimumFractionDigits: 1,
-                        maximumFractionDigits: 1,
-                      })}
-                      &nbsp;
-                      {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
-                      Point
-                    </span>
-                  </div>
-                  <div className="d-flex flex-row pt-lg-5 pt-3">
-                    <a onClick={decreaseValue} style={{ cursor: "pointer" }}>
-                      <img
-                        src="https://i.ibb.co/FswxxGJ/Group-187.png"
-                        width="60px"
-                      />
-                    </a>
-                    <div className="mintboxsss mt-1 ms-4">{value}</div>
-                    <a
-                      className="ms-4"
-                      onClick={increaseValue}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <img
-                        src="https://i.ibb.co/ZGpn9P7/Group-188.png"
-                        width="60px"
-                      />
-                    </a>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center mt-lg-5 mt-3">
-                    <button
-                      onClick={() => {
-                        myMint();
-                        // setModalShow(true);
-                      }}
-                      className="btn mintbtn "
-                    >
-                      MINT
-                    </button>
-                  </div>
-                  <span className="mintspan23 pt-lg-5 pt-3">
-                    MAXIMUM OF 3 tiger nfts CARD PER tx
-                  </span>
-                </div>
+                {!playing ? (
+                  <img onClick={playingSound} src={Off} alt="Sound Icon" />
+                ) : (
+                  <img onClick={playingSound} src={On} alt="Sound Icon" />
+                )}
               </div>
             </div>
+            <div className="row pt-4 pb-4 d-flex justify-content-center">
+              <div className="col-md-6 d-flex justify-content-center align-items-center">
+                <img
+                  alt="greetings"
+                  src="https://i.ibb.co/yyNVLVb/Rectangle-554.png"
+                  className="mintImage1"
+                />
+                <img alt="greetings" src={mints} className="mintImage2" />
+              </div>
+              <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                <div className="text-start">
+                  <span className="mintspane">Your Brawl:</span>&nbsp; &nbsp;
+                  {/* .toLocaleString() */}
+                  <span className="mintspane1">
+                    {brawlMintPoints.toLocaleString(undefined, {
+                      minimumFractionDigits: 1,
+                      maximumFractionDigits: 1,
+                    })}
+                    &nbsp;
+                    {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
+                    Point
+                  </span>
+                </div>
+                <div className="d-flex flex-row pt-lg-5 pt-3">
+                  <a onClick={decreaseValue} style={{ cursor: "pointer" }}>
+                    <img
+                      src="https://i.ibb.co/FswxxGJ/Group-187.png"
+                      width="60px"
+                    />
+                  </a>
+                  <div className="mintboxsss mt-1 ms-4">{value}</div>
+                  <a
+                    className="ms-4"
+                    onClick={increaseValue}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img
+                      src="https://i.ibb.co/ZGpn9P7/Group-188.png"
+                      width="60px"
+                    />
+                  </a>
+                </div>
+                <div className="d-flex justify-content-center align-items-center mt-lg-5 mt-3">
+                  <button
+                    onClick={() => {
+                      myMint();
+                      // setModalShow(true);
+                    }}
+                    className="btn mintbtn "
+                  >
+                    MINT
+                  </button>
+                </div>
+                <span className="mintspan23 pt-lg-5 pt-3">
+                  MAXIMUM OF 3 Chundung nfts CARD PER tx
+                </span>
+              </div>
+            </div>
+            {/* </div> */}
             <div className="row">
               <div className="col-md-12 col-11 mint-Page-border ">
                 <table class="table table-borderless">

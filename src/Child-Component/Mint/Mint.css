@@ -1,158 +1,172 @@
 .StakePageImage-Mint {
-    background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+  background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"),
+    url("https://i.ibb.co/ByXktst/Group-173.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .mintImage1 {
-    position: relative;
-    width: 400px;
+  position: relative;
+  width: 400px;
 }
 
 .mintImage2 {
-    position: absolute;
-    width: 362px;
+  position: absolute;
+  width: 362px;
 }
 
 .mintpopuo {
-    background-color: rgba(0, 0, 0, 0.25);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    border-radius: 5px;
-    border: 1px solid #F3961E;
+  background-color: rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
+  border: 1px solid #f3961e;
 }
 
 .mintspane {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 100%;
-    color: #F8B815;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 100%;
+  color: #f8b815;
 }
 
 .mintspane1 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 100%;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 100%;
+  color: #ffffff;
 }
 
 .mintboxsss {
-    background: #454545;
-    border-radius: 50px;
-    width: 100px;
-    height: 38px;
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 100%;
-    color: #FFFFFF;
-    text-align: center;
+  background: #454545;
+  border-radius: 50px;
+  width: 100px;
+  height: 38px;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
 }
 
 .mintbtn {
-    background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
-    border-radius: 50px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 33px;
-    padding: 10px 25px;
-    color: #FFFFFF;
-    /* margin-left: 80px; */
+  background: linear-gradient(90deg, #f3961e 1.7%, #ff5043 100%);
+  border-radius: 50px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 33px;
+  padding: 10px 25px;
+  color: #ffffff;
+  /* margin-left: 80px; */
 }
 
 .mintspan23 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 100%;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
 }
 
 .mint-Page-border {
-    border-top: 3px solid rgba(255, 255, 255, 0.25);
+  border-top: 3px solid rgba(255, 255, 255, 0.25);
 }
 
 .Mint-Time {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 132%;
+  color: #ffffff;
+}
+
+@media (min-width: 1400px) and (max-width: 6000px) {
+  .StakePageImage-Mint {
+    background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"),
+      url("https://i.ibb.co/ByXktst/Group-173.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    height: 100vh;
+  }
+}
+
+@media (max-width: 1050px) {
+  .mintImage1 {
+    position: relative;
+    width: 320px;
+  }
+
+  .mintImage2 {
+    position: absolute;
+    width: 282px;
+  }
+
+  .mintspane {
     font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 132%;
-    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    color: #f8b815;
+  }
+
+  .mintspane1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 100%;
+    color: #ffffff;
+  }
+
+  .StakePageImage-Mint {
+    background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"),
+      url("https://i.ibb.co/ByXktst/Group-173.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    height: 100vh;
+  }
 }
 
-@media(min-width: 1400px) and (max-width: 6000px) {
-    .StakePageImage-Mint {
-        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
+@media (max-width: 600px) {
+  .StakePageImage-Mint {
+    background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"),
+      url("https://i.ibb.co/ByXktst/Group-173.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 
-        height: 100vh;
-    }
+    height: 100%;
+  }
+  .mymediasound {
+    display: flex;
+    justify-content: end;
+    margin-right: 1rem !important;
+  }
 }
 
-@media(max-width: 1050px) {
-    .mintImage1 {
-        position: relative;
-        width: 320px;
-    }
+@media (max-width: 400px) {
+  .mintImage1 {
+    position: relative;
+    width: 280px;
+  }
 
-    .mintImage2 {
-        position: absolute;
-        width: 282px;
-    }
+  .mintImage2 {
+    position: absolute;
+    width: 252px;
+  }
+  .mymediasound {
+    display: flex;
+    justify-content: end;
 
-    .mintspane {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 100%;
-        color: #F8B815;
-    }
-
-    .mintspane1 {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 100%;
-        color: #FFFFFF;
-    }
-
-    .StakePageImage-Mint {
-        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-
-        height: 100vh;
-    }
-}
-
-@media(max-width: 600px) {
-    .StakePageImage-Mint {
-        background-image: url("https://i.ibb.co/sVx0FSC/Rectangle-493.png"), url('https://i.ibb.co/ByXktst/Group-173.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-
-        height: 100%;
-    }
-}
-
-@media(max-width: 400px) {
-    .mintImage1 {
-        position: relative;
-        width: 280px;
-    }
-
-    .mintImage2 {
-        position: absolute;
-        width: 252px;
-    }
-
-    /* .Mint-Time{
+    /* margin-right: 1rem !important; */
+  }
+  /* .Mint-Time{
         font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -163,11 +177,11 @@
 }
 
 .Congratimage {
-    width: 400px;
+  width: 400px;
 }
 
 .cardImg {
-    /* background-image: url("https://i.ibb.co/Sdz30VC/Group-505.png");
+  /* background-image: url("https://i.ibb.co/Sdz30VC/Group-505.png");
     padding-top: 20px;
 
     background-repeat: no-repeat;
@@ -175,21 +189,19 @@
     background-size: cover;
 
     width: 100%; */
-    display: flex;
-    justify-content: center;
-
+  display: flex;
+  justify-content: center;
 }
 
 .uperimg {
-    background-image: url("../../Assets/Mask group1000.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0px 0px 14px #F8B815;
-    width: 240px;
-    height: 240px;
-    display: flex;
-    flex-direction: row;
-
+  background-image: url("../../Assets/Mask group1000.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0px 0px 14px #f8b815;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  flex-direction: row;
 }
 /* .uperimg-two{
     background-image: url("../../Assets/Group 505.png");
@@ -198,16 +210,16 @@
     background-size: cover;
     background-position:center;
 } */
-.mintinage-two{
-    background-image: url("../../Assets/Group 505.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-    height: 400px;
-    width: 400px;
+.mintinage-two {
+  background-image: url("../../Assets/Group 505.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: 400px;
 }
-.stakeimage-mint{
-    width: 500px;
+.stakeimage-mint {
+  width: 500px;
 }
 /* .model-iii {
     width: 185px;
@@ -215,64 +227,59 @@
     box-shadow: 0px 0px 10px #F8B815;
 } */
 .model-i {
-    width: 185px;
-    height: 185px;
-    box-shadow: 0px 0px 14px #F8B815;
+  width: 185px;
+  height: 185px;
+  box-shadow: 0px 0px 14px #f8b815;
 }
 .mintImage45 {
-    /* position: relative; */
-    width: 300px;
-    /* left:   40%;
+  /* position: relative; */
+  width: 300px;
+  /* left:   40%;
     top: 50%; */
-
 }
 
 .simpleText {
-    font-family: Poppins;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 37px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: white;
-
-
+  font-family: Poppins;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 37px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
 }
 
 .underimg {
-    background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 
 .undermodelbtn {
-
-    /* width: 160px;
+  /* width: 160px;
     height: 50px; */
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 100px;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 33px;
-    color: #F3961E;
-    padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 33px;
+  color: #f3961e;
+  padding: 5px 10px;
 }
 
 .undermodelbtn2 {
-
-    background: linear-gradient(90deg, #F3961E 1.7%, #FF5043 100%);
-    border-radius: 100px;
-    /* width: 160px;
+  background: linear-gradient(90deg, #f3961e 1.7%, #ff5043 100%);
+  border-radius: 100px;
+  /* width: 160px;
     height: 50px; */
-    padding: 5px 10px;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 33px;
+  padding: 5px 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 33px;
 
-    color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* .btnmodelhere {
@@ -280,12 +287,12 @@
     justify-content: center;
 } */
 
-@media(max-width: 770px) {
-    .Congratimage {
-        width: 270px;
-    }
-    .stakeimage-mint {
-        display: none;
-        /* width: 430px; */
-    }
+@media (max-width: 770px) {
+  .Congratimage {
+    width: 270px;
+  }
+  .stakeimage-mint {
+    display: none;
+    /* width: 430px; */
+  }
 }

@@ -1,12 +1,12 @@
-import React from 'react'
-import StakePage from './Child-Component/Stake-Page/StakePage'
+import React from "react";
+import StakePage from "./Child-Component/Stake-Page/StakePage";
 
 function StakePages() {
   return (
     <div>
-        <StakePage/>
+      <StakePage />
     </div>
-  )
+  );
 }
 
-export default StakePages
+export default StakePages;

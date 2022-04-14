@@ -288,7 +288,7 @@ function Mint() {
                     </div>
                     <div className="d-flex  justify-content-center">
                       <p className="collectionsText mt-3">
-                        Chundung# {items.num}
+                        #{items.num} Chundung
                       </p>
 
                       {/* <div className="d-flex flex-row justify-content-between align-items-center mb-3"></div> */}

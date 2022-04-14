@@ -303,7 +303,7 @@ function Mint() {
                           ? "Rare"
                           : items.num < 99
                           ? "Unique"
-                          : items.num < 150
+                          : items.num < 180
                           ? "Legendary"
                           : "Mythic"}
                       </p>

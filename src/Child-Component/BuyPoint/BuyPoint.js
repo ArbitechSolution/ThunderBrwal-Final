@@ -193,27 +193,14 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         <div className="row d-flex justify-content-center align-items-center pb-3">
           <div className="col-md-12 col-11 Stakeboxs pt-4 pb-4">
             <div className="row ">
-              <div className="col-md-8 offset-md-2 d-flex align-items-center">
+              <div className="col-md-8 offset-md-2 d-flex justify-content-start align-items-center">
                 <img
                   src="https://i.ibb.co/SJLFXL2/Vector10.png"
-                  className="stakeimage ms-2"
+                  className="stakeimage"
                 />
               </div>
-            </div>
-            <div className="row">
-              {/* <div className='col-3'>
-                                
-                            </div> */}
-              <div className="col-md-6 col-12 offset-md-3">
-                <p className="stakepageP mt-1">
-                  BRWL POINT Converter Calculator
-                </p>
-              </div>
-              <div className="col-md-3 col-8 d-flex justify-content-end">
-                <button
-                  onClick={() => getWalletAddress()}
-                  className="btn btnstake "
-                >
+              <div className="col-md-2 d-flex justify-content-end">
+                <button className="btn btnstake" onClick={getWalletAddress}>
                   {acc === "No Wallet"
                     ? "Connect "
                     : acc === "Connect Wallet"
@@ -224,6 +211,15 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                       "..." +
                       acc.substring(acc.length - 5)}
                 </button>
+              </div>
+            </div>
+
+            <div className="row">
+              {/* <div className='col-3'>
+                                
+                            </div> */}
+              <div className="col-md-6 col-12 offset-md-3">
+                <p className="stakepageP ">BRWL POINT Converter Calculator</p>
               </div>
             </div>
             <div className="row d-flex justify-content-center mt-3">

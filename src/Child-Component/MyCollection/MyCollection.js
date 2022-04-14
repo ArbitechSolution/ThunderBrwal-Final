@@ -152,7 +152,7 @@ function MyCollection() {
       console.log("Connect Wallet");
     } else {
       let userEnteredAddress = toAddress.current.value;
-      console.log("userEnteredAddress", userEnteredAddress);
+      // console.log("userEnteredAddress", userEnteredAddress);
       setPopupshowaddress(userEnteredAddress);
       const web3 = window.web3;
       let stringLength = userEnteredAddress.length;
@@ -331,25 +331,25 @@ function MyCollection() {
         <div className="container pt-3">
           <div className="row d-flex justify-content-center align-items-center pb-3">
             <div className="col-md-12 col-11 pt-4 pb-4">
+              <div className="col-md-11 d-flex justify-content-end">
+                <button
+                  onClick={() => getWalletAddress()}
+                  className="btn btnstake"
+                >
+                  {acc === "No Wallet"
+                    ? "Connect "
+                    : acc === "Connect Wallet"
+                    ? "Connect"
+                    : acc === "Connect to Rinkebey"
+                    ? "Connect"
+                    : acc.substring(0, 5) +
+                      "..." +
+                      acc.substring(acc.length - 5)}
+                </button>
+              </div>
               <div className="row collections">
-                <div className="col-md-4 offset-md-4 text-center d-flex align-items-center">
+                <div className="col-md-4 col-10 offset-md-4 text-center d-flex align-items-center">
                   <p className="stakepageP">My NFT Collection</p>
-                </div>
-                <div className="col-md-3 d-flex justify-content-end">
-                  <button
-                    onClick={() => getWalletAddress()}
-                    className="btn btnstake"
-                  >
-                    {acc === "No Wallet"
-                      ? "Connect "
-                      : acc === "Connect Wallet"
-                      ? "Connect"
-                      : acc === "Connect to Rinkebey"
-                      ? "Connect"
-                      : acc.substring(0, 5) +
-                        "..." +
-                        acc.substring(acc.length - 5)}
-                  </button>
                 </div>
               </div>
 

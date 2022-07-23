@@ -16,9 +16,6 @@ function FooterDown() {
                      <a href='https://t.me/thb_community' target="_blank"><FaTelegramPlane size={28} className="icon"/></a>
                      <a href='https://twitter.com/THB_crypto' target="_blank"><BsTwitter size={28} className="icon"/></a>
                      <a href='https://github.com/Thunderbrawl-coin' target="_blank"><RiGithubLine size={28} className="icon"/></a>
-
-
-
                    </div>
                </div>
            </div>

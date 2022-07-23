@@ -1,12 +1,7 @@
 import React from 'react'
 import "./Traits.css"
 import Accordion from 'react-bootstrap/Accordion'
-// import tiger1 from "../../Assets/tiger 1.jpg"
-// import tiger2 from "../../Assets/tiger2.jpg"
-// import tiger3 from "../../Assets/tiger3.jpg"
-// import tiger4 from "../../Assets/tiger4.jpg"
-// import tiger5 from "../../Assets/tiger5.jpg"
-// import tiger6 from "../../Assets/tiger6.jpg"
+
 function Traits() {
     return (
         <div className='StakePageImage'>

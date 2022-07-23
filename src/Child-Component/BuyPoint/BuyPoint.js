@@ -72,7 +72,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         userBNBBalance = web3.utils.fromWei(userBNBBalance);
         userBNBBalance = parseFloat(userBNBBalance).toFixed(4);
         setUserBnbBalance(userBNBBalance);
-        // console.log("UserBnb balance",userBNBBalance);
       } catch (e) {
         console.error("Error whgile getting users Bnb Balance");
       }
@@ -82,18 +81,16 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
   let { currentBp } = useSelector((state) => state.setCurrentBpTokens);
   let { maxBpTokens } = useSelector((state) => state.setMaxBpTokens);
   let { acc } = useSelector((state) => state.connectWallet);
-  // console.log("Current Bp = ", currentBp)
-  // console.log("maxBpTokens Bp = ", maxBpTokens)
+ 
   let userEnterd = useRef();
 
   const closeModal = () => {
     setModalShow(false);
-    // ChnageMain();
+   
   };
 
   const getMaxUserBal = async () => {
-    // console.log("Inside");
-    // console.log("ACC=",acc)
+   
     if (acc == "No Wallet") {
       toast.error("No Wallet");
     } else if (acc == "Wrong Network") {
@@ -121,7 +118,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         bpPercent = web3.utils.fromWei(bpPercent);
         bpPercent = parseFloat(bpPercent);
         let multipliedValue = converted * bpPercent;
-        console.log("multipliedValue", multipliedValue);
         setYouWillrecive(multipliedValue);
       } catch (e) {
         console.log("Error While geting Max Balance", e);
@@ -129,8 +125,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
     }
   };
   const buyWithBnb = async () => {
-    // console.log("Inside");
-    // console.log("ACC=",acc)
     if (acc == "No Wallet") {
       toast.error("No Wallet");
     } else if (acc == "Wrong Network") {
@@ -144,7 +138,6 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
         setBnbSpent(userEnterdValue);
         let userBNBBalance = await web3.eth.getBalance(acc);
         userEnterdValue = web3.utils.toWei(userEnterdValue.toString());
-        // console.log("userEnterdValue", userBNBBalance);
         let stakingCOntractOf = new web3.eth.Contract(
           stakingContractAbi,
           stakingContractAddress
@@ -180,7 +173,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
   };
   const getWalletAddress = () => {
     dispatch(getWallet());
-    // allImagesNfts()
+
   };
   useEffect(() => {
     dispatch(getMaxBpTokens());
@@ -215,9 +208,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
             </div>
 
             <div className="row">
-              {/* <div className='col-3'>
-                                
-                            </div> */}
+              
               <div className="col-md-6 col-12 offset-md-3">
                 <p className="stakepageP ">BRWL POINT Converter Calculator</p>
               </div>
@@ -225,7 +216,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
             <div className="row d-flex justify-content-center mt-3">
               {modalShow ? (
                 <Modal
-                  // {...props}
+                 
                   show={modalShow}
                   onHide={() => setModalShow(false)}
                   size="lg"
@@ -275,13 +266,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                               </span>
                             </div>
                             <div className="row d-flex justify-content-center mt-5 mb-4">
-                              {/* <div className='col-md-5 mt-2'>
-                                                            <div className="d-grid gap-2">
-                                                                <a href="#" onClick={() => closeModal()} className="btn btnBuy18" size="lg" >
-                                                                    Back
-                                                                </a>
-                                                            </div>
-                                                        </div> */}
+                              
                               <div className="col-md-7 mt-2">
                                 <div className="d-grid gap-2">
                                   <a
@@ -375,7 +360,7 @@ function BuyPoint({ ChangeMint, ChnageMain }) {
                   <button
                     onClick={() => {
                       buyWithBnb();
-                      // setModalShow(true)
+                      
                     }}
                     className="btn btnBuy"
                     size="lg"

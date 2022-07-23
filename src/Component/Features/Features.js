@@ -1,9 +1,5 @@
 import React from 'react'
 import "./Features.css"
-// import CWC_1 from "../../Assets/CWC_1 1.png"
-// import CWC_2 from "../../Assets/CWC_2 (1) 1.png"
-// import CWC_3 from "../../Assets/CWC_31 1.png"
-
 function Features() {
     return (
         <div className='Features-image' id="features">

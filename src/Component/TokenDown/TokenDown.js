@@ -1,10 +1,5 @@
 import React from 'react'
 import "./TokenDown.css"
-// import CBP_2 from "../../Assets/CBP_2 (1) 1.png"
-// import CBP_3 from "../../Assets/CBP_3 (1) 1.png"
-// import CBP_4 from "../../Assets/CBP_4 1.png"
-// import CBP_5 from "../../Assets/CBP_5 1.png"
-// import Vector8 from "../../Assets/Group.png"
 function TokenDown() {
     return (
         <div className='container-fluid TokenDownimage'>

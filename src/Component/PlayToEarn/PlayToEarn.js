@@ -1,11 +1,5 @@
 import React from 'react'
 import "./PlayToEarn.css"
-// import Frame from "../../Assets/Frame 19.png"
-// import gameimage from "../../Assets/game image4 1.png"
-// import Vector1 from "../../Assets/Vector-1.png"
-// import Vector2 from "../../Assets/Vector-2.png"
-// import gameImage from "../../Assets/game image.png"
-
 function PlayToEarn() {
     return (
         <div className='PlayToEarnImage'>

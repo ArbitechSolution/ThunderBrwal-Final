@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Vector10 from "../../Assets/Vector10.png"
-// import Rectangle554 from "../../Assets/Rectangle 554.png"
 import {
   getWallet,
   getUserThbBalance,
@@ -18,17 +16,14 @@ import axios from "axios";
 import mints from "../../Assets/mint.png";
 import { getUserBrawlMintPoint } from "../../redux/redux/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import CloseButton from "react-bootstrap/CloseButton";
+
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import On from "../../Assets/On.png";
 import Off from "../../Assets/Off.png";
 import { nftContratAddress, nftContractAbi } from "../../Component/Utils/Nft";
 import useAudio from "./useAudio";
-// import Group187 from "../../Assets/Group 187.png"
-// import Group188 from "../../Assets/Group 188.png"
-import zero from "../../Assets/0.png";
-import one from "../../Assets/1.png";
+
 import mintSound from "../../Assets/mintSound.wav";
 function Mint() {
   let [value, setValue] = useState(1);
@@ -83,14 +78,13 @@ function Mint() {
       setValue(--value);
     }
   };
-  // Getting pics after Minting
   const allImagesNfts = async () => {
     if (acc == "No Wallet") {
-      console.log("wallet");
+      
     } else if (acc == "Wrong Network") {
-      console.log("wallet");
+      
     } else if (acc == "Connect Wallet") {
-      console.log("Connect Wallet");
+     
     } else {
       const web3 = window.web3;
       let nftContractOf = new web3.eth.Contract(
@@ -121,10 +115,9 @@ function Mint() {
             ...simplleArray,
             { imageUrl: imageUrl, num: dna, names: names },
           ];
-          console.log("simplleArray", myImgArry);
-          // setDispalyImage(simplleArray)
+          
           setImageArray(simplleArray);
-          console.log("Getting Response", res.data.image);
+          
         } catch (e) {
           console.log("Error while Fetching Api", e);
         }
@@ -135,7 +128,7 @@ function Mint() {
   // Minting Funtions
   const myMint = async () => {
     try {
-      console.log("my ACC=", acc);
+      
       if (acc == "No Wallet") {
         toast.error("No Wallet Connected");
       } else if (acc == "Wrong Network") {
@@ -162,7 +155,7 @@ function Mint() {
                 from: acc,
               })
               .on("receipt", (receipt) => {
-                console.log("mintValue", receipt);
+                
 
                 setTransctionData(receipt);
               });
@@ -219,8 +212,7 @@ function Mint() {
   useEffect(() => {
     dispatch(getUserBrawlMintPoint());
     getEventsForMinting();
-    // play()
-    // playingSound()
+  
   }, []);
 
   return (
@@ -291,7 +283,7 @@ function Mint() {
                         #{items.num} Chundung
                       </p>
 
-                      {/* <div className="d-flex flex-row justify-content-between align-items-center mb-3"></div> */}
+                      
                     </div>
                     <div className="d-flex  justify-content-center">
                       <p className="collectionsText ">
@@ -395,15 +387,7 @@ function Mint() {
             {/* <div> */}
             <div className="row ">
               <div className="col-lg-9  col-11  mymediasound">
-                {/* <PlayButton
-                                        active={isPlaying}
-                                        size={60}
-                                        iconColor="var(--color-background)"
-                                        idleBackgroundColor="var(--color-text)"
-                                        activeBackgroundColor="var(--color-primary)"
-                                        play={play}
-                                        stop={stop}
-                                        /> */}
+               
                 {!playing ? (
                   <img onClick={playingSound} src={Off} alt="Sound Icon" />
                 ) : (
@@ -430,7 +414,7 @@ function Mint() {
                       maximumFractionDigits: 1,
                     })}
                     &nbsp;
-                    {/* {brawlMintPoints.toLocaleString(undefined, {minimumFractionDigits: 1})} */}
+                   
                     Point
                   </span>
                 </div>
@@ -457,7 +441,6 @@ function Mint() {
                   <button
                     onClick={() => {
                       myMint();
-                      // setModalShow(true);
                     }}
                     className="btn mintbtn "
                   >
@@ -469,7 +452,6 @@ function Mint() {
                 </span>
               </div>
             </div>
-            {/* </div> */}
             <div className="row">
               <div className="col-md-12 col-11 mint-Page-border ">
                 <table class="table table-borderless">

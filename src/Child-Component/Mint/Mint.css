@@ -60,7 +60,6 @@
   line-height: 33px;
   padding: 10px 25px;
   color: #ffffff;
-  /* margin-left: 80px; */
 }
 
 .mintspan23 {
@@ -146,7 +145,7 @@
   .mymediasound {
     display: flex;
     justify-content: end;
-    /* margin-right: 1rem !important; */
+
   }
   .imagesRes {
     display: flex;
@@ -169,8 +168,6 @@
   .mymediasound {
     display: flex;
     justify-content: end;
-
-    /* margin-right: 1rem !important; */
   }
 
   .imagesRes {
@@ -180,14 +177,7 @@
 
     justify-content: center;
   }
-  /* .Mint-Time{
-        font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 132%;
-    color: #FFFFFF;
-    text-align: left;
-    } */
+  
 }
 
 .Congratimage {
@@ -195,14 +185,6 @@
 }
 
 .cardImg {
-  /* background-image: url("https://i.ibb.co/Sdz30VC/Group-505.png");
-    padding-top: 20px;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-
-    width: 100%; */
   display: flex;
   justify-content: center;
 }
@@ -217,13 +199,6 @@
   display: flex;
   flex-direction: row;
 }
-/* .uperimg-two{
-    background-image: url("../../Assets/Group 505.png");
-    background-repeat: no-repeat;
-
-    background-size: cover;
-    background-position:center;
-} */
 .mintinage-two {
   background-image: url("../../Assets/Group 505.png");
   background-repeat: no-repeat;
@@ -235,21 +210,14 @@
 .stakeimage-mint {
   width: 500px;
 }
-/* .model-iii {
-    width: 185px;
-    height: 185px;
-    box-shadow: 0px 0px 10px #F8B815;
-} */
+
 .model-i {
   width: 185px;
   height: 185px;
   box-shadow: 0px 0px 14px #f8b815;
 }
 .mintImage45 {
-  /* position: relative; */
   width: 300px;
-  /* left:   40%;
-    top: 50%; */
 }
 
 .simpleText {
@@ -268,8 +236,6 @@
 }
 
 .undermodelbtn {
-  /* width: 160px;
-    height: 50px; */
   background: rgba(0, 0, 0, 0.5);
   border-radius: 100px;
   font-family: Poppins;
@@ -284,8 +250,7 @@
 .undermodelbtn2 {
   background: linear-gradient(90deg, #f3961e 1.7%, #ff5043 100%);
   border-radius: 100px;
-  /* width: 160px;
-    height: 50px; */
+ 
   padding: 5px 10px;
   font-family: Poppins;
   font-style: normal;
@@ -296,10 +261,7 @@
   color: #ffffff;
 }
 
-/* .btnmodelhere {
-    display: flex;
-    justify-content: center;
-} */
+
 
 @media (max-width: 770px) {
   .Congratimage {
@@ -307,6 +269,5 @@
   }
   .stakeimage-mint {
     display: none;
-    /* width: 430px; */
   }
 }

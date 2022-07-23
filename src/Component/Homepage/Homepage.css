@@ -1,6 +1,5 @@
 .homeimage {
     background-image: url("https://i.ibb.co/r7WTg0Z/Group-117.png");
-    /* background: rgba(0, 0, 0, 0.2); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -31,15 +30,6 @@ color: white;
     outline-offset: none !important;
     box-shadow: none !important;
 }
-/* input{
-    border: 2px solid red;
-} */
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-} */
 ::-moz-color-swatch {
     border-color: transparent;
 }
@@ -57,24 +47,11 @@ input[type="text"]{
 input[type="text"]:focus{
     outline: none;
 }
-/* input {
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: groove;
-    background-color: #eee;
-  }
-   */
-  /* .no-outline:focus {
-    outline: none;
-  } */
-
 .BRAWL {
     color: #F8B815;
     font-weight: 500;
     font-size: 18px;
     line-height: 0px;
-    /* line-height: 100%; */
 }
 
 .THB {
@@ -170,7 +147,6 @@ width: 250px;
             font-weight: 500;
             font-size: 14px;
             line-height: 0px;
-            /* line-height: 100%; */
         }
         .imagepostion{
             position: absolute;
@@ -193,7 +169,6 @@ width: 250px;
         margin-top: 30px;
         position: absolute;
         width: 150px;
-        /* border: 2px solid red; */
         text-align: left;
     }
 

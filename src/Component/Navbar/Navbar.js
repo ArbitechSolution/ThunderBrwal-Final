@@ -15,7 +15,7 @@ function NavbarId({ ChnageMain, ChangeStake, ChangeMint, ChangeTraits, ChangeBre
 
 
                         <Navbar collapseOnSelect expand="lg" variant="dark">
-                            {/* <Container> */}
+                            
                             <Link to="/"><Navbar.Brand href="#"><img src="https://i.ibb.co/J5BD1S8/logo.png" width="40px" /></Navbar.Brand></Link>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
@@ -52,7 +52,7 @@ function NavbarId({ ChnageMain, ChangeStake, ChangeMint, ChangeTraits, ChangeBre
 
                                 </Nav>
                             </Navbar.Collapse>
-                            {/* </Container> */}
+                            
                         </Navbar>
                     </div>
                 </div>

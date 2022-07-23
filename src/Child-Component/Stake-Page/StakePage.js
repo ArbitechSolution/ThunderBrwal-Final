@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StakePage.css";
-// import Vector10 from "../../Assets/Vector10.png"
-// import B from "../../Assets/--02 1.png"
-// import vector99 from "../../Assets/vector 99.png"
-// import vector100 from "../../Assets/100 2.png"
 import {
   getWallet,
   getUserThbBalance,
@@ -19,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { ImInfo } from "react-icons/im";
 import Group578 from "../../Assets/Group 578.png";
-import Group579 from "../../Assets/Group 579.png";
 import Group509 from "../../Assets/Group 509.png";
 import { thbTokenAddress, thbTokenAbi } from "../../Component/Utils/ThbToken";
 import {
@@ -49,7 +44,6 @@ function StakePage() {
   let { tamountlp } = useSelector((state) => state.tAmountLp);
   let { brlPoint } = useSelector((state) => state.getUserBrlpoint);
   let { brlLPPoint } = useSelector((state) => state.getUserBrLplpoint);
-  // let {lpLockTime} = useSelector (state => state.setLpLockTime)
   let { userDepositTime } = useSelector((state) => state.setLpDepositTime);
 
   const getAccount = () => {
@@ -71,7 +65,7 @@ function StakePage() {
     }
   };
 
-  /// here goes the staking Functions for THB
+  
 
   const stakeVal = async () => {
     if (acc == "No Wallet") {

@@ -1,7 +1,6 @@
 import React from 'react'
 import "./MaskGroup.css"
-// import Kakao from "../../Assets/Kakao-Talk.png"
-// import vectors from "../../Assets/Vector-11.png"
+
 function MaskGroup() {
     return (
         <div className='MaskGroupImage' id="maskgroup">

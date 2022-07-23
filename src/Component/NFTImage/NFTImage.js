@@ -1,6 +1,6 @@
 import React from 'react'
 import "./NFTImage.css"
-// import Group149 from "../../Assets/Group 149.png"
+
 import gif11 from "../../video/Screenshot (1)-min (1).gif"
 import gif21 from "../../video/Screenshot (2).gif"
 

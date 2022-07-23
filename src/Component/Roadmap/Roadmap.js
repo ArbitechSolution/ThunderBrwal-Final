@@ -1,11 +1,5 @@
 import React from 'react'
 import "./Roadmap.css"
-// import Ellipse13 from "../../Assets/Ellipse 13.png"
-// import Vector4 from "../../Assets/Vector4.png"
-// import Rectangle547 from "../../Assets/Rectangle 547.png"
-// import Vector5 from "../../Assets/Vector5.png"
-// import Vector6 from "../../Assets/Vector6.png"
-// import Ellipse14 from "../../Assets/Ellipse 14.png"
 
 function Roadmap() {
     return (

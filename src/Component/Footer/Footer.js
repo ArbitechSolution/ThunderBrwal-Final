@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Footer.css"
-// import gmail from "../../Assets/gmail.png"
 function Footer() {
   return (
     <div className='FooterImage'>

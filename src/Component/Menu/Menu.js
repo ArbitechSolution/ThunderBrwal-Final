@@ -1,9 +1,5 @@
 import React from 'react'
 import "./Menu.css"
-// import vectorone from "../../Assets/vectorone.png"
-// import android from "../../Assets/android.png"
-// import Frame from "../../Assets/Frame 18.png"
-// import video from "../../video/Free Online Video Compressor_2.mp4"
 function Menu() {
   return (
     <div className='navbariamge'>
@@ -27,7 +23,6 @@ function Menu() {
                 <iframe height="400" width="500"
                   src="https://www.youtube.com/embed/rlLZVe97Qus" className='mt-4 videos' controls="controls" autoPlay="false">
                 </iframe>
-                {/* <video src="https://www.youtube.com/watch?v=rlLZVe97Qus" className='mt-4 videos' controls="controls" autoplay="true" /> */}
 
               </div>
             </div>

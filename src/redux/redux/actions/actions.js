@@ -58,9 +58,9 @@ export const getWallet = () => async (dispatch) => {
 export const getUserThbBalance = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+    
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+    
   } else {
     const web3 = window.web3;
     let userthbBalance = await thbTokenContractOf.methods
@@ -68,7 +68,6 @@ export const getUserThbBalance = () => async (dispatch) => {
       .call();
     userthbBalance = web3.utils.fromWei(userthbBalance);
     userthbBalance = parseInt(userthbBalance);
-    // console.log("userthbBalance ",userthbBalance);
     dispatch({
       type: GET_USER_THB_BALANCE,
       payload: userthbBalance,
@@ -79,9 +78,9 @@ export const getUserThbBalance = () => async (dispatch) => {
 export const getUserThbLpBalance = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+    
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+   
   } else {
     const web3 = window.web3;
     let userThbLpBalance = await thbLpTokenContractOf.methods
@@ -100,9 +99,9 @@ export const getUserThbLpBalance = () => async (dispatch) => {
 export const getUserTHbTamount = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+    
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+    
   } else {
     const web3 = window.web3;
     let userThbData = await stakingCOntractOf.methods.User(address).call();
@@ -119,9 +118,9 @@ export const getUserTHbTamount = () => async (dispatch) => {
 export const getUserTHbLPTamount = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+    
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+    
   } else {
     const web3 = window.web3;
     let userThbLpData = await stakingCOntractOf.methods.UserLP(address).call();
@@ -137,9 +136,9 @@ export const getUserTHbLPTamount = () => async (dispatch) => {
 export const getUserBrl = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("No Wallet");
+   
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+    
   } else {
     const web3 = window.web3;
     let userBrawlPoint = await stakingCOntractOf.methods
@@ -158,9 +157,9 @@ export const getUserBrl = () => async (dispatch) => {
 export const getUserBrLp = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+ 
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+    
   } else {
     const web3 = window.web3;
     let userBrawlLpPoint = await stakingCOntractOf.methods
@@ -178,14 +177,14 @@ export const getUserBrLp = () => async (dispatch) => {
 export const getUserBrawlMintPoint = () => async (dispatch) => {
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+   
   } else {
     const web3 = window.web3;
     let bpCalculator = await stakingCOntractOf.methods.balances(address).call();
     bpCalculator = web3.utils.fromWei(bpCalculator);
-    // bpCalculator = bpCalculator.toLocaleString(undefined, { minimumFractionDigits: 1 })
+    
     bpCalculator = parseFloat(bpCalculator);
     dispatch({
       type: GET_USER_MINT_BRAWL_POINTS,
@@ -223,9 +222,9 @@ export const getUserDepositTime = () => async (dispatch) => {
 
   let address = await loadWeb3();
   if (address == "No Wallet") {
-    console.log("Not Connected");
+   
   } else if (address == "Wrong Network") {
-    console.log("Wrong Network");
+ 
   } else {
     let timestamp = Math.floor(new Date().getTime() / 1000);
     let lpLockTime = await stakingCOntractOf.methods.LPlocktime().call();
@@ -241,13 +240,6 @@ export const getUserDepositTime = () => async (dispatch) => {
         let h = Math.floor((remainingTime % (3600 * 24)) / 3600);
         let m = Math.floor((remainingTime % 3600) / 60);
         let s = Math.floor(remainingTime % 60);
-
-        // tiemObj = {
-        //     days:d,
-        //     hours:h,
-        //     minutes:m,
-        //     seconds:s
-        // }
         if (d > 0) {
           tiemObj = { ...tiemObj, days: d };
         } else {
@@ -270,7 +262,6 @@ export const getUserDepositTime = () => async (dispatch) => {
         }
       }
 
-      // decidedVar=false
     } else {
       remainingTime = 0;
       tiemObj = {
@@ -279,7 +270,6 @@ export const getUserDepositTime = () => async (dispatch) => {
         minutes: 0,
         seconds: 0,
       };
-      // decidedVar = true
     }
 
     dispatch({

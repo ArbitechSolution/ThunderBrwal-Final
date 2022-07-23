@@ -1,19 +1,12 @@
 .Roadmapimage {
     background-image: url("https://i.ibb.co/C5ThgLL/background.png"), url('https://i.ibb.co/NWbMjkH/Rectangle-540.png');
-    /* background: rgba(0, 0, 0, 0.2); */
+   
     background-repeat: no-repeat;
-    /* background-attachment: fixed; */
+    
     background-size: cover;
 }
 
-.newclascenter {
 
-    /* margin-left: -5rem; */
-    /* border: 2px solid red; */
-
-
-
-}
 
 .timeline {
     max-width: 1200px;
@@ -86,27 +79,7 @@ ul {
     margin-left: -1.5em;
     color: rgba(255, 255, 255, 0.3);;
   }
-/* .Orderline ul,
-li {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  line-height: 1.5rem;
-  font-size: 20px;
-  color: white;
-}
-.Orderline li {
-    margin: 1em;
-    margin-left: 1.5em;
-  }
 
-.Orderline li:before {
-    content: '\f00c' ;
-    font-family: 'FontAwesome' !important;
-    float: left;
-    margin-left: -1.5em;
-    color: #2E9D2C;
-  } */
 /* LEAVE TILL LAST */
 .timeline__component--bottom {
     margin-bottom: 0;
@@ -239,9 +212,6 @@ li {
   color: white;
 }
 
-ul {
-  /* margin: 2em 0; */
-}
 
 .unorderlist1 {
   /* margin: 1em; */
@@ -295,9 +265,7 @@ ul {
   color: white;
 }
 
-ul {
-  /* margin: 2em 0; */
-}
+
 
 .unorderlist1 {
   margin: 1em;

@@ -9,7 +9,7 @@ import { getWallet } from "../../redux/redux/actions/actions";
 import { IoMdClose } from "react-icons/io";
 import { InputGroup, FormControl } from "react-bootstrap";
 import tick2 from "../../Assets/tick (2) 2.png";
-import Frame27 from "../../Assets/Frame 27.png";
+
 
 function MyCollection() {
   let dispatch = useDispatch();
@@ -26,7 +26,6 @@ function MyCollection() {
   let [dispalynamedata, setDisplayNameData] = useState([]);
   let [pageNumber, setPageNumber] = useState(1);
   let [totalPages, setTotalPages] = useState(1);
-  // let [num, setnum] = useState(0);
   let [popupshowaddress, setPopupshowaddress] = useState();
   let { acc } = useSelector((state) => state.connectWallet);
 
@@ -39,10 +38,10 @@ function MyCollection() {
       if (pageNumber < totalPages) {
         setPageNumber(pageNumber + 1);
       }
-      console.log("Loading More Up");
+      
       setFinalLimit(mywalletLength);
     } else {
-      console.log("Loading More");
+      
       if (pageNumber < totalPages) {
         setPageNumber(pageNumber + 1);
       }
@@ -69,7 +68,7 @@ function MyCollection() {
   const testAllImage = async () => {
     try {
       let res = await axios.get("/config/2.json");
-      console.log("responce", res);
+      
     } catch (e) {
       console.log("error testAllImage", e);
     }
@@ -77,14 +76,14 @@ function MyCollection() {
 
   const allImagesNfts = async () => {
     if (acc == "No Wallet") {
-      console.log("wallet");
+      
       setBtTxt("Connect Wallet");
     } else if (acc == "Wrong Network") {
       setBtTxt("Wrong Network");
     } else if (acc == "Connect Wallet") {
-      console.log("Connect Wallet");
+      
     } else {
-      // console.log("Inside")
+      
       const web3 = window.web3;
       let nftContractOf = new web3.eth.Contract(
         nftContractAbi,
@@ -94,22 +93,20 @@ function MyCollection() {
       let walletOfOwner = await nftContractOf.methods.walletOfOwner(acc).call();
       let walletLength = walletOfOwner.length;
       setMyWalletLength(walletLength);
-      console.log("walletOfOwner", walletOfOwner);
-      // console.log("finalLimit", finalLimit);
-      // console.log("initialLimit", initialLimit);
+      
 
       let ttlPage = parseInt(walletLength) / 12;
       ttlPage = Math.ceil(ttlPage);
       setTotalPages(ttlPage);
-      console.log("Total Pages", ttlPage);
+      
       if (parseInt(walletLength) > 0) {
-        // if(initialLimit<parseInt(walletLength))
+        
         {
           let myImgArry = [];
           let myNameDate = [];
           for (let i = 0; i < walletLength; i++) {
             try {
-              // console.log("Getting Response");
+              
               let res = await axios.get(`/config/${walletOfOwner[i]}.json`);
               let imageUrl = res.data.image;
               let dna = res.data.dna;
@@ -123,10 +120,9 @@ function MyCollection() {
                 ...simplleArray,
                 { imageUrl: imageUrl, num: dna, names: names },
               ];
-              console.log("simplleArray", myImgArry);
-              // setDispalyImage(simplleArray)
+             
               setImageArray(simplleArray);
-              console.log("Getting Response", res.data.image);
+             
             } catch (e) {
               console.log("Error while Fetching Api", e);
             }
@@ -137,22 +133,22 @@ function MyCollection() {
   };
 
   const clickedImage = (index) => {
-    console.log("You Clicked", index);
+   
     setClickedIndexes(index);
     setModalShow(true);
   };
 
   const transferNft = async () => {
     if (acc == "No Wallet") {
-      console.log("wallet");
+      
       setBtTxt("Connect Wallet");
     } else if (acc == "Wrong Network") {
       setBtTxt("Wrong Network");
     } else if (acc == "Connect Wallet") {
-      console.log("Connect Wallet");
+      
     } else {
       let userEnteredAddress = toAddress.current.value;
-      // console.log("userEnteredAddress", userEnteredAddress);
+      
       setPopupshowaddress(userEnteredAddress);
       const web3 = window.web3;
       let stringLength = userEnteredAddress.length;
@@ -188,15 +184,13 @@ function MyCollection() {
 
   const getWalletAddress = () => {
     dispatch(getWallet());
-    // allImagesNfts()
+    
   };
   useEffect(() => {
     allImagesNfts();
     testAllImage();
   }, [acc]);
-  // useEffect(() => {
-  //     allImagesNfts();
-  // }, [finalLimit])
+  
 
   return (
     <div className="StakePageImagess pb-5">
@@ -204,7 +198,7 @@ function MyCollection() {
         <Modal
           show={modalShow}
           onHide={() => setModalShow(false)}
-          // {...props}
+          
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -216,7 +210,7 @@ function MyCollection() {
                 size={28}
                 style={{ color: "white", cursor: "pointer" }}
               />
-              {/* <h2 className='collectionsTextLarge m-2'> Confirm</h2> */}
+             
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="StakePageImage d-flex justify-content-center align-items-center flex-column">
@@ -231,7 +225,7 @@ function MyCollection() {
                 <p className="collectionsText mt-3">
                   {dispalynamedata[clickedIndexes]}
                 </p>
-                {/* <p className='collectionsTextSmall'>Common</p> */}
+                
               </div>
             </div>
 
@@ -242,7 +236,7 @@ function MyCollection() {
                   <input
                     ref={toAddress}
                     className="pointinput form-control"
-                    // type="number"
+                    
                     min={1}
                     placeholder="0"
                     aria-label="Recipient's username with two button addons"
@@ -260,7 +254,7 @@ function MyCollection() {
               <button
                 onClick={() => {
                   transferNft();
-                  // setModalShowone(true)
+                  
                 }}
                 className="btn btnStakePage"
                 size="lg"
@@ -277,7 +271,7 @@ function MyCollection() {
         <Modal
           show={modalShowone}
           onHide={() => setModalShowone(false)}
-          // {...props}
+          
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -289,7 +283,7 @@ function MyCollection() {
                 size={28}
                 style={{ color: "white", cursor: "pointer" }}
               />
-              {/* <h2 className='collectionsTextLarge m-2'> Confirm</h2> */}
+              
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="StakePageImage d-flex justify-content-center align-items-center flex-column">

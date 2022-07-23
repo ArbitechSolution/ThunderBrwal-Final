@@ -1,26 +1,7 @@
 import React, { useEffect } from 'react'
 import "./GameNFT.css"
-// import vector3 from "../../Assets/Vector-3.png"
 import { Tabs, Tab } from 'react-bootstrap'
-// import $ from "jquery";
-// import tiger1 from "../../Assets/tiger 1.jpg"
-// import tiger2 from "../../Assets/tiger2.jpg"
-// import tiger3 from "../../Assets/tiger3.jpg"
-// import tiger4 from "../../Assets/tiger4.jpg"
-// import tiger5 from "../../Assets/tiger5.jpg"
-// import tiger6 from "../../Assets/tiger6.jpg"
 import Slider from "react-slick";
-// import chracter1 from "../../Assets/chracter 1.png"
-// import chracter2 from "../../Assets/chracter 2.png"
-// import chracter3 from "../../Assets/character 3.png"
-// import chracter4 from "../../Assets/character 4.png"
-// import chracter5 from "../../Assets/character 5.png"
-// import chracter6 from "../../Assets/character 6.png"
-// import equip1 from "../../Assets/equip1.png"
-// import equip2 from "../../Assets/equip2.png"
-// import equip3 from "../../Assets/equip3.png"
-// import equip4 from "../../Assets/equip4.png"
-// import equip5 from "../../Assets/equip5.png"
 function GameNFT() {
     var settings = {
         dots: true,

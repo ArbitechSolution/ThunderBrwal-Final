@@ -1,17 +1,12 @@
 import React, { useRef, useState } from 'react'
 import "./Homepage.css"
-// import B from "../../Assets/--02 1.png"
-// import P from "../../Assets/--08 1.png"
-// import BP from "../../Assets/--11 1.png"
-// import Ellipse from "../../Assets/Ellipse 9.png"
-// import Rectangle from "../../Assets/Rectangle 14.png"
 import { RiFileCopyLine } from 'react-icons/ri';
-// import Rectangle484 from "../../Assets/Rectangle 484.png"
+
 import { useClipboard } from 'use-clipboard-copy';
 function Homepage() {
 
     const clipboard = useClipboard({
-        copiedTimeout: 1000, // timeout duration in milliseconds
+        copiedTimeout: 1000, 
       });
     return (
         <div className='homeimage' id="token">
@@ -149,7 +144,7 @@ function Homepage() {
                                     <p className='Thunderbrawl text-md-start text-center line-height'>Binance Smart Chain</p>
                                     <img src="https://i.ibb.co/XW2cy70/Rectangle-14.png" className="homepagepic" />
                                 </div>
-                                <div className='line-height ' className="d-flex flex-column justify-content-center">
+                                <div className="d-flex flex-column justify-content-center line-height">
                                     <p className='Token-Name text-md-start text-center line-height'>Contract Address</p>
                                     <textarea className='d-flex justify-content-md-start justify-content-center'
                                             ref={clipboard.target}
